@@ -1,9 +1,9 @@
 {
-	"generatedAt": "2026-10-23T03:41:01.370Z",
-	"commit": "2b86f6b264d77627ce0999c358fccd95889d0ffa",
+	"generatedAt": "2026-10-23T10:01:44.959Z",
+	"commit": "100858345955022dc6543ddd770bbc1e55c9e9bf",
 	"githubRepo": "Automattic/wp-calypso",
 	"root": "client/dashboard",
-	"fileCount": 2281,
+	"fileCount": 2284,
 	"conventions": [
 		{
 			"id": "callout-file-name",
@@ -21,7 +21,7 @@
 			"status": "accepted",
 			"description": "`site-plan-card.tsx` default-exports `SitePlanCard` (or a qualified `SitesSitePlanCard`); `site-plan-card/index.tsx` does too. Matching names make components greppable from either side.",
 			"checked": 761,
-			"violations": 95
+			"violations": 97
 		},
 		{
 			"id": "hook-file-name",
@@ -29,8 +29,8 @@
 			"category": "naming",
 			"status": "proposed",
 			"description": "A module whose only runtime export is a hook is named after it in kebab-case (`useSitePlan` → `use-site-plan.ts`), and a `use-*.ts` file exports the hook its name promises.",
-			"checked": 136,
-			"violations": 37
+			"checked": 137,
+			"violations": 39
 		},
 		{
 			"id": "hook-folder-placement",
@@ -38,7 +38,7 @@
 			"category": "structure",
 			"status": "proposed",
 			"description": "A folder that has a `hooks/` subfolder keeps all its hooks there, and a `hooks/` folder is only worth having for more than one hook. A lone hook sits beside the code that uses it.",
-			"checked": 103,
+			"checked": 102,
 			"violations": 8
 		},
 		{
@@ -47,7 +47,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
-			"checked": 2951,
+			"checked": 2955,
 			"violations": 0
 		},
 		{
@@ -74,7 +74,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
-			"checked": 405,
+			"checked": 406,
 			"violations": 59
 		},
 		{
@@ -83,7 +83,7 @@
 			"category": "structure",
 			"status": "accepted",
 			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
-			"checked": 344,
+			"checked": 345,
 			"violations": 23
 		},
 		{
@@ -92,8 +92,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
-			"checked": 1409,
-			"violations": 66
+			"checked": 1410,
+			"violations": 65
 		},
 		{
 			"id": "upsell-illustration-name",
@@ -110,7 +110,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Per-folder utility modules are plain `utils.ts(x)`. Repeating the folder name (`storage/storage-utils.ts`) adds nothing; topical prefixes that don’t repeat it (`contact-validation-utils.ts`) are fine. Found by Claude in `sites/`.",
-			"checked": 30,
+			"checked": 31,
 			"violations": 1
 		},
 		{
@@ -120,7 +120,7 @@
 			"status": "accepted",
 			"description": "Grab-bag modules are called `utils.ts` or `utils/` (17 files, 6 folders today) rather than `helpers`, `helper` or `util`.",
 			"checked": 30,
-			"violations": 2
+			"violations": 0
 		},
 		{
 			"status": "accepted",
@@ -306,11 +306,29 @@
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
 		{
+			"id": "fce4c372f1",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/omnibar/node-language-switcher-modal.tsx",
+			"line": 16,
+			"message": "Default export `LanguageSwitcherNodeModal` doesn’t match `node-language-switcher-modal`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "aa33ef696f",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/omnibar/node-shopping-cart-panel.tsx",
+			"line": 9,
+			"message": "Default export `ShoppingCartNodePanel` doesn’t match `node-shopping-cart-panel`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
 			"id": "6ce5d330d1",
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "app/omnibar/omnibar.tsx",
-			"line": 99,
+			"line": 39,
 			"message": "Default export `OmnibarContainer` doesn’t match `omnibar`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -1050,49 +1068,67 @@
 			"message": "`use-visit-counter.ts` exports `usePersistentVisitCounter`, `useTrackVisitedAreas`, not the hook its name implies."
 		},
 		{
-			"id": "3d75b627cd",
+			"id": "e7416817b4",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "app/omnibar/plugin-help-center.tsx",
+			"file": "app/omnibar/node-ai-chat-can-show.ts",
+			"line": 13,
+			"message": "Only export is `useCanShowAiChatNode`, but the file is `node-ai-chat-can-show.ts`.",
+			"suggestion": "Rename to `use-can-show-ai-chat-node.ts`."
+		},
+		{
+			"id": "c3cf9535c8",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/node-ai-chat.tsx",
+			"line": 16,
+			"message": "Only export is `useAiChatNode`, but the file is `node-ai-chat.tsx`.",
+			"suggestion": "Rename to `use-ai-chat-node.tsx`."
+		},
+		{
+			"id": "afb8cae901",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/node-help-center.tsx",
 			"line": 38,
-			"message": "Only export is `useHelpCenterNodeBuilder`, but the file is `plugin-help-center.tsx`.",
+			"message": "Only export is `useHelpCenterNodeBuilder`, but the file is `node-help-center.tsx`.",
 			"suggestion": "Rename to `use-help-center-node-builder.tsx`."
 		},
 		{
-			"id": "2218e02fc1",
+			"id": "5e069a4975",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "app/omnibar/plugin-language-switcher.tsx",
+			"file": "app/omnibar/node-language-switcher.tsx",
 			"line": 18,
-			"message": "Only export is `useLanguageSwitcherPlugin`, but the file is `plugin-language-switcher.tsx`.",
-			"suggestion": "Rename to `use-language-switcher-plugin.tsx`."
+			"message": "Only export is `useLanguageSwitcherNode`, but the file is `node-language-switcher.tsx`.",
+			"suggestion": "Rename to `use-language-switcher-node.tsx`."
 		},
 		{
-			"id": "8781532e4a",
+			"id": "e513559b67",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "app/omnibar/plugin-launch-site.tsx",
+			"file": "app/omnibar/node-launch-site.tsx",
 			"line": 26,
-			"message": "Only export is `useLaunchSiteNodeBuilder`, but the file is `plugin-launch-site.tsx`.",
+			"message": "Only export is `useLaunchSiteNodeBuilder`, but the file is `node-launch-site.tsx`.",
 			"suggestion": "Rename to `use-launch-site-node-builder.tsx`."
 		},
 		{
-			"id": "d702949ef1",
+			"id": "f74066022f",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "app/omnibar/plugin-notifications.tsx",
+			"file": "app/omnibar/node-notifications.tsx",
 			"line": 22,
-			"message": "Only export is `useNotificationsNodeBuilder`, but the file is `plugin-notifications.tsx`.",
+			"message": "Only export is `useNotificationsNodeBuilder`, but the file is `node-notifications.tsx`.",
 			"suggestion": "Rename to `use-notifications-node-builder.tsx`."
 		},
 		{
-			"id": "68510e22f9",
+			"id": "679cebeb71",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "app/omnibar/plugin-shopping-cart.tsx",
-			"line": 57,
-			"message": "Only export is `useShoppingCartPlugin`, but the file is `plugin-shopping-cart.tsx`.",
-			"suggestion": "Rename to `use-shopping-cart-plugin.tsx`."
+			"file": "app/omnibar/node-shopping-cart.tsx",
+			"line": 59,
+			"message": "Only export is `useShoppingCartNode`, but the file is `node-shopping-cart.tsx`.",
+			"suggestion": "Rename to `use-shopping-cart-node.tsx`."
 		},
 		{
 			"id": "7dbf8be10a",
@@ -3022,20 +3058,12 @@
 			"suggestion": "Rename to `navigation-blocker.ts`."
 		},
 		{
-			"id": "c1dd6c8065",
+			"id": "f55e04d5e2",
 			"convention": "tsx-only-with-jsx",
 			"source": "scan",
-			"file": "app/omnibar/plugin-dashboard.tsx",
-			"message": "`plugin-dashboard.tsx` has no JSX.",
-			"suggestion": "Rename to `plugin-dashboard.ts`."
-		},
-		{
-			"id": "0dd141653e",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/omnibar/test/admin-bar-icon.test.tsx",
-			"message": "`admin-bar-icon.test.tsx` has no JSX.",
-			"suggestion": "Rename to `admin-bar-icon.test.ts`."
+			"file": "app/omnibar/node-dashboard.tsx",
+			"message": "`node-dashboard.tsx` has no JSX.",
+			"suggestion": "Rename to `node-dashboard.ts`."
 		},
 		{
 			"id": "8c5887ce8a",
@@ -3484,22 +3512,6 @@
 			"file": "sites/storage/storage-utils.ts",
 			"message": "`storage-utils.ts` repeats its folder name.",
 			"suggestion": "Rename to `utils.ts` and update its imports."
-		},
-		{
-			"id": "ac685fcdb0",
-			"convention": "utils-not-helpers",
-			"source": "scan",
-			"file": "me/notifications-sites/helpers/",
-			"message": "Folder `helpers/`.",
-			"suggestion": "Rename to `utils/`."
-		},
-		{
-			"id": "2878fe0c41",
-			"convention": "utils-not-helpers",
-			"source": "scan",
-			"file": "plugins/scheduled-updates/helpers.ts",
-			"message": "File `helpers.ts`.",
-			"suggestion": "Rename to `utils.ts`."
 		},
 		{
 			"id": "9cd3dd0e85",
