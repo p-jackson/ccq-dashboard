@@ -1,9 +1,9 @@
 {
-	"generatedAt": "2026-10-23T03:36:41.903Z",
-	"commit": "95b6c6695f26ce6e95efb049aefd80466e7443e0",
+	"generatedAt": "2026-10-23T03:41:01.370Z",
+	"commit": "2b86f6b264d77627ce0999c358fccd95889d0ffa",
 	"githubRepo": "Automattic/wp-calypso",
 	"root": "client/dashboard",
-	"fileCount": 2234,
+	"fileCount": 2281,
 	"conventions": [
 		{
 			"id": "callout-file-name",
@@ -20,7 +20,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "`site-plan-card.tsx` default-exports `SitePlanCard` (or a qualified `SitesSitePlanCard`); `site-plan-card/index.tsx` does too. Matching names make components greppable from either side.",
-			"checked": 750,
+			"checked": 761,
 			"violations": 95
 		},
 		{
@@ -29,8 +29,8 @@
 			"category": "naming",
 			"status": "proposed",
 			"description": "A module whose only runtime export is a hook is named after it in kebab-case (`useSitePlan` → `use-site-plan.ts`), and a `use-*.ts` file exports the hook its name promises.",
-			"checked": 135,
-			"violations": 36
+			"checked": 136,
+			"violations": 37
 		},
 		{
 			"id": "hook-folder-placement",
@@ -47,7 +47,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
-			"checked": 2891,
+			"checked": 2951,
 			"violations": 0
 		},
 		{
@@ -56,8 +56,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "An exported component whose props use a named type calls that type `<ComponentName>Props`. Inline object types are left alone.",
-			"checked": 294,
-			"violations": 76
+			"checked": 296,
+			"violations": 78
 		},
 		{
 			"id": "stylesheet-name",
@@ -65,7 +65,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "When a folder has a single plain stylesheet, it is called `style.scss` (the name used by ~100 folders), not `styles.scss`, `index.scss` or `<component>.scss`.",
-			"checked": 131,
+			"checked": 134,
 			"violations": 22
 		},
 		{
@@ -74,8 +74,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
-			"checked": 385,
-			"violations": 58
+			"checked": 405,
+			"violations": 59
 		},
 		{
 			"id": "test-file-target",
@@ -83,8 +83,8 @@
 			"category": "structure",
 			"status": "accepted",
 			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
-			"checked": 326,
-			"violations": 20
+			"checked": 344,
+			"violations": 23
 		},
 		{
 			"id": "tsx-only-with-jsx",
@@ -92,7 +92,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
-			"checked": 1382,
+			"checked": 1409,
 			"violations": 66
 		},
 		{
@@ -310,7 +310,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "app/omnibar/omnibar.tsx",
-			"line": 72,
+			"line": 99,
 			"message": "Default export `OmnibarContainer` doesn’t match `omnibar`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -328,7 +328,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "app/responsive-sidebar/agency.tsx",
-			"line": 29,
+			"line": 30,
 			"message": "Default export `AgencySidebar` doesn’t match `agency`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -859,7 +859,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/settings-ai-tools/index.tsx",
-			"line": 268,
+			"line": 261,
 			"message": "Default export `AIToolsSettings` doesn’t match `settings-ai-tools`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -1081,7 +1081,7 @@
 			"convention": "hook-file-name",
 			"source": "scan",
 			"file": "app/omnibar/plugin-notifications.tsx",
-			"line": 21,
+			"line": 22,
 			"message": "Only export is `useNotificationsNodeBuilder`, but the file is `plugin-notifications.tsx`.",
 			"suggestion": "Rename to `use-notifications-node-builder.tsx`."
 		},
@@ -1099,7 +1099,7 @@
 			"convention": "hook-file-name",
 			"source": "scan",
 			"file": "app/omnibar/site.ts",
-			"line": 39,
+			"line": 15,
 			"message": "Only export is `useSyncOmnibarSite`, but the file is `site.ts`.",
 			"suggestion": "Rename to `use-sync-omnibar-site.ts`."
 		},
@@ -1237,6 +1237,15 @@
 			"line": 8,
 			"message": "Only export is `useViewMailboxAction`, but the file is `view-mailbox.tsx`.",
 			"suggestion": "Rename to `use-view-mailbox-action.tsx`."
+		},
+		{
+			"id": "7e9e2ef79c",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/view-titan-dns-records.tsx",
+			"line": 10,
+			"message": "Only export is `useViewTitanDnsRecordsAction`, but the file is `view-titan-dns-records.tsx`.",
+			"suggestion": "Rename to `use-view-titan-dns-records-action.tsx`."
 		},
 		{
 			"id": "fb8b62914f",
@@ -1439,7 +1448,7 @@
 			"convention": "props-type-name",
 			"source": "scan",
 			"file": "agency/marketplace/hosting/pressable-premium-gate.tsx",
-			"line": 23,
+			"line": 24,
 			"message": "`PressablePremiumGate` takes `Props`.",
 			"suggestion": "Rename the type to `PressablePremiumGateProps`."
 		},
@@ -1466,7 +1475,7 @@
 			"convention": "props-type-name",
 			"source": "scan",
 			"file": "agency/marketplace/hosting/wpcom-section.tsx",
-			"line": 162,
+			"line": 155,
 			"message": "`WpcomSection` takes `Props`.",
 			"suggestion": "Rename the type to `WpcomSectionProps`."
 		},
@@ -1475,7 +1484,7 @@
 			"convention": "props-type-name",
 			"source": "scan",
 			"file": "agency/marketplace/products/cart-menu.tsx",
-			"line": 60,
+			"line": 61,
 			"message": "`CartMenu` takes `Props`.",
 			"suggestion": "Rename the type to `CartMenuProps`."
 		},
@@ -1583,7 +1592,7 @@
 			"convention": "props-type-name",
 			"source": "scan",
 			"file": "agency/partner-directory/dashboard-content.tsx",
-			"line": 82,
+			"line": 87,
 			"message": "`PartnerDirectoryDashboardContent` takes `Props`.",
 			"suggestion": "Rename the type to `PartnerDirectoryDashboardContentProps`."
 		},
@@ -1604,6 +1613,15 @@
 			"line": 61,
 			"message": "`PartnerDirectoryExpertiseContent` takes `Props`.",
 			"suggestion": "Rename the type to `PartnerDirectoryExpertiseContentProps`."
+		},
+		{
+			"id": "9ca9b180ae",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/partner-directory/lead-matching/section-fields.tsx",
+			"line": 79,
+			"message": "`LeadMatchingSectionFields` takes `Props`.",
+			"suggestion": "Rename the type to `LeadMatchingSectionFieldsProps`."
 		},
 		{
 			"id": "1b097c7c87",
@@ -1799,7 +1817,7 @@
 			"convention": "props-type-name",
 			"source": "scan",
 			"file": "domains/domain-transfer/select-site.tsx",
-			"line": 23,
+			"line": 27,
 			"message": "`SelectSite` takes `Props`.",
 			"suggestion": "Rename the type to `SelectSiteProps`."
 		},
@@ -1883,6 +1901,15 @@
 			"line": 97,
 			"message": "`UpsellStep` takes `StepProps`.",
 			"suggestion": "Rename the type to `UpsellStepProps`."
+		},
+		{
+			"id": "87fdfc1408",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/billing-purchases/move-purchase/site-transfer-review.tsx",
+			"line": 121,
+			"message": "`SiteTransferReview` takes `Props`.",
+			"suggestion": "Rename the type to `SiteTransferReviewProps`."
 		},
 		{
 			"id": "779ad75df9",
@@ -2147,6 +2174,14 @@
 			"suggestion": "Rename to `style.scss` and update its import."
 		},
 		{
+			"id": "c5100dc4d6",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "emails/components/titan-dns-records.scss",
+			"message": "Only stylesheet in `emails/components/` is named `titan-dns-records.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
 			"id": "6602b33bdb",
 			"convention": "stylesheet-name",
 			"source": "scan",
@@ -2168,14 +2203,6 @@
 			"source": "scan",
 			"file": "me/billing-purchases/payment-methods/credit-card-fields.scss",
 			"message": "Only stylesheet in `me/billing-purchases/payment-methods/` is named `credit-card-fields.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "a42e79883c",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "me/mcp/approval-bypass.scss",
-			"message": "Only stylesheet in `me/mcp/` is named `approval-bypass.scss`.",
 			"suggestion": "Rename to `style.scss` and update its import."
 		},
 		{
@@ -2491,6 +2518,14 @@
 			"suggestion": "Rename to `get-cart-items.test.ts`."
 		},
 		{
+			"id": "409bb83563",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "emails/utils/test/get-mailbox-cost.ts",
+			"message": "`get-mailbox-cost.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `get-mailbox-cost.test.ts`."
+		},
+		{
 			"id": "38eb2fb414",
 			"convention": "test-file-suffix",
 			"source": "scan",
@@ -2763,6 +2798,14 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
+			"id": "d05b527bc1",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/payout-settings-route.test.ts",
+			"message": "No `payout-settings-route.ts(x)` or `payout-settings-route/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
 			"id": "dea7155f65",
 			"convention": "test-file-target",
 			"source": "scan",
@@ -2875,11 +2918,27 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
+			"id": "ffd61093d4",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/mcp/test/read-page.test.tsx",
+			"message": "No `read-page.ts(x)` or `read-page/` beside `me/mcp/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
 			"id": "e483c58961",
 			"convention": "test-file-target",
 			"source": "scan",
 			"file": "sites/scan/test/use-fix-threats.test.tsx",
 			"message": "No `use-fix-threats.ts(x)` or `use-fix-threats/` beside `sites/scan/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "5e2093993b",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "sites/settings-ai-tools/test/ai-tools-read-page.test.tsx",
+			"message": "No `ai-tools-read-page.ts(x)` or `ai-tools-read-page/` beside `sites/settings-ai-tools/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{

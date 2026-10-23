@@ -1,17 +1,37 @@
 [
 	{
-		"date": "2026-10-23T03:36:41.903Z",
-		"commit": "95b6c6695f26ce6e95efb049aefd80466e7443e0",
+		"date": "2026-10-23T03:40:28.076Z",
+		"commit": "049e26a8ff7cfcf632eeb8c0b937f198ddd8a327",
 		"counts": {
 			"callout-file-name": 3,
 			"default-export-matches-filename": 95,
-			"hook-file-name": 36,
+			"hook-file-name": 37,
 			"hook-folder-placement": 8,
 			"kebab-case-paths": 0,
-			"props-type-name": 76,
+			"props-type-name": 78,
 			"stylesheet-name": 22,
-			"test-file-suffix": 58,
-			"test-file-target": 20,
+			"test-file-suffix": 59,
+			"test-file-target": 23,
+			"tsx-only-with-jsx": 66,
+			"upsell-illustration-name": 1,
+			"utils-no-folder-prefix": 1,
+			"utils-not-helpers": 2,
+			"modal-content-info": 1
+		}
+	},
+	{
+		"date": "2026-10-23T03:41:01.370Z",
+		"commit": "2b86f6b264d77627ce0999c358fccd95889d0ffa",
+		"counts": {
+			"callout-file-name": 3,
+			"default-export-matches-filename": 95,
+			"hook-file-name": 37,
+			"hook-folder-placement": 8,
+			"kebab-case-paths": 0,
+			"props-type-name": 78,
+			"stylesheet-name": 22,
+			"test-file-suffix": 59,
+			"test-file-target": 23,
 			"tsx-only-with-jsx": 66,
 			"upsell-illustration-name": 1,
 			"utils-no-folder-prefix": 1,
