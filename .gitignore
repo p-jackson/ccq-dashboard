@@ -7,3 +7,4 @@ tmp/
 .spacefast/.spacefast-*
 .spacefast/.space-link-*.tmp
 .spacefast/
+.cache/

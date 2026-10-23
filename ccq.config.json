@@ -1,5 +1,7 @@
 {
 	"githubRepo": "Automattic/wp-calypso",
+	"remote": "origin",
+	"branch": "trunk",
 	"root": "client/dashboard",
 	"space": {
 		"name": "Calypso Code Quality",

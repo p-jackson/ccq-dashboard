@@ -12,6 +12,10 @@
 		"track": "node bin/track.mjs",
 		"build": "node bin/build.mjs",
 		"publish": "node bin/publish.mjs",
-		"all": "node bin/scan.mjs && node bin/build.mjs && node bin/publish.mjs"
+		"all": "node bin/scan.mjs && node bin/build.mjs && node bin/publish.mjs",
+		"refresh": "node bin/refresh.mjs"
+	},
+	"dependencies": {
+		"typescript": "^6.0.3"
 	}
 }
