@@ -31,8 +31,8 @@ if ( space ) {
 }
 
 const out = execFileSync( 'npx', args, { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'inherit' ] } );
-// With --json the receipt is the last JSON line.
-const receipt = JSON.parse( out.trim().split( '\n' ).filter( ( l ) => l.startsWith( '{' ) ).pop() );
+// With --json the receipt is a single (pretty-printed) JSON document, possibly after log lines.
+const receipt = JSON.parse( out.slice( out.indexOf( '{' ) ) );
 const { id, liveUrl } = receipt.data?.space ?? {};
 
 if ( ! space && id ) {
