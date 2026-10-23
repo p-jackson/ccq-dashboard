@@ -1,0 +1,22 @@
+{
+	"conventions": [
+		{
+			"id": "modal-content-info",
+			"title": "A modal folder’s body component is `content-info.tsx`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "In `*-modal/` folders, the modal body that dataviews actions lazy-load without the `Modal` chrome is `content-info.tsx` (3 folders: `site-leave-modal`, `site-reset-modal`, `site-restore-modal`; the `-content-info.tsx` suffix is also used in `hosting-feature-activation-modal` and `migration-overview`). `site-change-address-modal` calls the same role `content.tsx`. One name makes the lazy-import targets predictable.",
+			"coveredAreas": [
+				"sites"
+			]
+		}
+	],
+	"findings": [
+		{
+			"convention": "modal-content-info",
+			"file": "sites/site-change-address-modal/content.tsx",
+			"message": "Modal body is `content.tsx`; the other modal folders lazy-loaded from dataviews actions use `content-info.tsx`.",
+			"suggestion": "Rename to `content-info.tsx` (and `test/content.test.tsx` to `test/content-info.test.tsx`), updating the lazy import in `domains/dataviews/actions.tsx`."
+		}
+	]
+}

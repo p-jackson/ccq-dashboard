@@ -1,0 +1,17 @@
+{
+	"name": "ccq",
+	"private": true,
+	"license": "GPL-2.0-or-later",
+	"description": "Calypso Code Quality: finds small code-consistency drift in wp-calypso's client/dashboard and publishes a backlog.",
+	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
+	"scripts": {
+		"scan": "node bin/scan.mjs",
+		"track": "node bin/track.mjs",
+		"build": "node bin/build.mjs",
+		"publish": "node bin/publish.mjs",
+		"all": "node bin/scan.mjs && node bin/build.mjs && node bin/publish.mjs"
+	}
+}

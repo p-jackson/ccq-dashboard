@@ -1,0 +1,413 @@
+:root {
+	--bg: #f7f7f5;
+	--surface: #ffffff;
+	--surface-2: #f0f0ec;
+	--text: #1d1d1b;
+	--muted: #6b6b66;
+	--border: #e2e2dc;
+	--accent: #3858e9;
+	--accent-soft: #e8ecfd;
+	--good: #1f8a4c;
+	--warn: #b26200;
+	--warn-soft: #fdf1e2;
+	--purple: #7a3fd1;
+	--purple-soft: #f1e9fc;
+	--mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+	--sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+	color-scheme: light;
+}
+
+@media ( prefers-color-scheme: dark ) {
+	:root:not( [data-theme='light'] ) {
+		--bg: #131312;
+		--surface: #1c1c1a;
+		--surface-2: #252522;
+		--text: #ecece8;
+		--muted: #9a9a93;
+		--border: #33332f;
+		--accent: #7b93ff;
+		--accent-soft: #232a4a;
+		--good: #4cc27f;
+		--warn: #f0a24a;
+		--warn-soft: #3a2a16;
+		--purple: #b48cf5;
+		--purple-soft: #2e2442;
+		color-scheme: dark;
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var( --bg );
+	color: var( --text );
+	font: 15px/1.5 var( --sans );
+}
+
+code {
+	font-family: var( --mono );
+	font-size: 0.88em;
+}
+
+a {
+	color: var( --accent );
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.wrap {
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 0 16px;
+}
+
+.top {
+	border-bottom: 1px solid var( --border );
+	background: var( --surface );
+	padding: 28px 0 20px;
+}
+
+.eyebrow {
+	margin: 0;
+	color: var( --muted );
+	font-size: 13px;
+}
+
+h1 {
+	margin: 2px 0 4px;
+	font-size: 28px;
+	letter-spacing: -0.02em;
+}
+
+.meta {
+	margin: 0;
+	color: var( --muted );
+	font-size: 13px;
+}
+
+.stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 28px;
+	margin: 20px 0 0;
+}
+
+.stats div {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.stats dt {
+	color: var( --muted );
+	font-size: 12px;
+}
+
+.stats dd {
+	margin: 0;
+	font-size: 24px;
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+}
+
+.layout {
+	display: grid;
+	grid-template-columns: 340px minmax( 0, 1fr );
+	gap: 28px;
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+
+@media ( max-width: 860px ) {
+	.layout {
+		grid-template-columns: minmax( 0, 1fr );
+	}
+}
+
+.rail-title {
+	margin: 0 0 8px;
+	color: var( --muted );
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.conventions,
+.prs ul,
+.findings {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.conventions button {
+	display: block;
+	width: 100%;
+	margin: 0 0 4px;
+	padding: 10px 12px;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	background: none;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.conventions button:hover {
+	background: var( --surface-2 );
+}
+
+.conventions button[aria-pressed='true'] {
+	border-color: var( --border );
+	background: var( --surface );
+}
+
+.conv-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 12px;
+}
+
+.conv-title {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.conv-count {
+	flex: none;
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+}
+
+.conv-count.zero {
+	color: var( --good );
+}
+
+.conv-sub {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 6px;
+	color: var( --muted );
+	font-size: 12px;
+}
+
+.bar {
+	flex: 1;
+	height: 4px;
+	border-radius: 2px;
+	background: var( --surface-2 );
+	overflow: hidden;
+}
+
+.bar span {
+	display: block;
+	height: 100%;
+	background: var( --good );
+}
+
+.pill {
+	display: inline-block;
+	padding: 1px 7px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.pill.accepted {
+	background: var( --accent-soft );
+	color: var( --accent );
+}
+
+.pill.proposed {
+	background: var( --surface-2 );
+	color: var( --muted );
+}
+
+.pill.claude {
+	background: var( --purple-soft );
+	color: var( --purple );
+}
+
+.pill.claimed {
+	background: var( --warn-soft );
+	color: var( --warn );
+}
+
+.pill.wontfix {
+	background: var( --surface-2 );
+	color: var( --muted );
+	text-decoration: line-through;
+}
+
+.pill.open-pr {
+	background: var( --accent-soft );
+	color: var( --accent );
+}
+
+.pill.merged {
+	background: var( --purple-soft );
+	color: var( --purple );
+}
+
+.prs {
+	margin-top: 24px;
+}
+
+.prs li {
+	padding: 8px 0;
+	border-top: 1px solid var( --border );
+	font-size: 13px;
+}
+
+.prs .pr-meta {
+	color: var( --muted );
+	font-size: 12px;
+}
+
+.filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.filters input,
+.filters select {
+	padding: 8px 10px;
+	border: 1px solid var( --border );
+	border-radius: 8px;
+	background: var( --surface );
+	color: inherit;
+	font: inherit;
+	font-size: 14px;
+}
+
+.filters input {
+	flex: 1 1 240px;
+}
+
+.detail {
+	margin-bottom: 16px;
+	padding: 16px;
+	border: 1px solid var( --border );
+	border-radius: 10px;
+	background: var( --surface );
+}
+
+.detail h2 {
+	margin: 0 0 6px;
+	font-size: 18px;
+}
+
+.detail p {
+	margin: 0;
+	color: var( --muted );
+}
+
+.detail .detail-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+.spark {
+	color: var( --accent );
+}
+
+.findings li {
+	display: grid;
+	grid-template-columns: minmax( 0, 1fr ) auto;
+	gap: 4px 16px;
+	padding: 12px 14px;
+	border: 1px solid var( --border );
+	border-bottom-width: 0;
+	background: var( --surface );
+}
+
+.findings li:first-child {
+	border-radius: 10px 10px 0 0;
+}
+
+.findings li:last-child {
+	border-bottom-width: 1px;
+	border-radius: 0 0 10px 10px;
+}
+
+.findings li:only-child {
+	border-radius: 10px;
+}
+
+.findings .path {
+	font-family: var( --mono );
+	font-size: 13px;
+	overflow-wrap: anywhere;
+}
+
+.findings .path .dir {
+	color: var( --muted );
+}
+
+.findings .msg {
+	grid-column: 1;
+	font-size: 14px;
+}
+
+.findings .fix {
+	grid-column: 1;
+	color: var( --muted );
+	font-size: 13px;
+}
+
+.findings .side {
+	grid-row: 1 / span 3;
+	grid-column: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 6px;
+}
+
+.copy {
+	padding: 2px 6px;
+	border: 1px solid var( --border );
+	border-radius: 6px;
+	background: none;
+	color: var( --muted );
+	font: 12px var( --mono );
+	cursor: pointer;
+}
+
+.copy:hover {
+	color: var( --text );
+}
+
+.conv-tag {
+	color: var( --muted );
+	font-size: 12px;
+}
+
+.empty {
+	padding: 32px;
+	color: var( --muted );
+	text-align: center;
+}
+
+.foot {
+	padding-top: 8px;
+	padding-bottom: 32px;
+	color: var( --muted );
+	font-size: 12px;
+}

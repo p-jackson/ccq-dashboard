@@ -1,0 +1,3454 @@
+{
+	"generatedAt": "2026-10-23T03:33:40.820Z",
+	"commit": "95b6c6695f26ce6e95efb049aefd80466e7443e0",
+	"githubRepo": "Automattic/wp-calypso",
+	"root": "client/dashboard",
+	"fileCount": 2234,
+	"conventions": [
+		{
+			"id": "callout-file-name",
+			"title": "A feature’s callout is `<folder>-callout.tsx` with `<folder>-callout-illustration.svg`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "A folder’s illustrated callout is named after the folder (`logs/logs-callout.tsx` + `logs-callout-illustration.svg`). Extra callouts in a folder that already has its own, like `performance/backend-callout.tsx`, are fine. Found by Claude in `sites/`.",
+			"checked": 8,
+			"violations": 3
+		},
+		{
+			"id": "default-export-matches-filename",
+			"title": "A default export is named after its file",
+			"category": "naming",
+			"status": "accepted",
+			"description": "`site-plan-card.tsx` default-exports `SitePlanCard` (or a qualified `SitesSitePlanCard`); `site-plan-card/index.tsx` does too. Matching names make components greppable from either side.",
+			"checked": 750,
+			"violations": 95
+		},
+		{
+			"id": "hook-file-name",
+			"title": "A hook lives in `use-<hook-name>.ts`",
+			"category": "naming",
+			"status": "proposed",
+			"description": "A module whose only runtime export is a hook is named after it in kebab-case (`useSitePlan` → `use-site-plan.ts`), and a `use-*.ts` file exports the hook its name promises.",
+			"checked": 135,
+			"violations": 36
+		},
+		{
+			"id": "hook-folder-placement",
+			"title": "Hooks are either all in `hooks/` or all beside their callers",
+			"category": "structure",
+			"status": "proposed",
+			"description": "A folder that has a `hooks/` subfolder keeps all its hooks there, and a `hooks/` folder is only worth having for more than one hook. A lone hook sits beside the code that uses it.",
+			"checked": 103,
+			"violations": 8
+		},
+		{
+			"id": "kebab-case-paths",
+			"title": "File and folder names are kebab-case",
+			"category": "naming",
+			"status": "accepted",
+			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
+			"checked": 2891,
+			"violations": 0
+		},
+		{
+			"id": "props-type-name",
+			"title": "Component props types are `<Component>Props`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "An exported component whose props use a named type calls that type `<ComponentName>Props`. Inline object types are left alone.",
+			"checked": 294,
+			"violations": 76
+		},
+		{
+			"id": "stylesheet-name",
+			"title": "A folder’s stylesheet is `style.scss`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "When a folder has a single plain stylesheet, it is called `style.scss` (the name used by ~100 folders), not `styles.scss`, `index.scss` or `<component>.scss`.",
+			"checked": 131,
+			"violations": 22
+		},
+		{
+			"id": "test-file-suffix",
+			"title": "Test files end in `.test.ts(x)`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
+			"checked": 385,
+			"violations": 58
+		},
+		{
+			"id": "test-file-target",
+			"title": "A test file is named after the module it tests",
+			"category": "structure",
+			"status": "accepted",
+			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
+			"checked": 326,
+			"violations": 20
+		},
+		{
+			"id": "tsx-only-with-jsx",
+			"title": "`.tsx` only for files that contain JSX",
+			"category": "naming",
+			"status": "accepted",
+			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
+			"checked": 1382,
+			"violations": 66
+		},
+		{
+			"id": "upsell-illustration-name",
+			"title": "An upsell illustration is `upsell-illustration.svg`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "A folder with one upsell image calls it plain `upsell-illustration.svg` (or `.tsx`); the folder already says what it’s for. Found by Claude in `sites/`.",
+			"checked": 7,
+			"violations": 1
+		},
+		{
+			"id": "utils-no-folder-prefix",
+			"title": "A folder’s utils module is `utils.ts`, not `<folder>-utils.ts`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "Per-folder utility modules are plain `utils.ts(x)`. Repeating the folder name (`storage/storage-utils.ts`) adds nothing; topical prefixes that don’t repeat it (`contact-validation-utils.ts`) are fine. Found by Claude in `sites/`.",
+			"checked": 30,
+			"violations": 1
+		},
+		{
+			"id": "utils-not-helpers",
+			"title": "Shared functions go in `utils`, not `helpers`",
+			"category": "naming",
+			"status": "accepted",
+			"description": "Grab-bag modules are called `utils.ts` or `utils/` (17 files, 6 folders today) rather than `helpers`, `helper` or `util`.",
+			"checked": 30,
+			"violations": 2
+		},
+		{
+			"status": "accepted",
+			"id": "modal-content-info",
+			"title": "A modal folder’s body component is `content-info.tsx`",
+			"category": "naming",
+			"description": "In `*-modal/` folders, the modal body that dataviews actions lazy-load without the `Modal` chrome is `content-info.tsx` (3 folders: `site-leave-modal`, `site-reset-modal`, `site-restore-modal`; the `-content-info.tsx` suffix is also used in `hosting-feature-activation-modal` and `migration-overview`). `site-change-address-modal` calls the same role `content.tsx`. One name makes the lazy-import targets predictable.",
+			"coveredAreas": [
+				"sites"
+			],
+			"source": "claude",
+			"checked": null,
+			"violations": 1
+		}
+	],
+	"findings": [
+		{
+			"id": "e928c9896c",
+			"convention": "callout-file-name",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/demo-callout-illustration.svg",
+			"message": "Callout file `demo-callout-illustration.svg` doesn’t match its folder `hosting/`.",
+			"suggestion": "Rename to `hosting-callout-illustration.svg` and update its imports."
+		},
+		{
+			"id": "12d3a983f4",
+			"convention": "callout-file-name",
+			"source": "scan",
+			"file": "sites/logs-activity/activity-logs-callout-illustration.svg",
+			"message": "Callout file `activity-logs-callout-illustration.svg` doesn’t match its folder `logs-activity/`.",
+			"suggestion": "Rename to `logs-activity-callout-illustration.svg` and update its imports."
+		},
+		{
+			"id": "e4cbbe338f",
+			"convention": "callout-file-name",
+			"source": "scan",
+			"file": "sites/logs-activity/activity-logs-callout.tsx",
+			"message": "Callout file `activity-logs-callout.tsx` doesn’t match its folder `logs-activity/`.",
+			"suggestion": "Rename to `logs-activity-callout.tsx` and update its imports."
+		},
+		{
+			"id": "16c144f39e",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/earn/referrals/hooks/use-payout-data.ts",
+			"line": 18,
+			"message": "Default export `useGetPayoutData` doesn’t match `use-payout-data`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "3cdfa45f37",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/earn/woopayments/add-woopayments-to-site/add-site-table.tsx",
+			"line": 20,
+			"message": "Default export `AddWooPaymentsToSiteTable` doesn’t match `add-site-table`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "0eb342c10d",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/pressable-offer-banner.tsx",
+			"line": 102,
+			"message": "Default export `PressableOffers` doesn’t match `pressable-offer-banner`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "4304ad740c",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/marketplace/referral-checkout/request-form.tsx",
+			"line": 24,
+			"message": "Default export `RequestClientPaymentForm` doesn’t match `request-form`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "0ce9e46238",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/connect-agent-content.tsx",
+			"line": 80,
+			"message": "Default export `McpConnectAgent` doesn’t match `connect-agent-content`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "249afbe583",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/connect-agent.tsx",
+			"line": 8,
+			"message": "Default export `McpConnectAgentScreen` doesn’t match `connect-agent`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "7679f04773",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/overview-content.tsx",
+			"line": 52,
+			"message": "Default export `McpOverview` doesn’t match `overview-content`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "bfec9d016a",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/read-tools.tsx",
+			"line": 9,
+			"message": "Default export `McpReadToolsScreen` doesn’t match `read-tools`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "cf672b6df0",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/starter-prompts-content.tsx",
+			"line": 102,
+			"message": "Default export `McpStarterPrompts` doesn’t match `starter-prompts-content`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "af9818f2b1",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/starter-prompts.tsx",
+			"line": 8,
+			"message": "Default export `McpStarterPromptsScreen` doesn’t match `starter-prompts`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "9f346a32e8",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/tools-content.tsx",
+			"line": 107,
+			"message": "Default export `McpTools` doesn’t match `tools-content`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "e642bbe96b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/mcp/write-tools.tsx",
+			"line": 9,
+			"message": "Default export `McpWriteToolsScreen` doesn’t match `write-tools`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "ce7c807683",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/sites/provisioning-notice.tsx",
+			"line": 112,
+			"message": "Default export `ProvisioningSiteNotices` doesn’t match `provisioning-notice`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "1c3c025285",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/team/accept-invite/index.tsx",
+			"line": 56,
+			"message": "Default export `AcceptTeamInvite` doesn’t match `accept-invite`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "741053ce8a",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/404/index.tsx",
+			"line": 18,
+			"message": "Default export `NotFound` doesn’t match `404`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "1c13394362",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/500/index.tsx",
+			"line": 180,
+			"message": "Default export `UnknownError` doesn’t match `500`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "6ce5d330d1",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/omnibar/omnibar.tsx",
+			"line": 72,
+			"message": "Default export `OmnibarContainer` doesn’t match `omnibar`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "2d4b1f8e9d",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/responsive-sidebar/agency-client.tsx",
+			"line": 7,
+			"message": "Default export `AgencyClientSidebar` doesn’t match `agency-client`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "2d63851d61",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/responsive-sidebar/agency.tsx",
+			"line": 29,
+			"message": "Default export `AgencySidebar` doesn’t match `agency`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "eeeabb167b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "app/root/error.tsx",
+			"line": 15,
+			"message": "Default export `NotFoundRoot` doesn’t match `error`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "e9acea8064",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "components/empty-state/index.tsx",
+			"line": 113,
+			"message": "Default export `EmptyStateWithStatics` doesn’t match `empty-state`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "c11fb03062",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "components/logs-activity-formatted-block/api-core-parser.ts",
+			"line": 281,
+			"message": "Default export `parseActivityLogEntryContent` doesn’t match `api-core-parser`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "9bc7de5648",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "components/logs-activity-formatted-block/index.tsx",
+			"line": 305,
+			"message": "Default export `FormattedBlock` doesn’t match `logs-activity-formatted-block`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "a21e8fbbcf",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "components/router-link-summary-button/index.tsx",
+			"line": 11,
+			"message": "Default export `DashboardSummaryButton` doesn’t match `router-link-summary-button`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "04fa6cf3d3",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/dns/add.tsx",
+			"line": 17,
+			"message": "Default export `DomainAddDNS` doesn’t match `add`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "f13585d4e7",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/dns/edit.tsx",
+			"line": 19,
+			"message": "Default export `DomainEditDNS` doesn’t match `edit`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "487fa720c4",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/index.tsx",
+			"line": 28,
+			"message": "Default export `DomainConnection` doesn’t match `domain-connection-setup`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "bfadf7ed7a",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/legacy-transfer-setup.tsx",
+			"line": 22,
+			"message": "Default export `DomainTransferSetup` doesn’t match `legacy-transfer-setup`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "78b20496aa",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-contact-details/index.tsx",
+			"line": 36,
+			"message": "Default export `DomainContactInfo` doesn’t match `domain-contact-details`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "579bdef377",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-forwarding/add.tsx",
+			"line": 20,
+			"message": "Default export `AddDomainForwarding` doesn’t match `add`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "bc74e0e43e",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-forwarding/edit.tsx",
+			"line": 21,
+			"message": "Default export `EditDomainForwarding` doesn’t match `edit`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "d068102291",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-glue-records/add.tsx",
+			"line": 14,
+			"message": "Default export `AddDomainGlueRecords` doesn’t match `add`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "70a60e40a5",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-glue-records/edit.tsx",
+			"line": 14,
+			"message": "Default export `EditDomainGlueRecords` doesn’t match `edit`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "007ee823a3",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-transfer/transfer-domain-to-other-site.tsx",
+			"line": 24,
+			"message": "Default export `DomainTransferToOtherSite` doesn’t match `transfer-domain-to-other-site`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "84bebc88dc",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domains-contact-details/index.tsx",
+			"line": 75,
+			"message": "Default export `DomainsContactInfo` doesn’t match `domains-contact-details`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "d9c9b68b97",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "emails/add-forwarder/index.tsx",
+			"line": 457,
+			"message": "Default export `AddEmailForwarder` doesn’t match `add-forwarder`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "8f84f363f8",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "emails/add-mailbox/index.tsx",
+			"line": 271,
+			"message": "Default export `AddProfessionalEmail` doesn’t match `add-mailbox`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "bf77da3a3f",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-monetize-subscriptions/index.tsx",
+			"line": 132,
+			"message": "Default export `MonetizeSubscriptions` doesn’t match `billing-monetize-subscriptions`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "859cab2cce",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-monetize-subscriptions/monetize-subscription.tsx",
+			"line": 255,
+			"message": "Default export `MonetizeSubscriptionDetails` doesn’t match `monetize-subscription`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "e8c5e5ad51",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-payment-methods/index.tsx",
+			"line": 81,
+			"message": "Default export `PaymentMethods` doesn’t match `billing-payment-methods`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "b833782b3a",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-purchases/add-payment-method.tsx",
+			"line": 86,
+			"message": "Default export `AddPaymentMethodWrapper` doesn’t match `add-payment-method`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "4f382115b1",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/marketplace-subscriptions-dialog.tsx",
+			"line": 89,
+			"message": "Default export `MarketPlaceSubscriptionsWarning` doesn’t match `marketplace-subscriptions-dialog`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "68342a4767",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-purchases/change-payment-method.tsx",
+			"line": 103,
+			"message": "Default export `ChangePaymentMethodWrapper` doesn’t match `change-payment-method`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "bb561a2ba7",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-purchases/index.tsx",
+			"line": 44,
+			"message": "Default export `PurchasesList` doesn’t match `billing-purchases`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "68b99caf7e",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/billing-tax-details/index.tsx",
+			"line": 9,
+			"message": "Default export `UserTaxInfoPage` doesn’t match `billing-tax-details`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "9ac6b17efc",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/mcp/approval-bypass.tsx",
+			"line": 48,
+			"message": "Default export `McpApprovalBypassControl` doesn’t match `approval-bypass`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "dc57c4bfd5",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/mcp/index.tsx",
+			"line": 265,
+			"message": "Default export `McpComponent` doesn’t match `mcp`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "47ea2f45fa",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/mcp/setup/index.tsx",
+			"line": 378,
+			"message": "Default export `McpSetupComponent` doesn’t match `setup`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "be55807133",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/profile-deletion/index.tsx",
+			"line": 17,
+			"message": "Default export `AccountDeletionSection` doesn’t match `profile-deletion`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "ec33273670",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/profile-gravatar/index.tsx",
+			"line": 97,
+			"message": "Default export `GravatarProfileSection` doesn’t match `profile-gravatar`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "26f488c87b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/profile-personal-details/index.tsx",
+			"line": 29,
+			"message": "Default export `PersonalDetailsSection` doesn’t match `profile-personal-details`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "0dd53df655",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/profile-personal-details/update-username/index.tsx",
+			"line": 38,
+			"message": "Default export `UsernameUpdateForm` doesn’t match `update-username`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "8c916a6303",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "me/reader/index.tsx",
+			"line": 13,
+			"message": "Default export `ReaderPreferences` doesn’t match `reader`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "f19705a748",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "plugins/manage/index.tsx",
+			"line": 44,
+			"message": "Default export `PluginsList` doesn’t match `manage`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "aec382b97c",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/backup-restore/granular-form.tsx",
+			"line": 126,
+			"message": "Default export `SiteBackupGranularRestoreForm` doesn’t match `granular-form`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "8c44748f93",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/deployments/icons/branch.tsx",
+			"line": 10,
+			"message": "Default export `BranchIcon` doesn’t match `branch`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "5e0cc0aeed",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/deployments/icons/github.tsx",
+			"line": 10,
+			"message": "Default export `GithubIcon` doesn’t match `github`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "aceb244320",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/hosting-feature-gated-with-callout/activation.tsx",
+			"line": 25,
+			"message": "Default export `ActivationCallout` doesn’t match `activation`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "ebce1fb14b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/hosting-feature-gated-with-callout/upsell.tsx",
+			"line": 28,
+			"message": "Default export `UpsellCallout` doesn’t match `upsell`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "a976aaadd6",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-agency-site-share-card/index.tsx",
+			"line": 9,
+			"message": "Default export `AgencySiteShareCard` doesn’t match `overview-agency-site-share-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "ff9eec5a44",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-backup-card/index.tsx",
+			"line": 117,
+			"message": "Default export `BackupCard` doesn’t match `overview-backup-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "90c437a8dd",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-difm-offer-card/index.tsx",
+			"line": 41,
+			"message": "Default export `DIFMOfferCard` doesn’t match `overview-difm-offer-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "2134c1478d",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-difm-upsell-card/index.tsx",
+			"line": 13,
+			"message": "Default export `DIFMUpsellCard` doesn’t match `overview-difm-upsell-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "c0fb6cbb59",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-domain-transfer-upsell-card/index.tsx",
+			"line": 10,
+			"message": "Default export `DomainTransferUpsellCard` doesn’t match `overview-domain-transfer-upsell-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "f40b733839",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-domain-upsell-card/index.tsx",
+			"line": 241,
+			"message": "Default export `DomainUpsellCard` doesn’t match `overview-domain-upsell-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "f15016d122",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-domains-card/index.tsx",
+			"line": 103,
+			"message": "Default export `DomainsCard` doesn’t match `overview-domains-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "3995b9c61c",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-jetpack-connection-warning-card/index.tsx",
+			"line": 6,
+			"message": "Default export `JetpackConnectionWarningCard` doesn’t match `overview-jetpack-connection-warning-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "a35ec44ecd",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-latest-activity-card/index.tsx",
+			"line": 60,
+			"message": "Default export `LatestActivityCard` doesn’t match `overview-latest-activity-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "0e17386a7b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-migrate-site-card/index.tsx",
+			"line": 8,
+			"message": "Default export `MigrateSiteCard` doesn’t match `overview-migrate-site-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "6139af682c",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-performance-card/index.tsx",
+			"line": 168,
+			"message": "Default export `PerformanceCard` doesn’t match `overview-performance-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "bca390c75b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-plan-card/index.tsx",
+			"line": 241,
+			"message": "Default export `PlanCard` doesn’t match `overview-plan-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "fda56b3633",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-scan-card/index.tsx",
+			"line": 96,
+			"message": "Default export `ScanCard` doesn’t match `overview-scan-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "40562e917e",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-site-action-menu/index.tsx",
+			"line": 61,
+			"message": "Default export `SiteActionMenu` doesn’t match `overview-site-action-menu`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "e4eecf49de",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-site-fields/index.tsx",
+			"line": 105,
+			"message": "Default export `SiteOverviewFields` doesn’t match `overview-site-fields`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "45a5383170",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-subscribers-card/index.tsx",
+			"line": 8,
+			"message": "Default export `SubscribersCard` doesn’t match `overview-subscribers-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "01ea5191c1",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/overview-visibility-card/index.tsx",
+			"line": 136,
+			"message": "Default export `VisibilityCard` doesn’t match `overview-visibility-card`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "7bafc2c8f1",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/performance/backend/backend-status.tsx",
+			"line": 6,
+			"message": "Default export `BackendStatusNotice` doesn’t match `backend-status`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "559f95f012",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-ai-tools/index.tsx",
+			"line": 268,
+			"message": "Default export `AIToolsSettings` doesn’t match `settings-ai-tools`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "b7a3d75cc4",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-apm/index.tsx",
+			"line": 66,
+			"message": "Default export `ApmSettings` doesn’t match `settings-apm`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "17c3e70ec8",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-caching/index.tsx",
+			"line": 56,
+			"message": "Default export `CachingSettings` doesn’t match `settings-caching`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "b87c8ef273",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-crontab/index.tsx",
+			"line": 98,
+			"message": "Default export `CrontabSettings` doesn’t match `settings-crontab`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "5749e111bf",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-database/index.tsx",
+			"line": 28,
+			"message": "Default export `SiteDatabaseSettings` doesn’t match `settings-database`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "ecd379ca2b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-defensive-mode/index.tsx",
+			"line": 71,
+			"message": "Default export `DefensiveModeSettings` doesn’t match `settings-defensive-mode`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "83d7f777cb",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-hundred-year-plan/index.tsx",
+			"line": 10,
+			"message": "Default export `HundredYearPlanSettings` doesn’t match `settings-hundred-year-plan`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "8d0ef754ef",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-php/index.tsx",
+			"line": 25,
+			"message": "Default export `PHPVersionSettings` doesn’t match `settings-php`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "883c5b64d1",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-primary-data-center/index.tsx",
+			"line": 15,
+			"message": "Default export `PrimaryDataCenterSettings` doesn’t match `settings-primary-data-center`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "a40c4e02e0",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-redirect/index.tsx",
+			"line": 14,
+			"message": "Default export `RedirectsSettings` doesn’t match `settings-redirect`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "8035c45d81",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-repositories/index.tsx",
+			"line": 195,
+			"message": "Default export `SiteRepositories` doesn’t match `settings-repositories`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "68fc4f4c5c",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-sftp-ssh/index.tsx",
+			"line": 20,
+			"message": "Default export `SftpSshSettings` doesn’t match `settings-sftp-ssh`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "cb33c37371",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-site-visibility/index.tsx",
+			"line": 13,
+			"message": "Default export `SiteVisibilitySettings` doesn’t match `settings-site-visibility`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "1fa1d8d275",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-static-file-404/index.tsx",
+			"line": 55,
+			"message": "Default export `SiteStaticFile404Settings` doesn’t match `settings-static-file-404`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "bec0b85305",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-subscription-gifting/index.tsx",
+			"line": 45,
+			"message": "Default export `SubscriptionGiftingSettings` doesn’t match `settings-subscription-gifting`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "a7bc94c22b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-web-application-firewall/index.tsx",
+			"line": 24,
+			"message": "Default export `WebApplicationFirewallSettings` doesn’t match `settings-web-application-firewall`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "aa7ff2a1a5",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-wordpress/index.tsx",
+			"line": 111,
+			"message": "Default export `WordPressSettings` doesn’t match `settings-wordpress`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "7f551a6878",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "sites/settings-wpcom-login/index.tsx",
+			"line": 21,
+			"message": "Default export `WpcomLoginSettings` doesn’t match `settings-wpcom-login`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "74da097eb3",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "agency/earn/referrals/hooks/use-payout-data.ts",
+			"message": "`use-payout-data.ts` exports `useGetPayoutData`, not the hook its name implies.",
+			"suggestion": "Rename to `use-get-payout-data.ts`."
+		},
+		{
+			"id": "a167bef92a",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "agency/team/dataviews/actions.ts",
+			"line": 12,
+			"message": "Only export is `useTeamActions`, but the file is `actions.ts`.",
+			"suggestion": "Rename to `use-team-actions.ts`."
+		},
+		{
+			"id": "5125b725ef",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "agency/team/dataviews/fields.tsx",
+			"line": 82,
+			"message": "Only export is `useTeamFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-team-fields.tsx`."
+		},
+		{
+			"id": "0190d1c082",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/hooks/use-visit-counter.ts",
+			"message": "`use-visit-counter.ts` exports `usePersistentVisitCounter`, `useTrackVisitedAreas`, not the hook its name implies."
+		},
+		{
+			"id": "3d75b627cd",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/plugin-help-center.tsx",
+			"line": 38,
+			"message": "Only export is `useHelpCenterNodeBuilder`, but the file is `plugin-help-center.tsx`.",
+			"suggestion": "Rename to `use-help-center-node-builder.tsx`."
+		},
+		{
+			"id": "2218e02fc1",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/plugin-language-switcher.tsx",
+			"line": 18,
+			"message": "Only export is `useLanguageSwitcherPlugin`, but the file is `plugin-language-switcher.tsx`.",
+			"suggestion": "Rename to `use-language-switcher-plugin.tsx`."
+		},
+		{
+			"id": "8781532e4a",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/plugin-launch-site.tsx",
+			"line": 26,
+			"message": "Only export is `useLaunchSiteNodeBuilder`, but the file is `plugin-launch-site.tsx`.",
+			"suggestion": "Rename to `use-launch-site-node-builder.tsx`."
+		},
+		{
+			"id": "d702949ef1",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/plugin-notifications.tsx",
+			"line": 21,
+			"message": "Only export is `useNotificationsNodeBuilder`, but the file is `plugin-notifications.tsx`.",
+			"suggestion": "Rename to `use-notifications-node-builder.tsx`."
+		},
+		{
+			"id": "68510e22f9",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/plugin-shopping-cart.tsx",
+			"line": 57,
+			"message": "Only export is `useShoppingCartPlugin`, but the file is `plugin-shopping-cart.tsx`.",
+			"suggestion": "Rename to `use-shopping-cart-plugin.tsx`."
+		},
+		{
+			"id": "7dbf8be10a",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/site.ts",
+			"line": 39,
+			"message": "Only export is `useSyncOmnibarSite`, but the file is `site.ts`.",
+			"suggestion": "Rename to `use-sync-omnibar-site.ts`."
+		},
+		{
+			"id": "a50087b218",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "app/omnibar/user.ts",
+			"line": 5,
+			"message": "Only export is `useOmnibarUser`, but the file is `user.ts`.",
+			"suggestion": "Rename to `use-omnibar-user.ts`."
+		},
+		{
+			"id": "bdad969119",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "components/site-expiry-notice/candidate.tsx",
+			"line": 29,
+			"message": "Only export is `useSiteExpiryNoticeCandidate`, but the file is `candidate.tsx`.",
+			"suggestion": "Rename to `use-site-expiry-notice-candidate.tsx`."
+		},
+		{
+			"id": "59c60e6ff9",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "domains/dataviews/actions.tsx",
+			"line": 45,
+			"message": "Only export is `useActions`, but the file is `actions.tsx`.",
+			"suggestion": "Rename to `use-actions.tsx`."
+		},
+		{
+			"id": "dc3a56adab",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "domains/dataviews/fields.tsx",
+			"line": 18,
+			"message": "Only export is `useFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-fields.tsx`."
+		},
+		{
+			"id": "9c85834079",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "domains/domain-dns/actions.tsx",
+			"line": 13,
+			"message": "Only export is `useDnsActions`, but the file is `actions.tsx`.",
+			"suggestion": "Rename to `use-dns-actions.tsx`."
+		},
+		{
+			"id": "4346f9af1a",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "domains/domain-dns/fields.tsx",
+			"line": 10,
+			"message": "Only export is `useDnsFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-dns-fields.tsx`."
+		},
+		{
+			"id": "5b9208e946",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/delete-email-forward.tsx",
+			"line": 17,
+			"message": "Only export is `useDeleteEmailForwardAction`, but the file is `delete-email-forward.tsx`.",
+			"suggestion": "Rename to `use-delete-email-forward-action.tsx`."
+		},
+		{
+			"id": "62089c5e69",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/delete-titan-mailbox.tsx",
+			"line": 17,
+			"message": "Only export is `useDeleteTitanMailboxAction`, but the file is `delete-titan-mailbox.tsx`.",
+			"suggestion": "Rename to `use-delete-titan-mailbox-action.tsx`."
+		},
+		{
+			"id": "952ef6b621",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/edit-email-forward.tsx",
+			"line": 21,
+			"message": "Only export is `useEditEmailForwardAction`, but the file is `edit-email-forward.tsx`.",
+			"suggestion": "Rename to `use-edit-email-forward-action.tsx`."
+		},
+		{
+			"id": "f0abe8b13c",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/finish-setup.tsx",
+			"line": 7,
+			"message": "Only export is `useFinishSetupAction`, but the file is `finish-setup.tsx`.",
+			"suggestion": "Rename to `use-finish-setup-action.tsx`."
+		},
+		{
+			"id": "a7d021d3b6",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/manage-google-workspace.ts",
+			"line": 7,
+			"message": "Only export is `useManageGoogleWorkspaceAction`, but the file is `manage-google-workspace.ts`.",
+			"suggestion": "Rename to `use-manage-google-workspace-action.ts`."
+		},
+		{
+			"id": "45931e54b0",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/manage-titan-mailboxes.tsx",
+			"line": 10,
+			"message": "Only export is `useManageTitanMailboxesAction`, but the file is `manage-titan-mailboxes.tsx`.",
+			"suggestion": "Rename to `use-manage-titan-mailboxes-action.tsx`."
+		},
+		{
+			"id": "893de33fba",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/payment-details.ts",
+			"line": 8,
+			"message": "Only export is `usePaymentDetailsAction`, but the file is `payment-details.ts`.",
+			"suggestion": "Rename to `use-payment-details-action.ts`."
+		},
+		{
+			"id": "d7c4eb2fe7",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/resend-verification.ts",
+			"line": 10,
+			"message": "Only export is `useResendVerificationAction`, but the file is `resend-verification.ts`.",
+			"suggestion": "Rename to `use-resend-verification-action.ts`."
+		},
+		{
+			"id": "13a0c7504d",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/view-mailbox.tsx",
+			"line": 8,
+			"message": "Only export is `useViewMailboxAction`, but the file is `view-mailbox.tsx`.",
+			"suggestion": "Rename to `use-view-mailbox-action.tsx`."
+		},
+		{
+			"id": "fb8b62914f",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/use-create-payment-methods.tsx",
+			"message": "`use-create-payment-methods.tsx` exports no hook."
+		},
+		{
+			"id": "ff086e6c6f",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "me/profile-personal-details/use-email-write-pending.ts",
+			"message": "`use-email-write-pending.ts` exports `useIsEmailWritePending`, not the hook its name implies.",
+			"suggestion": "Rename to `use-is-email-write-pending.ts`."
+		},
+		{
+			"id": "ac3a941cb5",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/dataviews/actions.tsx",
+			"line": 23,
+			"message": "Only export is `useActions`, but the file is `actions.tsx`.",
+			"suggestion": "Rename to `use-actions.tsx`."
+		},
+		{
+			"id": "c0d2d7a3f2",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/deleted-sites.ts",
+			"line": 9,
+			"message": "Only export is `useHasOnlyDeletedSites`, but the file is `deleted-sites.ts`.",
+			"suggestion": "Rename to `use-has-only-deleted-sites.ts`."
+		},
+		{
+			"id": "ad21669cdf",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/deployments-list/dataviews/fields.tsx",
+			"line": 26,
+			"message": "Only export is `useFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-fields.tsx`."
+		},
+		{
+			"id": "e468b18d31",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/logs-activity/dataviews/actions.tsx",
+			"line": 17,
+			"message": "Only export is `useActivityActions`, but the file is `actions.tsx`.",
+			"suggestion": "Rename to `use-activity-actions.tsx`."
+		},
+		{
+			"id": "36e91e7719",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/logs-activity/dataviews/fields.tsx",
+			"line": 52,
+			"message": "Only export is `useActivityFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-activity-fields.tsx`."
+		},
+		{
+			"id": "b43f04bc22",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/logs/dataviews/actions.tsx",
+			"line": 18,
+			"message": "Only export is `useActions`, but the file is `actions.tsx`.",
+			"suggestion": "Rename to `use-actions.tsx`."
+		},
+		{
+			"id": "714d86b649",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/logs/dataviews/fields.tsx",
+			"line": 99,
+			"message": "Only export is `useFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-fields.tsx`."
+		},
+		{
+			"id": "6ee604b5ea",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/settings-repositories/dataviews/fields.tsx",
+			"line": 10,
+			"message": "Only export is `useRepositoryFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-repository-fields.tsx`."
+		},
+		{
+			"id": "b793a64163",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "sites/site-fields/site-unreachable-status.tsx",
+			"line": 6,
+			"message": "Only export is `useIsSiteUnreachable`, but the file is `site-unreachable-status.tsx`.",
+			"suggestion": "Rename to `use-is-site-unreachable.tsx`."
+		},
+		{
+			"id": "0eb3cd37e9",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "agency/earn/woopayments/hooks/use-woopayments-site-setup.ts",
+			"message": "Only hook in `agency/earn/woopayments/hooks/`.",
+			"suggestion": "Move it up to `agency/earn/woopayments/` and remove the `hooks/` folder."
+		},
+		{
+			"id": "d36dff9270",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/hooks/use-dns-record-names.ts",
+			"message": "Only hook in `domains/domain-connection-setup/hooks/`.",
+			"suggestion": "Move it up to `domains/domain-connection-setup/` and remove the `hooks/` folder."
+		},
+		{
+			"id": "6d2131bccd",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "plugins/manage/hooks/use-sites-by-id.ts",
+			"message": "Only hook in `plugins/manage/hooks/`.",
+			"suggestion": "Move it up to `plugins/manage/` and remove the `hooks/` folder."
+		},
+		{
+			"id": "c69e3cdbea",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "sites/hooks/use-ai-launchpad.ts",
+			"message": "Only hook in `sites/hooks/`.",
+			"suggestion": "Move it up to `sites/` and remove the `hooks/` folder."
+		},
+		{
+			"id": "2e94f21221",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "sites/scan/hooks/use-fix-threats.ts",
+			"message": "Only hook in `sites/scan/hooks/`.",
+			"suggestion": "Move it up to `sites/scan/` and remove the `hooks/` folder."
+		},
+		{
+			"id": "6cb14ee868",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "agency/earn/woopayments/use-download-commissions-report.ts",
+			"message": "`agency/earn/woopayments/` has a `hooks/` folder, but this hook sits beside it.",
+			"suggestion": "Move it into `agency/earn/woopayments/hooks/`."
+		},
+		{
+			"id": "8e8cc10d8d",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "agency/earn/woopayments/use-woopayments-dashboard-data.ts",
+			"message": "`agency/earn/woopayments/` has a `hooks/` folder, but this hook sits beside it.",
+			"suggestion": "Move it into `agency/earn/woopayments/hooks/`."
+		},
+		{
+			"id": "5b3de0db57",
+			"convention": "hook-folder-placement",
+			"source": "scan",
+			"file": "sites/scan/use-scan-state.ts",
+			"message": "`sites/scan/` has a `hooks/` folder, but this hook sits beside it.",
+			"suggestion": "Move it into `sites/scan/hooks/`."
+		},
+		{
+			"id": "5434777a0a",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/earn/referrals/referrals-list.tsx",
+			"line": 33,
+			"message": "`ReferralsList` takes `Props`.",
+			"suggestion": "Rename the type to `ReferralsListProps`."
+		},
+		{
+			"id": "603d27175d",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/feedback/milestone-feedback-modal.tsx",
+			"line": 23,
+			"message": "`MilestoneFeedbackModal` takes `Props`.",
+			"suggestion": "Rename the type to `MilestoneFeedbackModalProps`."
+		},
+		{
+			"id": "34c215b26c",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/host-cards.tsx",
+			"line": 52,
+			"message": "`HostCards` takes `Props`.",
+			"suggestion": "Rename the type to `HostCardsProps`."
+		},
+		{
+			"id": "a932cbbdd8",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/pressable-plan-table.tsx",
+			"line": 71,
+			"message": "`PressablePlanTable` takes `Props`.",
+			"suggestion": "Rename the type to `PressablePlanTableProps`."
+		},
+		{
+			"id": "6c0414ba41",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/pressable-premium-gate.tsx",
+			"line": 23,
+			"message": "`PressablePremiumGate` takes `Props`.",
+			"suggestion": "Rename the type to `PressablePremiumGateProps`."
+		},
+		{
+			"id": "0d3b78f406",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/pressable-section.tsx",
+			"line": 134,
+			"message": "`PressableSection` takes `Props`.",
+			"suggestion": "Rename the type to `PressableSectionProps`."
+		},
+		{
+			"id": "ee22faddd8",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/selected-plan-card.tsx",
+			"line": 43,
+			"message": "`SelectedPlanCard` takes `Props`.",
+			"suggestion": "Rename the type to `SelectedPlanCardProps`."
+		},
+		{
+			"id": "64cb2e517f",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/wpcom-section.tsx",
+			"line": 162,
+			"message": "`WpcomSection` takes `Props`.",
+			"suggestion": "Rename the type to `WpcomSectionProps`."
+		},
+		{
+			"id": "3cfac5ad04",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/products/cart-menu.tsx",
+			"line": 60,
+			"message": "`CartMenu` takes `Props`.",
+			"suggestion": "Rename the type to `CartMenuProps`."
+		},
+		{
+			"id": "3899601add",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/products/featured-showcase.tsx",
+			"line": 83,
+			"message": "`FeaturedShowcase` takes `Props`.",
+			"suggestion": "Rename the type to `FeaturedShowcaseProps`."
+		},
+		{
+			"id": "ca1c55d8bf",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/products/product-details-modal.tsx",
+			"line": 49,
+			"message": "`ProductDetailsModal` takes `Props`.",
+			"suggestion": "Rename the type to `ProductDetailsModalProps`."
+		},
+		{
+			"id": "bc0df51067",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/products/product-price.tsx",
+			"line": 13,
+			"message": "`ProductPrice` takes `Props`.",
+			"suggestion": "Rename the type to `ProductPriceProps`."
+		},
+		{
+			"id": "457963f09b",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/products/product-store-card.tsx",
+			"line": 75,
+			"message": "`ProductStoreCard` takes `Props`.",
+			"suggestion": "Rename the type to `ProductStoreCardProps`."
+		},
+		{
+			"id": "3fd68dc12f",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/assign-license-modal.tsx",
+			"line": 64,
+			"message": "`AssignLicenseModal` takes `Props`.",
+			"suggestion": "Rename the type to `AssignLicenseModalProps`."
+		},
+		{
+			"id": "ffde24e101",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/revoke-license-modal.tsx",
+			"line": 44,
+			"message": "`RevokeLicenseModal` takes `Props`.",
+			"suggestion": "Rename the type to `RevokeLicenseModalProps`."
+		},
+		{
+			"id": "15faab66e6",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/transferred-badge.tsx",
+			"line": 22,
+			"message": "`TransferredBadge` takes `Props`.",
+			"suggestion": "Rename the type to `TransferredBadgeProps`."
+		},
+		{
+			"id": "f75bf4db19",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/referral-checkout/email-preview-modal.tsx",
+			"line": 48,
+			"message": "`ReferralEmailPreviewModal` takes `Props`.",
+			"suggestion": "Rename the type to `ReferralEmailPreviewModalProps`."
+		},
+		{
+			"id": "2bfdee1f47",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/referral-checkout/logo-field.tsx",
+			"line": 34,
+			"message": "`ReferralLogoField` takes `Props`.",
+			"suggestion": "Rename the type to `ReferralLogoFieldProps`."
+		},
+		{
+			"id": "4ace290c1d",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/referral-checkout/request-form.tsx",
+			"line": 34,
+			"message": "`RequestClientPaymentForm` takes `Props`.",
+			"suggestion": "Rename the type to `RequestClientPaymentFormProps`."
+		},
+		{
+			"id": "95e97d2bf9",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/marketplace/referral-checkout/summary.tsx",
+			"line": 84,
+			"message": "`ReferralSummary` takes `Props`.",
+			"suggestion": "Rename the type to `ReferralSummaryProps`."
+		},
+		{
+			"id": "70979eaaad",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/partner-directory/dashboard-content.tsx",
+			"line": 82,
+			"message": "`PartnerDirectoryDashboardContent` takes `Props`.",
+			"suggestion": "Rename the type to `PartnerDirectoryDashboardContentProps`."
+		},
+		{
+			"id": "f0fc819aa2",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/partner-directory/details/details-content.tsx",
+			"line": 88,
+			"message": "`PartnerDirectoryDetailsContent` takes `Props`.",
+			"suggestion": "Rename the type to `PartnerDirectoryDetailsContentProps`."
+		},
+		{
+			"id": "5bdcffdd08",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/partner-directory/expertise/expertise-content.tsx",
+			"line": 61,
+			"message": "`PartnerDirectoryExpertiseContent` takes `Props`.",
+			"suggestion": "Rename the type to `PartnerDirectoryExpertiseContentProps`."
+		},
+		{
+			"id": "1b097c7c87",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/partner-directory/not-approved-popover.tsx",
+			"line": 42,
+			"message": "`NotApprovedPopover` takes `Props`.",
+			"suggestion": "Rename the type to `NotApprovedPopoverProps`."
+		},
+		{
+			"id": "6415de19f7",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "agency/partner-directory/status-badge.tsx",
+			"line": 23,
+			"message": "`StatusBadge` takes `Props`.",
+			"suggestion": "Rename the type to `StatusBadgeProps`."
+		},
+		{
+			"id": "1e56c635b9",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "app/i18n.tsx",
+			"line": 145,
+			"message": "`I18nProvider` takes `PropsWithChildren`.",
+			"suggestion": "Rename the type to `I18nProviderProps`."
+		},
+		{
+			"id": "f7b33d47d1",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "app/resurrected-welcome-modal/index.tsx",
+			"line": 39,
+			"message": "`ResurrectedWelcomeModalGate` takes `Props`.",
+			"suggestion": "Rename the type to `ResurrectedWelcomeModalGateProps`."
+		},
+		{
+			"id": "276e4b5640",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "components/confirm-modal/index.tsx",
+			"line": 31,
+			"message": "`ConfirmModal` takes `Props`.",
+			"suggestion": "Rename the type to `ConfirmModalProps`."
+		},
+		{
+			"id": "da7bda9497",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "components/purchase-dialogs/remove-domain-dialog.tsx",
+			"line": 35,
+			"message": "`RemoveDomainDialog` takes `Props`.",
+			"suggestion": "Rename the type to `RemoveDomainDialogProps`."
+		},
+		{
+			"id": "ab308432f2",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "components/sidebar-navigator/sidebar-navigator-screen.tsx",
+			"line": 28,
+			"message": "`SidebarNavigatorScreen` takes `ScreenProps`.",
+			"suggestion": "Rename the type to `SidebarNavigatorScreenProps`."
+		},
+		{
+			"id": "166a1a1326",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "components/summary-button-card-footer/index.tsx",
+			"line": 6,
+			"message": "`SummaryButtonCardFooter` takes `SummaryButtonProps`.",
+			"suggestion": "Rename the type to `SummaryButtonCardFooterProps`."
+		},
+		{
+			"id": "762bb8e242",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "components/switcher/switcher-content.tsx",
+			"line": 59,
+			"message": "`SwitcherContent` takes `PropsWithChildren`.",
+			"suggestion": "Rename the type to `SwitcherContentProps`."
+		},
+		{
+			"id": "05a7215441",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/components/dns-propagation-progress-bar.tsx",
+			"line": 44,
+			"message": "`DnsPropagationProgressBar` takes `Props`.",
+			"suggestion": "Rename the type to `DnsPropagationProgressBarProps`."
+		},
+		{
+			"id": "8f3ae00276",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/components/dns-records-table.tsx",
+			"line": 151,
+			"message": "`DnsRecordsTable` takes `DnsRecordVerificationProps`.",
+			"suggestion": "Rename the type to `DnsRecordsTableProps`."
+		},
+		{
+			"id": "2273c5abf1",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/steps/login.tsx",
+			"line": 23,
+			"message": "`Login` takes `Pick`.",
+			"suggestion": "Rename the type to `LoginProps`."
+		},
+		{
+			"id": "1061eda452",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/steps/transfer-auth-code.tsx",
+			"line": 17,
+			"message": "`TransferAuthCode` takes `TransferStepComponentProps`.",
+			"suggestion": "Rename the type to `TransferAuthCodeProps`."
+		},
+		{
+			"id": "42edfcc220",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/steps/transfer-login.tsx",
+			"line": 4,
+			"message": "`TransferLogin` takes `TransferStepComponentProps`.",
+			"suggestion": "Rename the type to `TransferLoginProps`."
+		},
+		{
+			"id": "1615f449c0",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/steps/transfer-start.tsx",
+			"line": 16,
+			"message": "`TransferStart` takes `TransferStepComponentProps`.",
+			"suggestion": "Rename the type to `TransferStartProps`."
+		},
+		{
+			"id": "accd14bd1a",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/steps/transfer-unlock.tsx",
+			"line": 21,
+			"message": "`TransferUnlock` takes `TransferStepComponentProps`.",
+			"suggestion": "Rename the type to `TransferUnlockProps`."
+		},
+		{
+			"id": "f580005ef0",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-glue-records/summary.tsx",
+			"line": 9,
+			"message": "`DomainGlueRecordsSettingsSummary` takes `Props`.",
+			"suggestion": "Rename the type to `DomainGlueRecordsSettingsSummaryProps`."
+		},
+		{
+			"id": "3aa81c6e0b",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-overview/featured-card-emails.tsx",
+			"line": 55,
+			"message": "`FeaturedCardEmails` takes `Props`.",
+			"suggestion": "Rename the type to `FeaturedCardEmailsProps`."
+		},
+		{
+			"id": "5aa84259ef",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-overview/featured-card-privacy.tsx",
+			"line": 13,
+			"message": "`FeaturedCardPrivacy` takes `Props`.",
+			"suggestion": "Rename the type to `FeaturedCardPrivacyProps`."
+		},
+		{
+			"id": "54b3c95e82",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-overview/featured-card-renew.tsx",
+			"line": 15,
+			"message": "`FeaturedCardRenew` takes `Props`.",
+			"suggestion": "Rename the type to `FeaturedCardRenewProps`."
+		},
+		{
+			"id": "7f2a53fbae",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-overview/featured-card-site.tsx",
+			"line": 15,
+			"message": "`FeaturedCardSite` takes `Props`.",
+			"suggestion": "Rename the type to `FeaturedCardSiteProps`."
+		},
+		{
+			"id": "d20aa4d455",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/domain-transfer/select-site.tsx",
+			"line": 23,
+			"message": "`SelectSite` takes `Props`.",
+			"suggestion": "Rename the type to `SelectSiteProps`."
+		},
+		{
+			"id": "d3b9942603",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/name-servers/form.tsx",
+			"line": 111,
+			"message": "`NameServersForm` takes `Props`.",
+			"suggestion": "Rename the type to `NameServersFormProps`."
+		},
+		{
+			"id": "50ef524607",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "domains/name-servers/upsell-nudge.tsx",
+			"line": 16,
+			"message": "`UpsellNudge` takes `Props`.",
+			"suggestion": "Rename the type to `UpsellNudgeProps`."
+		},
+		{
+			"id": "ae394b29c6",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "emails/components/add-new-domain.tsx",
+			"line": 20,
+			"message": "`AddNewDomain` takes `Props`.",
+			"suggestion": "Rename the type to `AddNewDomainProps`."
+		},
+		{
+			"id": "d62a0baac4",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "emails/components/email-non-domain-owner-notice.tsx",
+			"line": 15,
+			"message": "`EmailNonDomainOwnerNotice` takes `EmailNonDomainOwnerMessageProps`.",
+			"suggestion": "Rename the type to `EmailNonDomainOwnerNoticeProps`."
+		},
+		{
+			"id": "b0db274fd2",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/billing-payment-methods/payment-method-delete-dialog.tsx",
+			"line": 30,
+			"message": "`PaymentMethodDeleteDialog` takes `Props`.",
+			"suggestion": "Rename the type to `PaymentMethodDeleteDialogProps`."
+		},
+		{
+			"id": "7ec7f70dba",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/atomic-revert-step.tsx",
+			"line": 31,
+			"message": "`AtomicRevertStep` takes `Props`.",
+			"suggestion": "Rename the type to `AtomicRevertStepProps`."
+		},
+		{
+			"id": "3366db3b71",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/educational-content-step.tsx",
+			"line": 76,
+			"message": "`EducationalContentStep` takes `StepProps`.",
+			"suggestion": "Rename the type to `EducationalContentStepProps`."
+		},
+		{
+			"id": "67105c6bc9",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/next-adventure-step.tsx",
+			"line": 15,
+			"message": "`NextAdventureStep` takes `Props`.",
+			"suggestion": "Rename the type to `NextAdventureStepProps`."
+		},
+		{
+			"id": "691eb32b03",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/upsell-step.tsx",
+			"line": 97,
+			"message": "`UpsellStep` takes `StepProps`.",
+			"suggestion": "Rename the type to `UpsellStepProps`."
+		},
+		{
+			"id": "779ad75df9",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/upcoming-renewals-dialog.tsx",
+			"line": 91,
+			"message": "`UpcomingRenewalsDialog` takes `Props`.",
+			"suggestion": "Rename the type to `UpcomingRenewalsDialogProps`."
+		},
+		{
+			"id": "676256fd9e",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/notifications-emails/pause-all-emails/confirmation-modal.tsx",
+			"line": 11,
+			"message": "`ConfirmationModal` takes `Props`.",
+			"suggestion": "Rename the type to `ConfirmationModalProps`."
+		},
+		{
+			"id": "6762a05e8b",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/notifications-emails/subscription-settings/form.tsx",
+			"line": 263,
+			"message": "`SubscriptionSettingsForm` takes `FormProps`.",
+			"suggestion": "Rename the type to `SubscriptionSettingsFormProps`."
+		},
+		{
+			"id": "f5e21b5766",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/notifications-sites/site-preview/index.tsx",
+			"line": 13,
+			"message": "`SitePreview` takes `Props`.",
+			"suggestion": "Rename the type to `SitePreviewProps`."
+		},
+		{
+			"id": "adf7ccfccd",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/notifications-sites/site-settings/apply-settings-to-all-sites-confirmation-modal/index.tsx",
+			"line": 11,
+			"message": "`ApplySettingsToAllSitesConfirmationModal` takes `Props`.",
+			"suggestion": "Rename the type to `ApplySettingsToAllSitesConfirmationModalProps`."
+		},
+		{
+			"id": "e2ff883fb1",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/notifications-sites/site-settings/index.tsx",
+			"line": 16,
+			"message": "`SiteSettings` takes `Props`.",
+			"suggestion": "Rename the type to `SiteSettingsProps`."
+		},
+		{
+			"id": "fd1e942ad2",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/security-connected-apps/application-details-modal.tsx",
+			"line": 64,
+			"message": "`ApplicationDetailsModal` takes `Props`.",
+			"suggestion": "Rename the type to `ApplicationDetailsModalProps`."
+		},
+		{
+			"id": "0219d1ba54",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/security-social-logins/apple-login.tsx",
+			"line": 22,
+			"message": "`AppleLogin` takes `SocialLoginButtonProps`.",
+			"suggestion": "Rename the type to `AppleLoginProps`."
+		},
+		{
+			"id": "bc1adcb626",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/security-social-logins/github-login.tsx",
+			"line": 6,
+			"message": "`GitHubLogin` takes `Props`.",
+			"suggestion": "Rename the type to `GitHubLoginProps`."
+		},
+		{
+			"id": "05b119e2e8",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/security-social-logins/google-login.tsx",
+			"line": 23,
+			"message": "`GoogleLogin` takes `SocialLoginButtonProps`.",
+			"suggestion": "Rename the type to `GoogleLoginProps`."
+		},
+		{
+			"id": "02674a2843",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "me/security-social-logins/paypal-login.tsx",
+			"line": 6,
+			"message": "`PayPalLogin` takes `Props`.",
+			"suggestion": "Rename the type to `PayPalLoginProps`."
+		},
+		{
+			"id": "cdfa0f3bde",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "plugins/plugin/components/active-toggle.tsx",
+			"line": 27,
+			"message": "`ActiveToggle` takes `ActiveFieldProps`.",
+			"suggestion": "Rename the type to `ActiveToggleProps`."
+		},
+		{
+			"id": "61368b3d5c",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "plugins/plugin/components/autoupdate-toggle.tsx",
+			"line": 29,
+			"message": "`AutoupdateToggle` takes `AutoupdateFieldProps`.",
+			"suggestion": "Rename the type to `AutoupdateToggleProps`."
+		},
+		{
+			"id": "547ce76b3c",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "plugins/scheduled-updates/components/schedule-form.tsx",
+			"line": 48,
+			"message": "`ScheduledUpdatesForm` takes `Props`.",
+			"suggestion": "Rename the type to `ScheduledUpdatesFormProps`."
+		},
+		{
+			"id": "602c925d11",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/overview-jetpack-connection-warning-card/index.tsx",
+			"line": 10,
+			"message": "`JetpackConnectionWarningCard` takes `Pick`.",
+			"suggestion": "Rename the type to `JetpackConnectionWarningCardProps`."
+		},
+		{
+			"id": "f09fb497e8",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/performance/performance-insight-screenshot.tsx",
+			"line": 203,
+			"message": "`InsightScreenshotWithOverlay` takes `InsightScreenshotProps`.",
+			"suggestion": "Rename the type to `InsightScreenshotWithOverlayProps`."
+		},
+		{
+			"id": "63107370a8",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/performance/screenshot-timeline.tsx",
+			"line": 25,
+			"message": "`ScreenshotTimeline` takes `Props`.",
+			"suggestion": "Rename the type to `ScreenshotTimelineProps`."
+		},
+		{
+			"id": "e6ccab938f",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/settings-repositories/disconnect-repository-modal-content.tsx",
+			"line": 31,
+			"message": "`DisconnectRepositoryModalContent` takes `DisconnectRepositoryModalProps`.",
+			"suggestion": "Rename the type to `DisconnectRepositoryModalContentProps`."
+		},
+		{
+			"id": "d3a5f8f1bf",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/site-fields/index.tsx",
+			"line": 169,
+			"message": "`SiteIconLink` takes `ComponentProps`.",
+			"suggestion": "Rename the type to `SiteIconLinkProps`."
+		},
+		{
+			"id": "210051eb53",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/site-leave-modal/index.tsx",
+			"line": 6,
+			"message": "`SiteLeaveModal` takes `ComponentProps`.",
+			"suggestion": "Rename the type to `SiteLeaveModalProps`."
+		},
+		{
+			"id": "79022d087f",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/site-preview-links/index.tsx",
+			"line": 27,
+			"message": "`SitePreviewLinks` takes `SitePreviewLinkProps`.",
+			"suggestion": "Rename the type to `SitePreviewLinksProps`."
+		},
+		{
+			"id": "04397989a9",
+			"convention": "props-type-name",
+			"source": "scan",
+			"file": "sites/site-restore-modal/content-info.tsx",
+			"line": 21,
+			"message": "`SiteRestoreContentInfo` takes `ContentInfoProps`.",
+			"suggestion": "Rename the type to `SiteRestoreContentInfoProps`."
+		},
+		{
+			"id": "795f0f983f",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "agency/earn/migrations/commissions-list/commission-columns.scss",
+			"message": "Only stylesheet in `agency/earn/migrations/commissions-list/` is named `commission-columns.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "6e15c9b94d",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "app/dev-tools/preferences.scss",
+			"message": "Only stylesheet in `app/dev-tools/` is named `preferences.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "54388637c6",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "app/help-center/help-center-app.scss",
+			"message": "Only stylesheet in `app/help-center/` is named `help-center-app.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "1dd438ed33",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "components/callout/styles.scss",
+			"message": "Only stylesheet in `components/callout/` is named `styles.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "3d28cb8045",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "components/dataviews/styles.scss",
+			"message": "Only stylesheet in `components/dataviews/` is named `styles.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "c1ed40de0a",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "components/switcher/switcher-content.scss",
+			"message": "Only stylesheet in `components/switcher/` is named `switcher-content.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "6f7c79ca82",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "domains/domain-security/dnssec-record-textarea.scss",
+			"message": "Only stylesheet in `domains/domain-security/` is named `dnssec-record-textarea.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "69b5dca8ff",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "domains/domain-transfer/select-site.scss",
+			"message": "Only stylesheet in `domains/domain-transfer/` is named `select-site.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "6602b33bdb",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "emails/mailboxes-ready/styles.scss",
+			"message": "Only stylesheet in `emails/mailboxes-ready/` is named `styles.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "3a09cc5740",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "me/billing-history/styles.scss",
+			"message": "Only stylesheet in `me/billing-history/` is named `styles.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "ccdf431f0e",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/credit-card-fields.scss",
+			"message": "Only stylesheet in `me/billing-purchases/payment-methods/` is named `credit-card-fields.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "a42e79883c",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "me/mcp/approval-bypass.scss",
+			"message": "Only stylesheet in `me/mcp/` is named `approval-bypass.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "7072e1e7c0",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "me/notifications-sites/site-list-settings/index.scss",
+			"message": "Only stylesheet in `me/notifications-sites/site-list-settings/` is named `index.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "3af6a51a30",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "me/notifications-sites/site-preview/index.scss",
+			"message": "Only stylesheet in `me/notifications-sites/site-preview/` is named `index.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "1598146f76",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "me/notifications-sites/site-settings/index.scss",
+			"message": "Only stylesheet in `me/notifications-sites/site-settings/` is named `index.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "31b32e227a",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "me/preferences-defaults/site-dropdown.scss",
+			"message": "Only stylesheet in `me/preferences-defaults/` is named `site-dropdown.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "be1e3d8726",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "plugins/plugin/components/field-action-toggle.scss",
+			"message": "Only stylesheet in `plugins/plugin/components/` is named `field-action-toggle.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "405ad9ef7c",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "sites/performance/backend/bar-list.scss",
+			"message": "Only stylesheet in `sites/performance/backend/` is named `bar-list.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "5c0db20bd8",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "sites/performance/backend/request-detail/span-tree.scss",
+			"message": "Only stylesheet in `sites/performance/backend/request-detail/` is named `span-tree.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "1d00a327ac",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "sites/site-launch-modal/styles.scss",
+			"message": "Only stylesheet in `sites/site-launch-modal/` is named `styles.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "02f570c78d",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "sites/site/sidebar-environment-switcher.scss",
+			"message": "Only stylesheet in `sites/site/` is named `sidebar-environment-switcher.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "c0b57fb26a",
+			"convention": "stylesheet-name",
+			"source": "scan",
+			"file": "sites/storage/storage-capacity-stat.scss",
+			"message": "Only stylesheet in `sites/storage/` is named `storage-capacity-stat.scss`.",
+			"suggestion": "Rename to `style.scss` and update its import."
+		},
+		{
+			"id": "238e995179",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/earn/referrals/hooks/test/use-consolidated-payout-data.ts",
+			"message": "`use-consolidated-payout-data.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `use-consolidated-payout-data.test.ts`."
+		},
+		{
+			"id": "a466bb7dae",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/earn/referrals/lib/test/generate-commissions-csv.ts",
+			"message": "`generate-commissions-csv.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `generate-commissions-csv.test.ts`."
+		},
+		{
+			"id": "bd97473d3e",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/earn/referrals/lib/test/get-estimated-commission.ts",
+			"message": "`get-estimated-commission.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `get-estimated-commission.test.ts`."
+		},
+		{
+			"id": "dab3584b3b",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/overview/test/use-pressable-offer-eligibility.ts",
+			"message": "`use-pressable-offer-eligibility.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `use-pressable-offer-eligibility.test.ts`."
+		},
+		{
+			"id": "bdab6f97d2",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/sites/dataviews/test/actions.tsx",
+			"message": "`actions.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `actions.test.tsx`."
+		},
+		{
+			"id": "2464ddd2a2",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/sites/dataviews/test/endpoint-fields.tsx",
+			"message": "`endpoint-fields.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `endpoint-fields.test.tsx`."
+		},
+		{
+			"id": "7d1c3b82eb",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/sites/dataviews/test/hydrate.tsx",
+			"message": "`hydrate.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `hydrate.test.tsx`."
+		},
+		{
+			"id": "62192a834f",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/sites/dataviews/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "3af4dc476d",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "agency/sites/dataviews/test/site.tsx",
+			"message": "`site.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `site.test.tsx`."
+		},
+		{
+			"id": "e60796c675",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "app/snackbars/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "30aa164753",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "app/snackbars/test/modal.tsx",
+			"message": "`modal.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `modal.test.tsx`."
+		},
+		{
+			"id": "01c24fa8dc",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/callout/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "8e0804294b",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/date-range-picker/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "01e6007947",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/date-range-picker/test/utils.ts",
+			"message": "`utils.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `utils.test.ts`."
+		},
+		{
+			"id": "3dd259dcd9",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/formatted-time/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "8efc8a3971",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/plan-expiry-notice/test/component.tsx",
+			"message": "`component.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `component.test.tsx`."
+		},
+		{
+			"id": "8e5ccfc59f",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/plan-expiry-notice/test/get-plan-expiry-notice.ts",
+			"message": "`get-plan-expiry-notice.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `get-plan-expiry-notice.test.ts`."
+		},
+		{
+			"id": "3adf00fc69",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/plan-expiry-notice/test/sitewide-scope.ts",
+			"message": "`sitewide-scope.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `sitewide-scope.test.ts`."
+		},
+		{
+			"id": "18b764724a",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/section-header/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "5ed53d1a91",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/site-expiry-notice/test/banner.tsx",
+			"message": "`banner.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `banner.test.tsx`."
+		},
+		{
+			"id": "272bd6160c",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/site-expiry-notice/test/dismissal.ts",
+			"message": "`dismissal.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `dismissal.test.ts`."
+		},
+		{
+			"id": "45d4aba387",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/site-expiry-notice/test/ensure-site-expiry-notice-data.ts",
+			"message": "`ensure-site-expiry-notice-data.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `ensure-site-expiry-notice-data.test.ts`."
+		},
+		{
+			"id": "6c0bb2ac77",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/site-expiry-notice/test/use-site-expiry-notice.tsx",
+			"message": "`use-site-expiry-notice.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `use-site-expiry-notice.test.tsx`."
+		},
+		{
+			"id": "add3bdd25b",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/summary-button-list/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "d64a2a84db",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "components/time-mismatch-notice/test/index.tsx",
+			"message": "`index.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `index.test.tsx`."
+		},
+		{
+			"id": "0bb12c138b",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "domains/domain-glue-records/test/delete-modal.tsx",
+			"message": "`delete-modal.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `delete-modal.test.tsx`."
+		},
+		{
+			"id": "2eb53759ff",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "domains/test/views.ts",
+			"message": "`views.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `views.test.ts`."
+		},
+		{
+			"id": "34dc40a636",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "emails/hooks/test/use-titan-downgrade.tsx",
+			"message": "`use-titan-downgrade.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `use-titan-downgrade.test.tsx`."
+		},
+		{
+			"id": "87385729b5",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "emails/utils/test/get-cart-items.ts",
+			"message": "`get-cart-items.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `get-cart-items.test.ts`."
+		},
+		{
+			"id": "38eb2fb414",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "emails/utils/test/titan-tiers.ts",
+			"message": "`titan-tiers.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `titan-tiers.test.ts`."
+		},
+		{
+			"id": "6a2b3c2aa1",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/test/enriched-survey-data.ts",
+			"message": "`enriched-survey-data.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `enriched-survey-data.test.ts`."
+		},
+		{
+			"id": "097e83376f",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/test/get-confirmation-copy.ts",
+			"message": "`get-confirmation-copy.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `get-confirmation-copy.test.ts`."
+		},
+		{
+			"id": "d91e235e99",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/test/next-step.ts",
+			"message": "`next-step.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `next-step.test.ts`."
+		},
+		{
+			"id": "47afd1e0a6",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "sites/overview/test/email-block-notice.tsx",
+			"message": "`email-block-notice.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `email-block-notice.test.tsx`."
+		},
+		{
+			"id": "6912c44038",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "sites/overview/test/storage-warning-banner.tsx",
+			"message": "`storage-warning-banner.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `storage-warning-banner.test.tsx`."
+		},
+		{
+			"id": "cbfe969888",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "sites/site-fields/test/get-plan-expiry-status.ts",
+			"message": "`get-plan-expiry-status.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `get-plan-expiry-status.test.ts`."
+		},
+		{
+			"id": "2b075e96d9",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "sites/site-fields/test/name.tsx",
+			"message": "`name.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `name.test.tsx`."
+		},
+		{
+			"id": "f92fb239f8",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "sites/site-fields/test/plan.tsx",
+			"message": "`plan.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `plan.test.tsx`."
+		},
+		{
+			"id": "a28339d042",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "sites/site-fields/test/visibility.tsx",
+			"message": "`visibility.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `visibility.test.tsx`."
+		},
+		{
+			"id": "6b3a7118c8",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "sites/test/views.ts",
+			"message": "`views.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `views.test.ts`."
+		},
+		{
+			"id": "2928d28ba0",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/backport-return-urls.ts",
+			"message": "`backport-return-urls.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `backport-return-urls.test.ts`."
+		},
+		{
+			"id": "06fa5fca7c",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/datetime.ts",
+			"message": "`datetime.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `datetime.test.ts`."
+		},
+		{
+			"id": "582122c3cb",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/difm-offer.ts",
+			"message": "`difm-offer.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `difm-offer.test.ts`."
+		},
+		{
+			"id": "3c1061dbb2",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/hosting-dashboard-enrollment.ts",
+			"message": "`hosting-dashboard-enrollment.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `hosting-dashboard-enrollment.test.ts`."
+		},
+		{
+			"id": "ab84a02992",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/is-web-url.ts",
+			"message": "`is-web-url.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `is-web-url.test.ts`."
+		},
+		{
+			"id": "722f1bdbbf",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/phone-number.ts",
+			"message": "`phone-number.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `phone-number.test.ts`."
+		},
+		{
+			"id": "e448b8b7a5",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/premium-analytics-url.ts",
+			"message": "`premium-analytics-url.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `premium-analytics-url.test.ts`."
+		},
+		{
+			"id": "44c53b4f5b",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/purchase-expiry-copy.ts",
+			"message": "`purchase-expiry-copy.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `purchase-expiry-copy.test.ts`."
+		},
+		{
+			"id": "9bd5736471",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/purchase.ts",
+			"message": "`purchase.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `purchase.test.ts`."
+		},
+		{
+			"id": "96b44ca5b7",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/site-features.ts",
+			"message": "`site-features.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `site-features.test.ts`."
+		},
+		{
+			"id": "29e3a1e643",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/site-plan.ts",
+			"message": "`site-plan.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `site-plan.test.ts`."
+		},
+		{
+			"id": "e1f8c0361d",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/site-status.ts",
+			"message": "`site-status.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `site-status.test.ts`."
+		},
+		{
+			"id": "2bb6fc50cb",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/site-storage.ts",
+			"message": "`site-storage.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `site-storage.test.ts`."
+		},
+		{
+			"id": "d4f0f0acc3",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/site-subscribers.ts",
+			"message": "`site-subscribers.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `site-subscribers.test.ts`."
+		},
+		{
+			"id": "06c19a64ec",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/site-url.ts",
+			"message": "`site-url.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `site-url.test.ts`."
+		},
+		{
+			"id": "3788ef6678",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/url.ts",
+			"message": "`url.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `url.test.ts`."
+		},
+		{
+			"id": "fd3adecae8",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/use-difm-offer-engagement-tracking.tsx",
+			"message": "`use-difm-offer-engagement-tracking.tsx` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `use-difm-offer-engagement-tracking.test.tsx`."
+		},
+		{
+			"id": "d825278b17",
+			"convention": "test-file-suffix",
+			"source": "scan",
+			"file": "utils/test/use-resend-cooldown.ts",
+			"message": "`use-resend-cooldown.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `use-resend-cooldown.test.ts`."
+		},
+		{
+			"id": "80a84b6181",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/agency-capabilities.test.ts",
+			"message": "No `agency-capabilities.ts(x)` or `agency-capabilities/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "01351cd05d",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/agency-site-access-route.test.ts",
+			"message": "No `agency-site-access-route.ts(x)` or `agency-site-access-route/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "f4e40f39f0",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/agency-sites-route.test.ts",
+			"message": "No `agency-sites-route.ts(x)` or `agency-sites-route/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "16b61d8ef6",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/cancel-purchase-route.test.ts",
+			"message": "No `cancel-purchase-route.ts(x)` or `cancel-purchase-route/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "b8e6e8d33b",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/marketplace-purchases-route.test.ts",
+			"message": "No `marketplace-purchases-route.ts(x)` or `marketplace-purchases-route/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "dea7155f65",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/team-accept-invite-route.test.ts",
+			"message": "No `team-accept-invite-route.ts(x)` or `team-accept-invite-route/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "7f45a82317",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/survicate/test/visit-traits.test.tsx",
+			"message": "No `visit-traits.ts(x)` or `visit-traits/` beside `app/survicate/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "52b5193d3a",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/test/unified-page-view.test.tsx",
+			"message": "No `unified-page-view.ts(x)` or `unified-page-view/` beside `app/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "57338ddb98",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "components/switcher/test/switcher.test.tsx",
+			"message": "No `switcher.ts(x)` or `switcher/` beside `components/switcher/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "560b59aeb7",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "components/text-blur/test/translate-harness.test.tsx",
+			"message": "No `translate-harness.ts(x)` or `translate-harness/` beside `components/text-blur/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "89c20d0164",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "domains/dataviews/test/expiry-field.test.tsx",
+			"message": "No `expiry-field.ts(x)` or `expiry-field/` beside `domains/dataviews/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "4019b3efbe",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/test/dns-propagation-progress-bar.test.tsx",
+			"message": "No `dns-propagation-progress-bar.ts(x)` or `dns-propagation-progress-bar/` beside `domains/domain-connection-setup/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "385823a3fc",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "domains/domain-connection-setup/test/domain-propagation-status.test.tsx",
+			"message": "No `domain-propagation-status.ts(x)` or `domain-propagation-status/` beside `domains/domain-connection-setup/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "9ba78cb763",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/auto-renew-payment-method-cta.test.tsx",
+			"message": "No `auto-renew-payment-method-cta.ts(x)` or `auto-renew-payment-method-cta/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "4ab24e424c",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/cancel-or-remove-action-button.test.tsx",
+			"message": "No `cancel-or-remove-action-button.ts(x)` or `cancel-or-remove-action-button/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "a31aa549d7",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/partner-managed-actions.test.tsx",
+			"message": "No `partner-managed-actions.ts(x)` or `partner-managed-actions/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "6e963bb4a7",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/product-change-action-item.test.tsx",
+			"message": "No `product-change-action-item.ts(x)` or `product-change-action-item/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "7a9de35e45",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/purchase-header-actions.test.tsx",
+			"message": "No `purchase-header-actions.ts(x)` or `purchase-header-actions/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "0638b78ee0",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/storage-upgrade-action-button.test.tsx",
+			"message": "No `storage-upgrade-action-button.ts(x)` or `storage-upgrade-action-button/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "e483c58961",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "sites/scan/test/use-fix-threats.test.tsx",
+			"message": "No `use-fix-threats.ts(x)` or `use-fix-threats/` beside `sites/scan/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "14d3ae0c45",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/test/actions.test.tsx",
+			"message": "`actions.test.tsx` has no JSX.",
+			"suggestion": "Rename to `actions.test.ts`."
+		},
+		{
+			"id": "83e18b375c",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "agency/sites/dataviews/test/actions.tsx",
+			"message": "`actions.tsx` has no JSX.",
+			"suggestion": "Rename to `actions.ts`."
+		},
+		{
+			"id": "98363978ea",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app-a4a/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "c7e924d90c",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app-dotcom/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "3336c1444f",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/command-palette/commands.tsx",
+			"message": "`commands.tsx` has no JSX.",
+			"suggestion": "Rename to `commands.ts`."
+		},
+		{
+			"id": "8a9f518b93",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/logger/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "f591ab9d35",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/mutation-error-tracker/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "14a18ca0eb",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/navigation-blocker/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "2e85579d38",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/navigation-blocker/navigation-blocker-registry.tsx",
+			"message": "`navigation-blocker-registry.tsx` has no JSX.",
+			"suggestion": "Rename to `navigation-blocker-registry.ts`."
+		},
+		{
+			"id": "cb682d910d",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/navigation-blocker/navigation-blocker.tsx",
+			"message": "`navigation-blocker.tsx` has no JSX.",
+			"suggestion": "Rename to `navigation-blocker.ts`."
+		},
+		{
+			"id": "c1dd6c8065",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/omnibar/plugin-dashboard.tsx",
+			"message": "`plugin-dashboard.tsx` has no JSX.",
+			"suggestion": "Rename to `plugin-dashboard.ts`."
+		},
+		{
+			"id": "0dd141653e",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/omnibar/test/admin-bar-icon.test.tsx",
+			"message": "`admin-bar-icon.test.tsx` has no JSX.",
+			"suggestion": "Rename to `admin-bar-icon.test.ts`."
+		},
+		{
+			"id": "8c5887ce8a",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/router/agency-client.tsx",
+			"message": "`agency-client.tsx` has no JSX.",
+			"suggestion": "Rename to `agency-client.ts`."
+		},
+		{
+			"id": "2d042e9cb6",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/router/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "3a1bd4cd37",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/router/me.tsx",
+			"message": "`me.tsx` has no JSX.",
+			"suggestion": "Rename to `me.ts`."
+		},
+		{
+			"id": "2fb827c49b",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/router/plugins.tsx",
+			"message": "`plugins.tsx` has no JSX.",
+			"suggestion": "Rename to `plugins.ts`."
+		},
+		{
+			"id": "c663dae360",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/router/root.tsx",
+			"message": "`root.tsx` has no JSX.",
+			"suggestion": "Rename to `root.ts`."
+		},
+		{
+			"id": "3491a493d5",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/router/test/me.test.tsx",
+			"message": "`me.test.tsx` has no JSX.",
+			"suggestion": "Rename to `me.test.ts`."
+		},
+		{
+			"id": "6bf9d2b072",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/router/test/sites.test.tsx",
+			"message": "`sites.test.tsx` has no JSX.",
+			"suggestion": "Rename to `sites.test.ts`."
+		},
+		{
+			"id": "127ec69a8c",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/shopping-cart/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "614b40a757",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/snackbars/limit-total-snackbars.tsx",
+			"message": "`limit-total-snackbars.tsx` has no JSX.",
+			"suggestion": "Rename to `limit-total-snackbars.ts`."
+		},
+		{
+			"id": "adc6cf5904",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/staging-site-sync-monitor/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "d0cac8f2eb",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/survicate/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "7189540dbf",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "app/transient-query-params/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "9f391a105e",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/component-view-tracker/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "2a9fbedb15",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/dataviews/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "7e8accaf38",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/domain-contact-details-form/ca-contact-fields.tsx",
+			"message": "`ca-contact-fields.tsx` has no JSX.",
+			"suggestion": "Rename to `ca-contact-fields.ts`."
+		},
+		{
+			"id": "1eb6a0134a",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/domain-contact-details-form/fr-contact-fields.tsx",
+			"message": "`fr-contact-fields.tsx` has no JSX.",
+			"suggestion": "Rename to `fr-contact-fields.ts`."
+		},
+		{
+			"id": "b63ee5c56e",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/domain-contact-details-form/uk-contact-fields.tsx",
+			"message": "`uk-contact-fields.tsx` has no JSX.",
+			"suggestion": "Rename to `uk-contact-fields.ts`."
+		},
+		{
+			"id": "fe90c39cb3",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/error-boundary/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "b3cafe8d7a",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/flash-message/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "ecdda3902d",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/guided-tour/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "032c9f6518",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/page-view-tracker/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "58bbb961fa",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/router-link-summary-button/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "b219f2f234",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "components/sidebar/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "9ce2da5ea7",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dataviews/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "8cd9f7ea71",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/a-record.tsx",
+			"message": "`a-record.tsx` has no JSX.",
+			"suggestion": "Rename to `a-record.ts`."
+		},
+		{
+			"id": "2fffca5ff5",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/aaaa-record.tsx",
+			"message": "`aaaa-record.tsx` has no JSX.",
+			"suggestion": "Rename to `aaaa-record.ts`."
+		},
+		{
+			"id": "a1da632273",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/alias-record.tsx",
+			"message": "`alias-record.tsx` has no JSX.",
+			"suggestion": "Rename to `alias-record.ts`."
+		},
+		{
+			"id": "062d27593e",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/caa-record.tsx",
+			"message": "`caa-record.tsx` has no JSX.",
+			"suggestion": "Rename to `caa-record.ts`."
+		},
+		{
+			"id": "05542da564",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/cname-record.tsx",
+			"message": "`cname-record.tsx` has no JSX.",
+			"suggestion": "Rename to `cname-record.ts`."
+		},
+		{
+			"id": "8c4fc81521",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/mx-record.tsx",
+			"message": "`mx-record.tsx` has no JSX.",
+			"suggestion": "Rename to `mx-record.ts`."
+		},
+		{
+			"id": "054fae0117",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/ns-record.tsx",
+			"message": "`ns-record.tsx` has no JSX.",
+			"suggestion": "Rename to `ns-record.ts`."
+		},
+		{
+			"id": "dbd9e4201f",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "domains/dns/records/srv-record.tsx",
+			"message": "`srv-record.tsx` has no JSX.",
+			"suggestion": "Rename to `srv-record.ts`."
+		},
+		{
+			"id": "3a5cc76a2f",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "emails/dataviews/actions/finish-setup.tsx",
+			"message": "`finish-setup.tsx` has no JSX.",
+			"suggestion": "Rename to `finish-setup.ts`."
+		},
+		{
+			"id": "7c78fa19f9",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "emails/dataviews/fields/type.tsx",
+			"message": "`type.tsx` has no JSX.",
+			"suggestion": "Rename to `type.ts`."
+		},
+		{
+			"id": "9e4dbf6932",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "emails/dataviews/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "d861fa00aa",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "emails/dataviews/views.tsx",
+			"message": "`views.tsx` has no JSX.",
+			"suggestion": "Rename to `views.ts`."
+		},
+		{
+			"id": "0430112aa8",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/cancel-header-title.tsx",
+			"message": "`cancel-header-title.tsx` has no JSX.",
+			"suggestion": "Rename to `cancel-header-title.ts`."
+		},
+		{
+			"id": "c2fda67178",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/refund-amount-string.tsx",
+			"message": "`refund-amount-string.tsx` has no JSX.",
+			"suggestion": "Rename to `refund-amount-string.ts`."
+		},
+		{
+			"id": "5140a7e910",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/test/cancel-header-title.test.tsx",
+			"message": "`cancel-header-title.test.tsx` has no JSX.",
+			"suggestion": "Rename to `cancel-header-title.test.ts`."
+		},
+		{
+			"id": "296b8a6eb3",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-method-selector/payment-method-selector-submit-button-content.tsx",
+			"message": "`payment-method-selector-submit-button-content.tsx` has no JSX.",
+			"suggestion": "Rename to `payment-method-selector-submit-button-content.ts`."
+		},
+		{
+			"id": "c31d3aec30",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/use-create-credit-card.tsx",
+			"message": "`use-create-credit-card.tsx` has no JSX.",
+			"suggestion": "Rename to `use-create-credit-card.ts`."
+		},
+		{
+			"id": "3f9811b60a",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/use-create-existing-cards.tsx",
+			"message": "`use-create-existing-cards.tsx` has no JSX.",
+			"suggestion": "Rename to `use-create-existing-cards.ts`."
+		},
+		{
+			"id": "d6e045dff3",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/use-create-existing-paypal-ppcp.tsx",
+			"message": "`use-create-existing-paypal-ppcp.tsx` has no JSX.",
+			"suggestion": "Rename to `use-create-existing-paypal-ppcp.ts`."
+		},
+		{
+			"id": "fdce384d30",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/use-create-payment-methods.tsx",
+			"message": "`use-create-payment-methods.tsx` has no JSX.",
+			"suggestion": "Rename to `use-create-payment-methods.ts`."
+		},
+		{
+			"id": "b72348ec61",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/use-create-paypal-express.tsx",
+			"message": "`use-create-paypal-express.tsx` has no JSX.",
+			"suggestion": "Rename to `use-create-paypal-express.ts`."
+		},
+		{
+			"id": "3a8a13b9a9",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/deployments-list/dataviews/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "1db72e7690",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/deployments-list/get-deployment-time-tooltip-text.tsx",
+			"message": "`get-deployment-time-tooltip-text.tsx` has no JSX.",
+			"suggestion": "Rename to `get-deployment-time-tooltip-text.ts`."
+		},
+		{
+			"id": "f2932acb0a",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/hosting-feature-gate/index.tsx",
+			"message": "`index.tsx` has no JSX.",
+			"suggestion": "Rename to `index.ts`."
+		},
+		{
+			"id": "665c23d77d",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/monitoring-http-responses-card/http-codes.tsx",
+			"message": "`http-codes.tsx` has no JSX.",
+			"suggestion": "Rename to `http-codes.ts`."
+		},
+		{
+			"id": "37fe30d30f",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/notice-arbiter.tsx",
+			"message": "`notice-arbiter.tsx` has no JSX.",
+			"suggestion": "Rename to `notice-arbiter.ts`."
+		},
+		{
+			"id": "66ab47ee28",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/performance/backend-callout.tsx",
+			"message": "`backend-callout.tsx` has no JSX.",
+			"suggestion": "Rename to `backend-callout.ts`."
+		},
+		{
+			"id": "f5df492486",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/settings-caching/utils.tsx",
+			"message": "`utils.tsx` has no JSX.",
+			"suggestion": "Rename to `utils.ts`."
+		},
+		{
+			"id": "fbe75db412",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "sites/site-fields/site-unreachable-status.tsx",
+			"message": "`site-unreachable-status.tsx` has no JSX.",
+			"suggestion": "Rename to `site-unreachable-status.ts`."
+		},
+		{
+			"id": "63a46c6e98",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "utils/gridicons.tsx",
+			"message": "`gridicons.tsx` has no JSX.",
+			"suggestion": "Rename to `gridicons.ts`."
+		},
+		{
+			"id": "8c5609ab10",
+			"convention": "upsell-illustration-name",
+			"source": "scan",
+			"file": "sites/overview-domain-transfer-upsell-card/upsell-illustration-transfer-domain.svg",
+			"message": "Upsell image has a `-transfer-domain` suffix.",
+			"suggestion": "Rename to `upsell-illustration.svg` and update its import."
+		},
+		{
+			"id": "00bb432923",
+			"convention": "utils-no-folder-prefix",
+			"source": "scan",
+			"file": "sites/storage/storage-utils.ts",
+			"message": "`storage-utils.ts` repeats its folder name.",
+			"suggestion": "Rename to `utils.ts` and update its imports."
+		},
+		{
+			"id": "ac685fcdb0",
+			"convention": "utils-not-helpers",
+			"source": "scan",
+			"file": "me/notifications-sites/helpers/",
+			"message": "Folder `helpers/`.",
+			"suggestion": "Rename to `utils/`."
+		},
+		{
+			"id": "2878fe0c41",
+			"convention": "utils-not-helpers",
+			"source": "scan",
+			"file": "plugins/scheduled-updates/helpers.ts",
+			"message": "File `helpers.ts`.",
+			"suggestion": "Rename to `utils.ts`."
+		},
+		{
+			"id": "9cd3dd0e85",
+			"source": "claude",
+			"convention": "modal-content-info",
+			"file": "sites/site-change-address-modal/content.tsx",
+			"message": "Modal body is `content.tsx`; the other modal folders lazy-loaded from dataviews actions use `content-info.tsx`.",
+			"suggestion": "Rename to `content-info.tsx` (and `test/content.test.tsx` to `test/content-info.test.tsx`), updating the lazy import in `domains/dataviews/actions.tsx`."
+		}
+	]
+}

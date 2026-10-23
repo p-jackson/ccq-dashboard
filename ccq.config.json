@@ -1,0 +1,8 @@
+{
+	"githubRepo": "Automattic/wp-calypso",
+	"root": "client/dashboard",
+	"space": {
+		"name": "Calypso Code Quality",
+		"slug": "ccq-dashboard"
+	}
+}
