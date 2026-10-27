@@ -1,9 +1,9 @@
 {
-	"generatedAt": "2026-10-27T07:47:15.235Z",
-	"commit": "dffde7068d589a5b1461df530adb8d263a7f3e6f",
+	"generatedAt": "2026-10-27T07:55:18.998Z",
+	"commit": "d76bf5c0a9fbb806325d35f89de6f00c7a0be1ad",
 	"githubRepo": "Automattic/wp-calypso",
 	"root": "client/dashboard",
-	"fileCount": 2304,
+	"fileCount": 2306,
 	"conventions": [
 		{
 			"id": "callout-file-name",
@@ -38,7 +38,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
-			"checked": 2977,
+			"checked": 2979,
 			"violations": 0
 		},
 		{
@@ -56,8 +56,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
-			"checked": 410,
-			"violations": 59
+			"checked": 414,
+			"violations": 2
 		},
 		{
 			"id": "test-file-target",
@@ -65,8 +65,8 @@
 			"category": "structure",
 			"status": "accepted",
 			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
-			"checked": 349,
-			"violations": 24
+			"checked": 410,
+			"violations": 34
 		},
 		{
 			"id": "tsx-only-with-jsx",
@@ -74,8 +74,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
-			"checked": 1357,
-			"violations": 0
+			"checked": 1359,
+			"violations": 1
 		},
 		{
 			"id": "typescript-not-javascript",
@@ -83,8 +83,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Source and test files use `.ts` / `.tsx`, never `.js` / `.jsx`, so everything is type-checked. Tool config files such as `eslint.config.mjs` are exempt.",
-			"checked": 1996,
-			"violations": 2
+			"checked": 1998,
+			"violations": 0
 		},
 		{
 			"id": "upsell-illustration-name",
@@ -2091,38 +2091,6 @@
 			"suggestion": "Rename the type to `SiteRestoreContentInfoProps`."
 		},
 		{
-			"id": "238e995179",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/earn/referrals/hooks/test/use-consolidated-payout-data.ts",
-			"message": "`use-consolidated-payout-data.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `use-consolidated-payout-data.test.ts`."
-		},
-		{
-			"id": "a466bb7dae",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/earn/referrals/lib/test/generate-commissions-csv.ts",
-			"message": "`generate-commissions-csv.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `generate-commissions-csv.test.ts`."
-		},
-		{
-			"id": "bd97473d3e",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/earn/referrals/lib/test/get-estimated-commission.ts",
-			"message": "`get-estimated-commission.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `get-estimated-commission.test.ts`."
-		},
-		{
-			"id": "dab3584b3b",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/overview/test/use-pressable-offer-eligibility.ts",
-			"message": "`use-pressable-offer-eligibility.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `use-pressable-offer-eligibility.test.ts`."
-		},
-		{
 			"id": "5abc04c9da",
 			"convention": "test-file-suffix",
 			"source": "scan",
@@ -2131,436 +2099,12 @@
 			"suggestion": "Rename to `actions.test.ts`."
 		},
 		{
-			"id": "2464ddd2a2",
+			"id": "2ef0138717",
 			"convention": "test-file-suffix",
 			"source": "scan",
-			"file": "agency/sites/dataviews/test/endpoint-fields.tsx",
-			"message": "`endpoint-fields.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `endpoint-fields.test.tsx`."
-		},
-		{
-			"id": "7d1c3b82eb",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/sites/dataviews/test/hydrate.tsx",
-			"message": "`hydrate.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `hydrate.test.tsx`."
-		},
-		{
-			"id": "62192a834f",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/sites/dataviews/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "3af4dc476d",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/sites/dataviews/test/site.tsx",
-			"message": "`site.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `site.test.tsx`."
-		},
-		{
-			"id": "e60796c675",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "app/snackbars/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "30aa164753",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "app/snackbars/test/modal.tsx",
-			"message": "`modal.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `modal.test.tsx`."
-		},
-		{
-			"id": "01c24fa8dc",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/callout/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "8e0804294b",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/date-range-picker/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "01e6007947",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/date-range-picker/test/utils.ts",
-			"message": "`utils.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `utils.test.ts`."
-		},
-		{
-			"id": "3dd259dcd9",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/formatted-time/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "8efc8a3971",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/plan-expiry-notice/test/component.tsx",
-			"message": "`component.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `component.test.tsx`."
-		},
-		{
-			"id": "8e5ccfc59f",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/plan-expiry-notice/test/get-plan-expiry-notice.ts",
-			"message": "`get-plan-expiry-notice.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `get-plan-expiry-notice.test.ts`."
-		},
-		{
-			"id": "3adf00fc69",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/plan-expiry-notice/test/sitewide-scope.ts",
-			"message": "`sitewide-scope.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `sitewide-scope.test.ts`."
-		},
-		{
-			"id": "18b764724a",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/section-header/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "5ed53d1a91",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/site-expiry-notice/test/banner.tsx",
-			"message": "`banner.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `banner.test.tsx`."
-		},
-		{
-			"id": "272bd6160c",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/site-expiry-notice/test/dismissal.ts",
-			"message": "`dismissal.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `dismissal.test.ts`."
-		},
-		{
-			"id": "45d4aba387",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/site-expiry-notice/test/ensure-site-expiry-notice-data.ts",
-			"message": "`ensure-site-expiry-notice-data.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `ensure-site-expiry-notice-data.test.ts`."
-		},
-		{
-			"id": "6c0bb2ac77",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/site-expiry-notice/test/use-site-expiry-notice.tsx",
-			"message": "`use-site-expiry-notice.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `use-site-expiry-notice.test.tsx`."
-		},
-		{
-			"id": "add3bdd25b",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/summary-button-list/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "d64a2a84db",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "components/time-mismatch-notice/test/index.tsx",
-			"message": "`index.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `index.test.tsx`."
-		},
-		{
-			"id": "0bb12c138b",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "domains/domain-glue-records/test/delete-modal.tsx",
-			"message": "`delete-modal.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `delete-modal.test.tsx`."
-		},
-		{
-			"id": "2eb53759ff",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "domains/test/views.ts",
-			"message": "`views.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `views.test.ts`."
-		},
-		{
-			"id": "34dc40a636",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "emails/hooks/test/use-titan-downgrade.tsx",
-			"message": "`use-titan-downgrade.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `use-titan-downgrade.test.tsx`."
-		},
-		{
-			"id": "87385729b5",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "emails/utils/test/get-cart-items.ts",
-			"message": "`get-cart-items.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `get-cart-items.test.ts`."
-		},
-		{
-			"id": "409bb83563",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "emails/utils/test/get-mailbox-cost.ts",
-			"message": "`get-mailbox-cost.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `get-mailbox-cost.test.ts`."
-		},
-		{
-			"id": "38eb2fb414",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "emails/utils/test/titan-tiers.ts",
-			"message": "`titan-tiers.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `titan-tiers.test.ts`."
-		},
-		{
-			"id": "6a2b3c2aa1",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/test/enriched-survey-data.ts",
-			"message": "`enriched-survey-data.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `enriched-survey-data.test.ts`."
-		},
-		{
-			"id": "097e83376f",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/test/get-confirmation-copy.ts",
-			"message": "`get-confirmation-copy.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `get-confirmation-copy.test.ts`."
-		},
-		{
-			"id": "d91e235e99",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/test/next-step.ts",
-			"message": "`next-step.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `next-step.test.ts`."
-		},
-		{
-			"id": "47afd1e0a6",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "sites/overview/test/email-block-notice.tsx",
-			"message": "`email-block-notice.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `email-block-notice.test.tsx`."
-		},
-		{
-			"id": "6912c44038",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "sites/overview/test/storage-warning-banner.tsx",
-			"message": "`storage-warning-banner.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `storage-warning-banner.test.tsx`."
-		},
-		{
-			"id": "cbfe969888",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "sites/site-fields/test/get-plan-expiry-status.ts",
-			"message": "`get-plan-expiry-status.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `get-plan-expiry-status.test.ts`."
-		},
-		{
-			"id": "2b075e96d9",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "sites/site-fields/test/name.tsx",
-			"message": "`name.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `name.test.tsx`."
-		},
-		{
-			"id": "f92fb239f8",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "sites/site-fields/test/plan.tsx",
-			"message": "`plan.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `plan.test.tsx`."
-		},
-		{
-			"id": "a28339d042",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "sites/site-fields/test/visibility.tsx",
-			"message": "`visibility.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `visibility.test.tsx`."
-		},
-		{
-			"id": "6b3a7118c8",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "sites/test/views.ts",
-			"message": "`views.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `views.test.ts`."
-		},
-		{
-			"id": "2928d28ba0",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/backport-return-urls.ts",
-			"message": "`backport-return-urls.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `backport-return-urls.test.ts`."
-		},
-		{
-			"id": "06fa5fca7c",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/datetime.ts",
-			"message": "`datetime.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `datetime.test.ts`."
-		},
-		{
-			"id": "582122c3cb",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/difm-offer.ts",
-			"message": "`difm-offer.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `difm-offer.test.ts`."
-		},
-		{
-			"id": "3c1061dbb2",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/hosting-dashboard-enrollment.ts",
-			"message": "`hosting-dashboard-enrollment.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `hosting-dashboard-enrollment.test.ts`."
-		},
-		{
-			"id": "ab84a02992",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/is-web-url.ts",
-			"message": "`is-web-url.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `is-web-url.test.ts`."
-		},
-		{
-			"id": "722f1bdbbf",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/phone-number.ts",
-			"message": "`phone-number.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `phone-number.test.ts`."
-		},
-		{
-			"id": "e448b8b7a5",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/premium-analytics-url.ts",
-			"message": "`premium-analytics-url.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `premium-analytics-url.test.ts`."
-		},
-		{
-			"id": "44c53b4f5b",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/purchase-expiry-copy.ts",
-			"message": "`purchase-expiry-copy.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `purchase-expiry-copy.test.ts`."
-		},
-		{
-			"id": "9bd5736471",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/purchase.ts",
-			"message": "`purchase.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `purchase.test.ts`."
-		},
-		{
-			"id": "96b44ca5b7",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/site-features.ts",
-			"message": "`site-features.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `site-features.test.ts`."
-		},
-		{
-			"id": "29e3a1e643",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/site-plan.ts",
-			"message": "`site-plan.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `site-plan.test.ts`."
-		},
-		{
-			"id": "e1f8c0361d",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/site-status.ts",
-			"message": "`site-status.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `site-status.test.ts`."
-		},
-		{
-			"id": "2bb6fc50cb",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/site-storage.ts",
-			"message": "`site-storage.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `site-storage.test.ts`."
-		},
-		{
-			"id": "d4f0f0acc3",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/site-subscribers.ts",
-			"message": "`site-subscribers.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `site-subscribers.test.ts`."
-		},
-		{
-			"id": "06c19a64ec",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/site-url.ts",
-			"message": "`site-url.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `site-url.test.ts`."
-		},
-		{
-			"id": "3788ef6678",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/url.ts",
-			"message": "`url.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `url.test.ts`."
-		},
-		{
-			"id": "fd3adecae8",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/use-difm-offer-engagement-tracking.tsx",
-			"message": "`use-difm-offer-engagement-tracking.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `use-difm-offer-engagement-tracking.test.tsx`."
-		},
-		{
-			"id": "d825278b17",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/use-resend-cooldown.ts",
-			"message": "`use-resend-cooldown.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `use-resend-cooldown.test.ts`."
+			"file": "utils/test/ssh.ts",
+			"message": "`ssh.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `ssh.test.ts`."
 		},
 		{
 			"id": "80a84b6181",
@@ -2627,6 +2171,14 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
+			"id": "d5135ca818",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/snackbars/test/modal.test.tsx",
+			"message": "No `modal.ts(x)` or `modal/` beside `app/snackbars/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
 			"id": "7f45a82317",
 			"convention": "test-file-target",
 			"source": "scan",
@@ -2640,6 +2192,30 @@
 			"source": "scan",
 			"file": "app/test/unified-page-view.test.tsx",
 			"message": "No `unified-page-view.ts(x)` or `unified-page-view/` beside `app/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "14b6003cb2",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "components/domain-contact-details-form/custom-form-fieldsets/test/region-address-fieldsets.test.tsx",
+			"message": "No `region-address-fieldsets.ts(x)` or `region-address-fieldsets/` beside `components/domain-contact-details-form/custom-form-fieldsets/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "7cbbaf0567",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "components/plan-expiry-notice/test/component.test.tsx",
+			"message": "No `component.ts(x)` or `component/` beside `components/plan-expiry-notice/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "c068b65553",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "components/plan-expiry-notice/test/sitewide-scope.test.ts",
+			"message": "No `sitewide-scope.ts(x)` or `sitewide-scope/` beside `components/plan-expiry-notice/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
@@ -2680,6 +2256,14 @@
 			"source": "scan",
 			"file": "domains/domain-connection-setup/test/domain-propagation-status.test.tsx",
 			"message": "No `domain-propagation-status.ts(x)` or `domain-propagation-status/` beside `domains/domain-connection-setup/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "edf9c1823e",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "domains/test/views.test.ts",
+			"message": "No `views.ts(x)` or `views/` beside `domains/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
@@ -2755,20 +2339,52 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
-			"id": "4081c47032",
-			"convention": "typescript-not-javascript",
+			"id": "62387a4007",
+			"convention": "test-file-target",
 			"source": "scan",
-			"file": "components/domain-contact-details-form/custom-form-fieldsets/test/region-address-fieldsets.js",
-			"message": "`region-address-fieldsets.js` is JavaScript.",
-			"suggestion": "Convert to TypeScript as `region-address-fieldsets.ts` (`.tsx` if it contains JSX)."
+			"file": "sites/site-fields/test/name.test.tsx",
+			"message": "No `name.ts(x)` or `name/` beside `sites/site-fields/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
-			"id": "e42c984c8e",
-			"convention": "typescript-not-javascript",
+			"id": "389879bf5a",
+			"convention": "test-file-target",
 			"source": "scan",
-			"file": "utils/test/domain.js",
-			"message": "`domain.js` is JavaScript.",
-			"suggestion": "Convert to TypeScript as `domain.ts` (`.tsx` if it contains JSX)."
+			"file": "sites/site-fields/test/plan.test.tsx",
+			"message": "No `plan.ts(x)` or `plan/` beside `sites/site-fields/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "308157f1d5",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "sites/site-fields/test/visibility.test.tsx",
+			"message": "No `visibility.ts(x)` or `visibility/` beside `sites/site-fields/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "86e13c73bf",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "sites/test/views.test.ts",
+			"message": "No `views.ts(x)` or `views/` beside `sites/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "2805756792",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "utils/test/backport-return-urls.test.ts",
+			"message": "No `backport-return-urls.ts(x)` or `backport-return-urls/` beside `utils/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "dc9a9cdc4b",
+			"convention": "tsx-only-with-jsx",
+			"source": "scan",
+			"file": "agency/sites/dataviews/test/actions.test.tsx",
+			"message": "`actions.test.tsx` has no JSX.",
+			"suggestion": "Rename to `actions.test.ts`."
 		},
 		{
 			"id": "8c5609ab10",
