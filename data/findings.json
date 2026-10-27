@@ -1,9 +1,9 @@
 {
-	"generatedAt": "2026-10-23T10:01:44.959Z",
-	"commit": "100858345955022dc6543ddd770bbc1e55c9e9bf",
+	"generatedAt": "2026-10-27T07:47:15.235Z",
+	"commit": "dffde7068d589a5b1461df530adb8d263a7f3e6f",
 	"githubRepo": "Automattic/wp-calypso",
 	"root": "client/dashboard",
-	"fileCount": 2284,
+	"fileCount": 2304,
 	"conventions": [
 		{
 			"id": "callout-file-name",
@@ -20,7 +20,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "`site-plan-card.tsx` default-exports `SitePlanCard` (or a qualified `SitesSitePlanCard`); `site-plan-card/index.tsx` does too. Matching names make components greppable from either side.",
-			"checked": 761,
+			"checked": 770,
 			"violations": 97
 		},
 		{
@@ -29,17 +29,8 @@
 			"category": "naming",
 			"status": "proposed",
 			"description": "A module whose only runtime export is a hook is named after it in kebab-case (`useSitePlan` → `use-site-plan.ts`), and a `use-*.ts` file exports the hook its name promises.",
-			"checked": 137,
-			"violations": 39
-		},
-		{
-			"id": "hook-folder-placement",
-			"title": "Hooks are either all in `hooks/` or all beside their callers",
-			"category": "structure",
-			"status": "proposed",
-			"description": "A folder that has a `hooks/` subfolder keeps all its hooks there, and a `hooks/` folder is only worth having for more than one hook. A lone hook sits beside the code that uses it.",
-			"checked": 102,
-			"violations": 8
+			"checked": 139,
+			"violations": 41
 		},
 		{
 			"id": "kebab-case-paths",
@@ -47,7 +38,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
-			"checked": 2955,
+			"checked": 2977,
 			"violations": 0
 		},
 		{
@@ -60,21 +51,12 @@
 			"violations": 78
 		},
 		{
-			"id": "stylesheet-name",
-			"title": "A folder’s stylesheet is `style.scss`",
-			"category": "naming",
-			"status": "accepted",
-			"description": "When a folder has a single plain stylesheet, it is called `style.scss` (the name used by ~100 folders), not `styles.scss`, `index.scss` or `<component>.scss`.",
-			"checked": 134,
-			"violations": 22
-		},
-		{
 			"id": "test-file-suffix",
 			"title": "Test files end in `.test.ts(x)`",
 			"category": "naming",
 			"status": "accepted",
 			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
-			"checked": 406,
+			"checked": 410,
 			"violations": 59
 		},
 		{
@@ -83,8 +65,8 @@
 			"category": "structure",
 			"status": "accepted",
 			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
-			"checked": 345,
-			"violations": 23
+			"checked": 349,
+			"violations": 24
 		},
 		{
 			"id": "tsx-only-with-jsx",
@@ -92,8 +74,17 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
-			"checked": 1410,
-			"violations": 65
+			"checked": 1357,
+			"violations": 0
+		},
+		{
+			"id": "typescript-not-javascript",
+			"title": "Code is TypeScript, not JavaScript",
+			"category": "naming",
+			"status": "accepted",
+			"description": "Source and test files use `.ts` / `.tsx`, never `.js` / `.jsx`, so everything is type-checked. Tool config files such as `eslint.config.mjs` are exempt.",
+			"checked": 1996,
+			"violations": 2
 		},
 		{
 			"id": "upsell-illustration-name",
@@ -387,10 +378,10 @@
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
 		{
-			"id": "a21e8fbbcf",
+			"id": "7090ffd05c",
 			"convention": "default-export-matches-filename",
 			"source": "scan",
-			"file": "components/router-link-summary-button/index.tsx",
+			"file": "components/router-link-summary-button/index.ts",
 			"line": 11,
 			"message": "Default export `DashboardSummaryButton` doesn’t match `router-link-summary-button`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
@@ -598,7 +589,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "me/mcp/index.tsx",
-			"line": 265,
+			"line": 258,
 			"message": "Default export `McpComponent` doesn’t match `mcp`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -706,7 +697,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/hosting-feature-gated-with-callout/upsell.tsx",
-			"line": 28,
+			"line": 29,
 			"message": "Default export `UpsellCallout` doesn’t match `upsell`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -814,7 +805,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-plan-card/index.tsx",
-			"line": 241,
+			"line": 244,
 			"message": "Default export `PlanCard` doesn’t match `overview-plan-card`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -1043,6 +1034,15 @@
 			"suggestion": "Rename to `use-get-payout-data.ts`."
 		},
 		{
+			"id": "dc48e9b095",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "agency/resources/learn/dataviews/fields.tsx",
+			"line": 18,
+			"message": "Only export is `useResourceFields`, but the file is `fields.tsx`.",
+			"suggestion": "Rename to `use-resource-fields.tsx`."
+		},
+		{
 			"id": "a167bef92a",
 			"convention": "hook-file-name",
 			"source": "scan",
@@ -1162,7 +1162,7 @@
 			"convention": "hook-file-name",
 			"source": "scan",
 			"file": "domains/dataviews/actions.tsx",
-			"line": 45,
+			"line": 46,
 			"message": "Only export is `useActions`, but the file is `actions.tsx`.",
 			"suggestion": "Rename to `use-actions.tsx`."
 		},
@@ -1221,13 +1221,13 @@
 			"suggestion": "Rename to `use-edit-email-forward-action.tsx`."
 		},
 		{
-			"id": "f0abe8b13c",
+			"id": "11d11cd104",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "emails/dataviews/actions/finish-setup.tsx",
+			"file": "emails/dataviews/actions/finish-setup.ts",
 			"line": 7,
-			"message": "Only export is `useFinishSetupAction`, but the file is `finish-setup.tsx`.",
-			"suggestion": "Rename to `use-finish-setup-action.tsx`."
+			"message": "Only export is `useFinishSetupAction`, but the file is `finish-setup.ts`.",
+			"suggestion": "Rename to `use-finish-setup-action.ts`."
 		},
 		{
 			"id": "a7d021d3b6",
@@ -1266,6 +1266,15 @@
 			"suggestion": "Rename to `use-resend-verification-action.ts`."
 		},
 		{
+			"id": "b58b485f6a",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "emails/dataviews/actions/upgrade-mailbox.ts",
+			"line": 10,
+			"message": "Only export is `useUpgradeMailboxAction`, but the file is `upgrade-mailbox.ts`.",
+			"suggestion": "Rename to `use-upgrade-mailbox-action.ts`."
+		},
+		{
 			"id": "13a0c7504d",
 			"convention": "hook-file-name",
 			"source": "scan",
@@ -1284,11 +1293,11 @@
 			"suggestion": "Rename to `use-view-titan-dns-records-action.tsx`."
 		},
 		{
-			"id": "fb8b62914f",
+			"id": "e682ec15b0",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "me/billing-purchases/payment-methods/use-create-payment-methods.tsx",
-			"message": "`use-create-payment-methods.tsx` exports no hook."
+			"file": "me/billing-purchases/payment-methods/use-create-payment-methods.ts",
+			"message": "`use-create-payment-methods.ts` exports no hook."
 		},
 		{
 			"id": "ff086e6c6f",
@@ -1371,77 +1380,13 @@
 			"suggestion": "Rename to `use-repository-fields.tsx`."
 		},
 		{
-			"id": "b793a64163",
+			"id": "884460d020",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "sites/site-fields/site-unreachable-status.tsx",
+			"file": "sites/site-fields/site-unreachable-status.ts",
 			"line": 6,
-			"message": "Only export is `useIsSiteUnreachable`, but the file is `site-unreachable-status.tsx`.",
-			"suggestion": "Rename to `use-is-site-unreachable.tsx`."
-		},
-		{
-			"id": "0eb3cd37e9",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "agency/earn/woopayments/hooks/use-woopayments-site-setup.ts",
-			"message": "Only hook in `agency/earn/woopayments/hooks/`.",
-			"suggestion": "Move it up to `agency/earn/woopayments/` and remove the `hooks/` folder."
-		},
-		{
-			"id": "d36dff9270",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "domains/domain-connection-setup/hooks/use-dns-record-names.ts",
-			"message": "Only hook in `domains/domain-connection-setup/hooks/`.",
-			"suggestion": "Move it up to `domains/domain-connection-setup/` and remove the `hooks/` folder."
-		},
-		{
-			"id": "6d2131bccd",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "plugins/manage/hooks/use-sites-by-id.ts",
-			"message": "Only hook in `plugins/manage/hooks/`.",
-			"suggestion": "Move it up to `plugins/manage/` and remove the `hooks/` folder."
-		},
-		{
-			"id": "c69e3cdbea",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "sites/hooks/use-ai-launchpad.ts",
-			"message": "Only hook in `sites/hooks/`.",
-			"suggestion": "Move it up to `sites/` and remove the `hooks/` folder."
-		},
-		{
-			"id": "2e94f21221",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "sites/scan/hooks/use-fix-threats.ts",
-			"message": "Only hook in `sites/scan/hooks/`.",
-			"suggestion": "Move it up to `sites/scan/` and remove the `hooks/` folder."
-		},
-		{
-			"id": "6cb14ee868",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "agency/earn/woopayments/use-download-commissions-report.ts",
-			"message": "`agency/earn/woopayments/` has a `hooks/` folder, but this hook sits beside it.",
-			"suggestion": "Move it into `agency/earn/woopayments/hooks/`."
-		},
-		{
-			"id": "8e8cc10d8d",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "agency/earn/woopayments/use-woopayments-dashboard-data.ts",
-			"message": "`agency/earn/woopayments/` has a `hooks/` folder, but this hook sits beside it.",
-			"suggestion": "Move it into `agency/earn/woopayments/hooks/`."
-		},
-		{
-			"id": "5b3de0db57",
-			"convention": "hook-folder-placement",
-			"source": "scan",
-			"file": "sites/scan/use-scan-state.ts",
-			"message": "`sites/scan/` has a `hooks/` folder, but this hook sits beside it.",
-			"suggestion": "Move it into `sites/scan/hooks/`."
+			"message": "Only export is `useIsSiteUnreachable`, but the file is `site-unreachable-status.ts`.",
+			"suggestion": "Rename to `use-is-site-unreachable.ts`."
 		},
 		{
 			"id": "5434777a0a",
@@ -2146,182 +2091,6 @@
 			"suggestion": "Rename the type to `SiteRestoreContentInfoProps`."
 		},
 		{
-			"id": "795f0f983f",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "agency/earn/migrations/commissions-list/commission-columns.scss",
-			"message": "Only stylesheet in `agency/earn/migrations/commissions-list/` is named `commission-columns.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "6e15c9b94d",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "app/dev-tools/preferences.scss",
-			"message": "Only stylesheet in `app/dev-tools/` is named `preferences.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "54388637c6",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "app/help-center/help-center-app.scss",
-			"message": "Only stylesheet in `app/help-center/` is named `help-center-app.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "1dd438ed33",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "components/callout/styles.scss",
-			"message": "Only stylesheet in `components/callout/` is named `styles.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "3d28cb8045",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "components/dataviews/styles.scss",
-			"message": "Only stylesheet in `components/dataviews/` is named `styles.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "c1ed40de0a",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "components/switcher/switcher-content.scss",
-			"message": "Only stylesheet in `components/switcher/` is named `switcher-content.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "6f7c79ca82",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "domains/domain-security/dnssec-record-textarea.scss",
-			"message": "Only stylesheet in `domains/domain-security/` is named `dnssec-record-textarea.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "69b5dca8ff",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "domains/domain-transfer/select-site.scss",
-			"message": "Only stylesheet in `domains/domain-transfer/` is named `select-site.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "c5100dc4d6",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "emails/components/titan-dns-records.scss",
-			"message": "Only stylesheet in `emails/components/` is named `titan-dns-records.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "6602b33bdb",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "emails/mailboxes-ready/styles.scss",
-			"message": "Only stylesheet in `emails/mailboxes-ready/` is named `styles.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "3a09cc5740",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "me/billing-history/styles.scss",
-			"message": "Only stylesheet in `me/billing-history/` is named `styles.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "ccdf431f0e",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "me/billing-purchases/payment-methods/credit-card-fields.scss",
-			"message": "Only stylesheet in `me/billing-purchases/payment-methods/` is named `credit-card-fields.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "7072e1e7c0",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "me/notifications-sites/site-list-settings/index.scss",
-			"message": "Only stylesheet in `me/notifications-sites/site-list-settings/` is named `index.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "3af6a51a30",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "me/notifications-sites/site-preview/index.scss",
-			"message": "Only stylesheet in `me/notifications-sites/site-preview/` is named `index.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "1598146f76",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "me/notifications-sites/site-settings/index.scss",
-			"message": "Only stylesheet in `me/notifications-sites/site-settings/` is named `index.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "31b32e227a",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "me/preferences-defaults/site-dropdown.scss",
-			"message": "Only stylesheet in `me/preferences-defaults/` is named `site-dropdown.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "be1e3d8726",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "plugins/plugin/components/field-action-toggle.scss",
-			"message": "Only stylesheet in `plugins/plugin/components/` is named `field-action-toggle.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "405ad9ef7c",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "sites/performance/backend/bar-list.scss",
-			"message": "Only stylesheet in `sites/performance/backend/` is named `bar-list.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "5c0db20bd8",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "sites/performance/backend/request-detail/span-tree.scss",
-			"message": "Only stylesheet in `sites/performance/backend/request-detail/` is named `span-tree.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "1d00a327ac",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "sites/site-launch-modal/styles.scss",
-			"message": "Only stylesheet in `sites/site-launch-modal/` is named `styles.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "02f570c78d",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "sites/site/sidebar-environment-switcher.scss",
-			"message": "Only stylesheet in `sites/site/` is named `sidebar-environment-switcher.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
-			"id": "c0b57fb26a",
-			"convention": "stylesheet-name",
-			"source": "scan",
-			"file": "sites/storage/storage-capacity-stat.scss",
-			"message": "Only stylesheet in `sites/storage/` is named `storage-capacity-stat.scss`.",
-			"suggestion": "Rename to `style.scss` and update its import."
-		},
-		{
 			"id": "238e995179",
 			"convention": "test-file-suffix",
 			"source": "scan",
@@ -2354,12 +2123,12 @@
 			"suggestion": "Rename to `use-pressable-offer-eligibility.test.ts`."
 		},
 		{
-			"id": "bdab6f97d2",
+			"id": "5abc04c9da",
 			"convention": "test-file-suffix",
 			"source": "scan",
-			"file": "agency/sites/dataviews/test/actions.tsx",
-			"message": "`actions.tsx` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `actions.test.tsx`."
+			"file": "agency/sites/dataviews/test/actions.ts",
+			"message": "`actions.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `actions.test.ts`."
 		},
 		{
 			"id": "2464ddd2a2",
@@ -2802,6 +2571,14 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
+			"id": "32fa4e2f06",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/agency-route-titles.test.ts",
+			"message": "No `agency-route-titles.ts(x)` or `agency-route-titles/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
 			"id": "01351cd05d",
 			"convention": "test-file-target",
 			"source": "scan",
@@ -2978,524 +2755,20 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
-			"id": "14d3ae0c45",
-			"convention": "tsx-only-with-jsx",
+			"id": "4081c47032",
+			"convention": "typescript-not-javascript",
 			"source": "scan",
-			"file": "agency/marketplace/purchases/test/actions.test.tsx",
-			"message": "`actions.test.tsx` has no JSX.",
-			"suggestion": "Rename to `actions.test.ts`."
+			"file": "components/domain-contact-details-form/custom-form-fieldsets/test/region-address-fieldsets.js",
+			"message": "`region-address-fieldsets.js` is JavaScript.",
+			"suggestion": "Convert to TypeScript as `region-address-fieldsets.ts` (`.tsx` if it contains JSX)."
 		},
 		{
-			"id": "83e18b375c",
-			"convention": "tsx-only-with-jsx",
+			"id": "e42c984c8e",
+			"convention": "typescript-not-javascript",
 			"source": "scan",
-			"file": "agency/sites/dataviews/test/actions.tsx",
-			"message": "`actions.tsx` has no JSX.",
-			"suggestion": "Rename to `actions.ts`."
-		},
-		{
-			"id": "98363978ea",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app-a4a/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "c7e924d90c",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app-dotcom/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "3336c1444f",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/command-palette/commands.tsx",
-			"message": "`commands.tsx` has no JSX.",
-			"suggestion": "Rename to `commands.ts`."
-		},
-		{
-			"id": "8a9f518b93",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/logger/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "f591ab9d35",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/mutation-error-tracker/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "14a18ca0eb",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/navigation-blocker/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "2e85579d38",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/navigation-blocker/navigation-blocker-registry.tsx",
-			"message": "`navigation-blocker-registry.tsx` has no JSX.",
-			"suggestion": "Rename to `navigation-blocker-registry.ts`."
-		},
-		{
-			"id": "cb682d910d",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/navigation-blocker/navigation-blocker.tsx",
-			"message": "`navigation-blocker.tsx` has no JSX.",
-			"suggestion": "Rename to `navigation-blocker.ts`."
-		},
-		{
-			"id": "f55e04d5e2",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/omnibar/node-dashboard.tsx",
-			"message": "`node-dashboard.tsx` has no JSX.",
-			"suggestion": "Rename to `node-dashboard.ts`."
-		},
-		{
-			"id": "8c5887ce8a",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/router/agency-client.tsx",
-			"message": "`agency-client.tsx` has no JSX.",
-			"suggestion": "Rename to `agency-client.ts`."
-		},
-		{
-			"id": "2d042e9cb6",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/router/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "3a1bd4cd37",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/router/me.tsx",
-			"message": "`me.tsx` has no JSX.",
-			"suggestion": "Rename to `me.ts`."
-		},
-		{
-			"id": "2fb827c49b",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/router/plugins.tsx",
-			"message": "`plugins.tsx` has no JSX.",
-			"suggestion": "Rename to `plugins.ts`."
-		},
-		{
-			"id": "c663dae360",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/router/root.tsx",
-			"message": "`root.tsx` has no JSX.",
-			"suggestion": "Rename to `root.ts`."
-		},
-		{
-			"id": "3491a493d5",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/router/test/me.test.tsx",
-			"message": "`me.test.tsx` has no JSX.",
-			"suggestion": "Rename to `me.test.ts`."
-		},
-		{
-			"id": "6bf9d2b072",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/router/test/sites.test.tsx",
-			"message": "`sites.test.tsx` has no JSX.",
-			"suggestion": "Rename to `sites.test.ts`."
-		},
-		{
-			"id": "127ec69a8c",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/shopping-cart/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "614b40a757",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/snackbars/limit-total-snackbars.tsx",
-			"message": "`limit-total-snackbars.tsx` has no JSX.",
-			"suggestion": "Rename to `limit-total-snackbars.ts`."
-		},
-		{
-			"id": "adc6cf5904",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/staging-site-sync-monitor/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "d0cac8f2eb",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/survicate/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "7189540dbf",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "app/transient-query-params/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "9f391a105e",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/component-view-tracker/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "2a9fbedb15",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/dataviews/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "7e8accaf38",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/domain-contact-details-form/ca-contact-fields.tsx",
-			"message": "`ca-contact-fields.tsx` has no JSX.",
-			"suggestion": "Rename to `ca-contact-fields.ts`."
-		},
-		{
-			"id": "1eb6a0134a",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/domain-contact-details-form/fr-contact-fields.tsx",
-			"message": "`fr-contact-fields.tsx` has no JSX.",
-			"suggestion": "Rename to `fr-contact-fields.ts`."
-		},
-		{
-			"id": "b63ee5c56e",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/domain-contact-details-form/uk-contact-fields.tsx",
-			"message": "`uk-contact-fields.tsx` has no JSX.",
-			"suggestion": "Rename to `uk-contact-fields.ts`."
-		},
-		{
-			"id": "fe90c39cb3",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/error-boundary/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "b3cafe8d7a",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/flash-message/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "ecdda3902d",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/guided-tour/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "032c9f6518",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/page-view-tracker/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "58bbb961fa",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/router-link-summary-button/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "b219f2f234",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "components/sidebar/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "9ce2da5ea7",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dataviews/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "8cd9f7ea71",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/a-record.tsx",
-			"message": "`a-record.tsx` has no JSX.",
-			"suggestion": "Rename to `a-record.ts`."
-		},
-		{
-			"id": "2fffca5ff5",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/aaaa-record.tsx",
-			"message": "`aaaa-record.tsx` has no JSX.",
-			"suggestion": "Rename to `aaaa-record.ts`."
-		},
-		{
-			"id": "a1da632273",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/alias-record.tsx",
-			"message": "`alias-record.tsx` has no JSX.",
-			"suggestion": "Rename to `alias-record.ts`."
-		},
-		{
-			"id": "062d27593e",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/caa-record.tsx",
-			"message": "`caa-record.tsx` has no JSX.",
-			"suggestion": "Rename to `caa-record.ts`."
-		},
-		{
-			"id": "05542da564",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/cname-record.tsx",
-			"message": "`cname-record.tsx` has no JSX.",
-			"suggestion": "Rename to `cname-record.ts`."
-		},
-		{
-			"id": "8c4fc81521",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/mx-record.tsx",
-			"message": "`mx-record.tsx` has no JSX.",
-			"suggestion": "Rename to `mx-record.ts`."
-		},
-		{
-			"id": "054fae0117",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/ns-record.tsx",
-			"message": "`ns-record.tsx` has no JSX.",
-			"suggestion": "Rename to `ns-record.ts`."
-		},
-		{
-			"id": "dbd9e4201f",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "domains/dns/records/srv-record.tsx",
-			"message": "`srv-record.tsx` has no JSX.",
-			"suggestion": "Rename to `srv-record.ts`."
-		},
-		{
-			"id": "3a5cc76a2f",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "emails/dataviews/actions/finish-setup.tsx",
-			"message": "`finish-setup.tsx` has no JSX.",
-			"suggestion": "Rename to `finish-setup.ts`."
-		},
-		{
-			"id": "7c78fa19f9",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "emails/dataviews/fields/type.tsx",
-			"message": "`type.tsx` has no JSX.",
-			"suggestion": "Rename to `type.ts`."
-		},
-		{
-			"id": "9e4dbf6932",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "emails/dataviews/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "d861fa00aa",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "emails/dataviews/views.tsx",
-			"message": "`views.tsx` has no JSX.",
-			"suggestion": "Rename to `views.ts`."
-		},
-		{
-			"id": "0430112aa8",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/cancel-header-title.tsx",
-			"message": "`cancel-header-title.tsx` has no JSX.",
-			"suggestion": "Rename to `cancel-header-title.ts`."
-		},
-		{
-			"id": "c2fda67178",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/refund-amount-string.tsx",
-			"message": "`refund-amount-string.tsx` has no JSX.",
-			"suggestion": "Rename to `refund-amount-string.ts`."
-		},
-		{
-			"id": "5140a7e910",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/test/cancel-header-title.test.tsx",
-			"message": "`cancel-header-title.test.tsx` has no JSX.",
-			"suggestion": "Rename to `cancel-header-title.test.ts`."
-		},
-		{
-			"id": "296b8a6eb3",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/payment-method-selector/payment-method-selector-submit-button-content.tsx",
-			"message": "`payment-method-selector-submit-button-content.tsx` has no JSX.",
-			"suggestion": "Rename to `payment-method-selector-submit-button-content.ts`."
-		},
-		{
-			"id": "c31d3aec30",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/payment-methods/use-create-credit-card.tsx",
-			"message": "`use-create-credit-card.tsx` has no JSX.",
-			"suggestion": "Rename to `use-create-credit-card.ts`."
-		},
-		{
-			"id": "3f9811b60a",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/payment-methods/use-create-existing-cards.tsx",
-			"message": "`use-create-existing-cards.tsx` has no JSX.",
-			"suggestion": "Rename to `use-create-existing-cards.ts`."
-		},
-		{
-			"id": "d6e045dff3",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/payment-methods/use-create-existing-paypal-ppcp.tsx",
-			"message": "`use-create-existing-paypal-ppcp.tsx` has no JSX.",
-			"suggestion": "Rename to `use-create-existing-paypal-ppcp.ts`."
-		},
-		{
-			"id": "fdce384d30",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/payment-methods/use-create-payment-methods.tsx",
-			"message": "`use-create-payment-methods.tsx` has no JSX.",
-			"suggestion": "Rename to `use-create-payment-methods.ts`."
-		},
-		{
-			"id": "b72348ec61",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "me/billing-purchases/payment-methods/use-create-paypal-express.tsx",
-			"message": "`use-create-paypal-express.tsx` has no JSX.",
-			"suggestion": "Rename to `use-create-paypal-express.ts`."
-		},
-		{
-			"id": "3a8a13b9a9",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/deployments-list/dataviews/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "1db72e7690",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/deployments-list/get-deployment-time-tooltip-text.tsx",
-			"message": "`get-deployment-time-tooltip-text.tsx` has no JSX.",
-			"suggestion": "Rename to `get-deployment-time-tooltip-text.ts`."
-		},
-		{
-			"id": "f2932acb0a",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/hosting-feature-gate/index.tsx",
-			"message": "`index.tsx` has no JSX.",
-			"suggestion": "Rename to `index.ts`."
-		},
-		{
-			"id": "665c23d77d",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/monitoring-http-responses-card/http-codes.tsx",
-			"message": "`http-codes.tsx` has no JSX.",
-			"suggestion": "Rename to `http-codes.ts`."
-		},
-		{
-			"id": "37fe30d30f",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/notice-arbiter.tsx",
-			"message": "`notice-arbiter.tsx` has no JSX.",
-			"suggestion": "Rename to `notice-arbiter.ts`."
-		},
-		{
-			"id": "66ab47ee28",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/performance/backend-callout.tsx",
-			"message": "`backend-callout.tsx` has no JSX.",
-			"suggestion": "Rename to `backend-callout.ts`."
-		},
-		{
-			"id": "f5df492486",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/settings-caching/utils.tsx",
-			"message": "`utils.tsx` has no JSX.",
-			"suggestion": "Rename to `utils.ts`."
-		},
-		{
-			"id": "fbe75db412",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "sites/site-fields/site-unreachable-status.tsx",
-			"message": "`site-unreachable-status.tsx` has no JSX.",
-			"suggestion": "Rename to `site-unreachable-status.ts`."
-		},
-		{
-			"id": "63a46c6e98",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "utils/gridicons.tsx",
-			"message": "`gridicons.tsx` has no JSX.",
-			"suggestion": "Rename to `gridicons.ts`."
+			"file": "utils/test/domain.js",
+			"message": "`domain.js` is JavaScript.",
+			"suggestion": "Convert to TypeScript as `domain.ts` (`.tsx` if it contains JSX)."
 		},
 		{
 			"id": "8c5609ab10",
