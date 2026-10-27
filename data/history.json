@@ -95,5 +95,24 @@
 			"utils-not-helpers": 0,
 			"modal-content-info": 1
 		}
+	},
+	{
+		"date": "2026-10-27T08:13:49.589Z",
+		"commit": "3edede95db276e866b270296702342825fdaa7ae",
+		"counts": {
+			"callout-file-name": 3,
+			"default-export-matches-filename": 97,
+			"hook-file-name": 41,
+			"kebab-case-paths": 0,
+			"props-type-name": 78,
+			"test-file-suffix": 0,
+			"test-file-target": 34,
+			"tsx-only-with-jsx": 0,
+			"typescript-not-javascript": 0,
+			"upsell-illustration-name": 1,
+			"utils-no-folder-prefix": 1,
+			"utils-not-helpers": 0,
+			"modal-content-info": 1
+		}
 	}
 ]

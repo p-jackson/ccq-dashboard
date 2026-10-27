@@ -1,9 +1,9 @@
 {
-	"generatedAt": "2026-10-27T07:55:18.998Z",
-	"commit": "d76bf5c0a9fbb806325d35f89de6f00c7a0be1ad",
+	"generatedAt": "2026-10-27T08:13:49.589Z",
+	"commit": "3edede95db276e866b270296702342825fdaa7ae",
 	"githubRepo": "Automattic/wp-calypso",
 	"root": "client/dashboard",
-	"fileCount": 2306,
+	"fileCount": 2305,
 	"conventions": [
 		{
 			"id": "callout-file-name",
@@ -38,7 +38,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
-			"checked": 2979,
+			"checked": 2978,
 			"violations": 0
 		},
 		{
@@ -56,8 +56,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
-			"checked": 414,
-			"violations": 2
+			"checked": 413,
+			"violations": 0
 		},
 		{
 			"id": "test-file-target",
@@ -65,7 +65,7 @@
 			"category": "structure",
 			"status": "accepted",
 			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
-			"checked": 410,
+			"checked": 411,
 			"violations": 34
 		},
 		{
@@ -74,8 +74,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
-			"checked": 1359,
-			"violations": 1
+			"checked": 1358,
+			"violations": 0
 		},
 		{
 			"id": "typescript-not-javascript",
@@ -83,7 +83,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Source and test files use `.ts` / `.tsx`, never `.js` / `.jsx`, so everything is type-checked. Tool config files such as `eslint.config.mjs` are exempt.",
-			"checked": 1998,
+			"checked": 1997,
 			"violations": 0
 		},
 		{
@@ -2091,22 +2091,6 @@
 			"suggestion": "Rename the type to `SiteRestoreContentInfoProps`."
 		},
 		{
-			"id": "5abc04c9da",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "agency/sites/dataviews/test/actions.ts",
-			"message": "`actions.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `actions.test.ts`."
-		},
-		{
-			"id": "2ef0138717",
-			"convention": "test-file-suffix",
-			"source": "scan",
-			"file": "utils/test/ssh.ts",
-			"message": "`ssh.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `ssh.test.ts`."
-		},
-		{
 			"id": "80a84b6181",
 			"convention": "test-file-target",
 			"source": "scan",
@@ -2377,14 +2361,6 @@
 			"file": "utils/test/backport-return-urls.test.ts",
 			"message": "No `backport-return-urls.ts(x)` or `backport-return-urls/` beside `utils/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
-		},
-		{
-			"id": "dc9a9cdc4b",
-			"convention": "tsx-only-with-jsx",
-			"source": "scan",
-			"file": "agency/sites/dataviews/test/actions.test.tsx",
-			"message": "`actions.test.tsx` has no JSX.",
-			"suggestion": "Rename to `actions.test.ts`."
 		},
 		{
 			"id": "8c5609ab10",
