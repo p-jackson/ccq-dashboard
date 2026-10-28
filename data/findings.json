@@ -1,9 +1,9 @@
 {
-	"generatedAt": "2026-10-27T08:13:49.589Z",
-	"commit": "3edede95db276e866b270296702342825fdaa7ae",
+	"generatedAt": "2026-10-28T00:59:56.619Z",
+	"commit": "623dbdfdb178a2fc587965502b9740ec51683607",
 	"githubRepo": "Automattic/wp-calypso",
 	"root": "client/dashboard",
-	"fileCount": 2305,
+	"fileCount": 2323,
 	"conventions": [
 		{
 			"id": "callout-file-name",
@@ -20,7 +20,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "`site-plan-card.tsx` default-exports `SitePlanCard` (or a qualified `SitesSitePlanCard`); `site-plan-card/index.tsx` does too. Matching names make components greppable from either side.",
-			"checked": 770,
+			"checked": 777,
 			"violations": 97
 		},
 		{
@@ -29,7 +29,7 @@
 			"category": "naming",
 			"status": "proposed",
 			"description": "A module whose only runtime export is a hook is named after it in kebab-case (`useSitePlan` → `use-site-plan.ts`), and a `use-*.ts` file exports the hook its name promises.",
-			"checked": 139,
+			"checked": 141,
 			"violations": 41
 		},
 		{
@@ -38,7 +38,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
-			"checked": 2978,
+			"checked": 2999,
 			"violations": 0
 		},
 		{
@@ -48,7 +48,7 @@
 			"status": "accepted",
 			"description": "An exported component whose props use a named type calls that type `<ComponentName>Props`. Inline object types are left alone.",
 			"checked": 296,
-			"violations": 78
+			"violations": 14
 		},
 		{
 			"id": "test-file-suffix",
@@ -56,8 +56,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
-			"checked": 413,
-			"violations": 0
+			"checked": 417,
+			"violations": 1
 		},
 		{
 			"id": "test-file-target",
@@ -65,7 +65,7 @@
 			"category": "structure",
 			"status": "accepted",
 			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
-			"checked": 411,
+			"checked": 414,
 			"violations": 34
 		},
 		{
@@ -74,7 +74,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
-			"checked": 1358,
+			"checked": 1368,
 			"violations": 0
 		},
 		{
@@ -83,7 +83,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Source and test files use `.ts` / `.tsx`, never `.js` / `.jsx`, so everything is type-checked. Tool config files such as `eslint.config.mjs` are exempt.",
-			"checked": 1997,
+			"checked": 2015,
 			"violations": 0
 		},
 		{
@@ -102,7 +102,7 @@
 			"status": "accepted",
 			"description": "Per-folder utility modules are plain `utils.ts(x)`. Repeating the folder name (`storage/storage-utils.ts`) adds nothing; topical prefixes that don’t repeat it (`contact-validation-utils.ts`) are fine. Found by Claude in `sites/`.",
 			"checked": 31,
-			"violations": 1
+			"violations": 0
 		},
 		{
 			"id": "utils-not-helpers",
@@ -110,7 +110,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Grab-bag modules are called `utils.ts` or `utils/` (17 files, 6 folders today) rather than `helpers`, `helper` or `util`.",
-			"checked": 30,
+			"checked": 31,
 			"violations": 0
 		},
 		{
@@ -481,7 +481,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "domains/domains-contact-details/index.tsx",
-			"line": 75,
+			"line": 76,
 			"message": "Default export `DomainsContactInfo` doesn’t match `domains-contact-details`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -814,7 +814,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-scan-card/index.tsx",
-			"line": 96,
+			"line": 97,
 			"message": "Default export `ScanCard` doesn’t match `overview-scan-card`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -1389,240 +1389,6 @@
 			"suggestion": "Rename to `use-is-site-unreachable.ts`."
 		},
 		{
-			"id": "5434777a0a",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/earn/referrals/referrals-list.tsx",
-			"line": 33,
-			"message": "`ReferralsList` takes `Props`.",
-			"suggestion": "Rename the type to `ReferralsListProps`."
-		},
-		{
-			"id": "603d27175d",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/feedback/milestone-feedback-modal.tsx",
-			"line": 23,
-			"message": "`MilestoneFeedbackModal` takes `Props`.",
-			"suggestion": "Rename the type to `MilestoneFeedbackModalProps`."
-		},
-		{
-			"id": "34c215b26c",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/hosting/host-cards.tsx",
-			"line": 52,
-			"message": "`HostCards` takes `Props`.",
-			"suggestion": "Rename the type to `HostCardsProps`."
-		},
-		{
-			"id": "a932cbbdd8",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/hosting/pressable-plan-table.tsx",
-			"line": 71,
-			"message": "`PressablePlanTable` takes `Props`.",
-			"suggestion": "Rename the type to `PressablePlanTableProps`."
-		},
-		{
-			"id": "6c0414ba41",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/hosting/pressable-premium-gate.tsx",
-			"line": 24,
-			"message": "`PressablePremiumGate` takes `Props`.",
-			"suggestion": "Rename the type to `PressablePremiumGateProps`."
-		},
-		{
-			"id": "0d3b78f406",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/hosting/pressable-section.tsx",
-			"line": 134,
-			"message": "`PressableSection` takes `Props`.",
-			"suggestion": "Rename the type to `PressableSectionProps`."
-		},
-		{
-			"id": "ee22faddd8",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/hosting/selected-plan-card.tsx",
-			"line": 43,
-			"message": "`SelectedPlanCard` takes `Props`.",
-			"suggestion": "Rename the type to `SelectedPlanCardProps`."
-		},
-		{
-			"id": "64cb2e517f",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/hosting/wpcom-section.tsx",
-			"line": 155,
-			"message": "`WpcomSection` takes `Props`.",
-			"suggestion": "Rename the type to `WpcomSectionProps`."
-		},
-		{
-			"id": "3cfac5ad04",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/products/cart-menu.tsx",
-			"line": 61,
-			"message": "`CartMenu` takes `Props`.",
-			"suggestion": "Rename the type to `CartMenuProps`."
-		},
-		{
-			"id": "3899601add",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/products/featured-showcase.tsx",
-			"line": 83,
-			"message": "`FeaturedShowcase` takes `Props`.",
-			"suggestion": "Rename the type to `FeaturedShowcaseProps`."
-		},
-		{
-			"id": "ca1c55d8bf",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/products/product-details-modal.tsx",
-			"line": 49,
-			"message": "`ProductDetailsModal` takes `Props`.",
-			"suggestion": "Rename the type to `ProductDetailsModalProps`."
-		},
-		{
-			"id": "bc0df51067",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/products/product-price.tsx",
-			"line": 13,
-			"message": "`ProductPrice` takes `Props`.",
-			"suggestion": "Rename the type to `ProductPriceProps`."
-		},
-		{
-			"id": "457963f09b",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/products/product-store-card.tsx",
-			"line": 75,
-			"message": "`ProductStoreCard` takes `Props`.",
-			"suggestion": "Rename the type to `ProductStoreCardProps`."
-		},
-		{
-			"id": "3fd68dc12f",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/purchases/assign-license-modal.tsx",
-			"line": 64,
-			"message": "`AssignLicenseModal` takes `Props`.",
-			"suggestion": "Rename the type to `AssignLicenseModalProps`."
-		},
-		{
-			"id": "ffde24e101",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/purchases/revoke-license-modal.tsx",
-			"line": 44,
-			"message": "`RevokeLicenseModal` takes `Props`.",
-			"suggestion": "Rename the type to `RevokeLicenseModalProps`."
-		},
-		{
-			"id": "15faab66e6",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/purchases/transferred-badge.tsx",
-			"line": 22,
-			"message": "`TransferredBadge` takes `Props`.",
-			"suggestion": "Rename the type to `TransferredBadgeProps`."
-		},
-		{
-			"id": "f75bf4db19",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/referral-checkout/email-preview-modal.tsx",
-			"line": 48,
-			"message": "`ReferralEmailPreviewModal` takes `Props`.",
-			"suggestion": "Rename the type to `ReferralEmailPreviewModalProps`."
-		},
-		{
-			"id": "2bfdee1f47",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/referral-checkout/logo-field.tsx",
-			"line": 34,
-			"message": "`ReferralLogoField` takes `Props`.",
-			"suggestion": "Rename the type to `ReferralLogoFieldProps`."
-		},
-		{
-			"id": "4ace290c1d",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/referral-checkout/request-form.tsx",
-			"line": 34,
-			"message": "`RequestClientPaymentForm` takes `Props`.",
-			"suggestion": "Rename the type to `RequestClientPaymentFormProps`."
-		},
-		{
-			"id": "95e97d2bf9",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/marketplace/referral-checkout/summary.tsx",
-			"line": 84,
-			"message": "`ReferralSummary` takes `Props`.",
-			"suggestion": "Rename the type to `ReferralSummaryProps`."
-		},
-		{
-			"id": "70979eaaad",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/partner-directory/dashboard-content.tsx",
-			"line": 87,
-			"message": "`PartnerDirectoryDashboardContent` takes `Props`.",
-			"suggestion": "Rename the type to `PartnerDirectoryDashboardContentProps`."
-		},
-		{
-			"id": "f0fc819aa2",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/partner-directory/details/details-content.tsx",
-			"line": 88,
-			"message": "`PartnerDirectoryDetailsContent` takes `Props`.",
-			"suggestion": "Rename the type to `PartnerDirectoryDetailsContentProps`."
-		},
-		{
-			"id": "5bdcffdd08",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/partner-directory/expertise/expertise-content.tsx",
-			"line": 61,
-			"message": "`PartnerDirectoryExpertiseContent` takes `Props`.",
-			"suggestion": "Rename the type to `PartnerDirectoryExpertiseContentProps`."
-		},
-		{
-			"id": "9ca9b180ae",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/partner-directory/lead-matching/section-fields.tsx",
-			"line": 79,
-			"message": "`LeadMatchingSectionFields` takes `Props`.",
-			"suggestion": "Rename the type to `LeadMatchingSectionFieldsProps`."
-		},
-		{
-			"id": "1b097c7c87",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/partner-directory/not-approved-popover.tsx",
-			"line": 42,
-			"message": "`NotApprovedPopover` takes `Props`.",
-			"suggestion": "Rename the type to `NotApprovedPopoverProps`."
-		},
-		{
-			"id": "6415de19f7",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "agency/partner-directory/status-badge.tsx",
-			"line": 23,
-			"message": "`StatusBadge` takes `Props`.",
-			"suggestion": "Rename the type to `StatusBadgeProps`."
-		},
-		{
 			"id": "1e56c635b9",
 			"convention": "props-type-name",
 			"source": "scan",
@@ -1630,42 +1396,6 @@
 			"line": 145,
 			"message": "`I18nProvider` takes `PropsWithChildren`.",
 			"suggestion": "Rename the type to `I18nProviderProps`."
-		},
-		{
-			"id": "f7b33d47d1",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "app/resurrected-welcome-modal/index.tsx",
-			"line": 39,
-			"message": "`ResurrectedWelcomeModalGate` takes `Props`.",
-			"suggestion": "Rename the type to `ResurrectedWelcomeModalGateProps`."
-		},
-		{
-			"id": "276e4b5640",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "components/confirm-modal/index.tsx",
-			"line": 31,
-			"message": "`ConfirmModal` takes `Props`.",
-			"suggestion": "Rename the type to `ConfirmModalProps`."
-		},
-		{
-			"id": "da7bda9497",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "components/purchase-dialogs/remove-domain-dialog.tsx",
-			"line": 35,
-			"message": "`RemoveDomainDialog` takes `Props`.",
-			"suggestion": "Rename the type to `RemoveDomainDialogProps`."
-		},
-		{
-			"id": "ab308432f2",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "components/sidebar-navigator/sidebar-navigator-screen.tsx",
-			"line": 28,
-			"message": "`SidebarNavigatorScreen` takes `ScreenProps`.",
-			"suggestion": "Rename the type to `SidebarNavigatorScreenProps`."
 		},
 		{
 			"id": "166a1a1326",
@@ -1684,24 +1414,6 @@
 			"line": 59,
 			"message": "`SwitcherContent` takes `PropsWithChildren`.",
 			"suggestion": "Rename the type to `SwitcherContentProps`."
-		},
-		{
-			"id": "05a7215441",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-connection-setup/components/dns-propagation-progress-bar.tsx",
-			"line": 44,
-			"message": "`DnsPropagationProgressBar` takes `Props`.",
-			"suggestion": "Rename the type to `DnsPropagationProgressBarProps`."
-		},
-		{
-			"id": "8f3ae00276",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-connection-setup/components/dns-records-table.tsx",
-			"line": 151,
-			"message": "`DnsRecordsTable` takes `DnsRecordVerificationProps`.",
-			"suggestion": "Rename the type to `DnsRecordsTableProps`."
 		},
 		{
 			"id": "2273c5abf1",
@@ -1749,213 +1461,6 @@
 			"suggestion": "Rename the type to `TransferUnlockProps`."
 		},
 		{
-			"id": "f580005ef0",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-glue-records/summary.tsx",
-			"line": 9,
-			"message": "`DomainGlueRecordsSettingsSummary` takes `Props`.",
-			"suggestion": "Rename the type to `DomainGlueRecordsSettingsSummaryProps`."
-		},
-		{
-			"id": "3aa81c6e0b",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-overview/featured-card-emails.tsx",
-			"line": 55,
-			"message": "`FeaturedCardEmails` takes `Props`.",
-			"suggestion": "Rename the type to `FeaturedCardEmailsProps`."
-		},
-		{
-			"id": "5aa84259ef",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-overview/featured-card-privacy.tsx",
-			"line": 13,
-			"message": "`FeaturedCardPrivacy` takes `Props`.",
-			"suggestion": "Rename the type to `FeaturedCardPrivacyProps`."
-		},
-		{
-			"id": "54b3c95e82",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-overview/featured-card-renew.tsx",
-			"line": 15,
-			"message": "`FeaturedCardRenew` takes `Props`.",
-			"suggestion": "Rename the type to `FeaturedCardRenewProps`."
-		},
-		{
-			"id": "7f2a53fbae",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-overview/featured-card-site.tsx",
-			"line": 15,
-			"message": "`FeaturedCardSite` takes `Props`.",
-			"suggestion": "Rename the type to `FeaturedCardSiteProps`."
-		},
-		{
-			"id": "d20aa4d455",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/domain-transfer/select-site.tsx",
-			"line": 27,
-			"message": "`SelectSite` takes `Props`.",
-			"suggestion": "Rename the type to `SelectSiteProps`."
-		},
-		{
-			"id": "d3b9942603",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/name-servers/form.tsx",
-			"line": 111,
-			"message": "`NameServersForm` takes `Props`.",
-			"suggestion": "Rename the type to `NameServersFormProps`."
-		},
-		{
-			"id": "50ef524607",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "domains/name-servers/upsell-nudge.tsx",
-			"line": 16,
-			"message": "`UpsellNudge` takes `Props`.",
-			"suggestion": "Rename the type to `UpsellNudgeProps`."
-		},
-		{
-			"id": "ae394b29c6",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "emails/components/add-new-domain.tsx",
-			"line": 20,
-			"message": "`AddNewDomain` takes `Props`.",
-			"suggestion": "Rename the type to `AddNewDomainProps`."
-		},
-		{
-			"id": "d62a0baac4",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "emails/components/email-non-domain-owner-notice.tsx",
-			"line": 15,
-			"message": "`EmailNonDomainOwnerNotice` takes `EmailNonDomainOwnerMessageProps`.",
-			"suggestion": "Rename the type to `EmailNonDomainOwnerNoticeProps`."
-		},
-		{
-			"id": "b0db274fd2",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/billing-payment-methods/payment-method-delete-dialog.tsx",
-			"line": 30,
-			"message": "`PaymentMethodDeleteDialog` takes `Props`.",
-			"suggestion": "Rename the type to `PaymentMethodDeleteDialogProps`."
-		},
-		{
-			"id": "7ec7f70dba",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/atomic-revert-step.tsx",
-			"line": 31,
-			"message": "`AtomicRevertStep` takes `Props`.",
-			"suggestion": "Rename the type to `AtomicRevertStepProps`."
-		},
-		{
-			"id": "3366db3b71",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/educational-content-step.tsx",
-			"line": 76,
-			"message": "`EducationalContentStep` takes `StepProps`.",
-			"suggestion": "Rename the type to `EducationalContentStepProps`."
-		},
-		{
-			"id": "67105c6bc9",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/next-adventure-step.tsx",
-			"line": 15,
-			"message": "`NextAdventureStep` takes `Props`.",
-			"suggestion": "Rename the type to `NextAdventureStepProps`."
-		},
-		{
-			"id": "691eb32b03",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/upsell-step.tsx",
-			"line": 97,
-			"message": "`UpsellStep` takes `StepProps`.",
-			"suggestion": "Rename the type to `UpsellStepProps`."
-		},
-		{
-			"id": "87fdfc1408",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/billing-purchases/move-purchase/site-transfer-review.tsx",
-			"line": 121,
-			"message": "`SiteTransferReview` takes `Props`.",
-			"suggestion": "Rename the type to `SiteTransferReviewProps`."
-		},
-		{
-			"id": "779ad75df9",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/billing-purchases/purchase-settings/upcoming-renewals-dialog.tsx",
-			"line": 91,
-			"message": "`UpcomingRenewalsDialog` takes `Props`.",
-			"suggestion": "Rename the type to `UpcomingRenewalsDialogProps`."
-		},
-		{
-			"id": "676256fd9e",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/notifications-emails/pause-all-emails/confirmation-modal.tsx",
-			"line": 11,
-			"message": "`ConfirmationModal` takes `Props`.",
-			"suggestion": "Rename the type to `ConfirmationModalProps`."
-		},
-		{
-			"id": "6762a05e8b",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/notifications-emails/subscription-settings/form.tsx",
-			"line": 263,
-			"message": "`SubscriptionSettingsForm` takes `FormProps`.",
-			"suggestion": "Rename the type to `SubscriptionSettingsFormProps`."
-		},
-		{
-			"id": "f5e21b5766",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/notifications-sites/site-preview/index.tsx",
-			"line": 13,
-			"message": "`SitePreview` takes `Props`.",
-			"suggestion": "Rename the type to `SitePreviewProps`."
-		},
-		{
-			"id": "adf7ccfccd",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/notifications-sites/site-settings/apply-settings-to-all-sites-confirmation-modal/index.tsx",
-			"line": 11,
-			"message": "`ApplySettingsToAllSitesConfirmationModal` takes `Props`.",
-			"suggestion": "Rename the type to `ApplySettingsToAllSitesConfirmationModalProps`."
-		},
-		{
-			"id": "e2ff883fb1",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/notifications-sites/site-settings/index.tsx",
-			"line": 16,
-			"message": "`SiteSettings` takes `Props`.",
-			"suggestion": "Rename the type to `SiteSettingsProps`."
-		},
-		{
-			"id": "fd1e942ad2",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/security-connected-apps/application-details-modal.tsx",
-			"line": 64,
-			"message": "`ApplicationDetailsModal` takes `Props`.",
-			"suggestion": "Rename the type to `ApplicationDetailsModalProps`."
-		},
-		{
 			"id": "0219d1ba54",
 			"convention": "props-type-name",
 			"source": "scan",
@@ -1965,15 +1470,6 @@
 			"suggestion": "Rename the type to `AppleLoginProps`."
 		},
 		{
-			"id": "bc1adcb626",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/security-social-logins/github-login.tsx",
-			"line": 6,
-			"message": "`GitHubLogin` takes `Props`.",
-			"suggestion": "Rename the type to `GitHubLoginProps`."
-		},
-		{
 			"id": "05b119e2e8",
 			"convention": "props-type-name",
 			"source": "scan",
@@ -1981,42 +1477,6 @@
 			"line": 23,
 			"message": "`GoogleLogin` takes `SocialLoginButtonProps`.",
 			"suggestion": "Rename the type to `GoogleLoginProps`."
-		},
-		{
-			"id": "02674a2843",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "me/security-social-logins/paypal-login.tsx",
-			"line": 6,
-			"message": "`PayPalLogin` takes `Props`.",
-			"suggestion": "Rename the type to `PayPalLoginProps`."
-		},
-		{
-			"id": "cdfa0f3bde",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "plugins/plugin/components/active-toggle.tsx",
-			"line": 27,
-			"message": "`ActiveToggle` takes `ActiveFieldProps`.",
-			"suggestion": "Rename the type to `ActiveToggleProps`."
-		},
-		{
-			"id": "61368b3d5c",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "plugins/plugin/components/autoupdate-toggle.tsx",
-			"line": 29,
-			"message": "`AutoupdateToggle` takes `AutoupdateFieldProps`.",
-			"suggestion": "Rename the type to `AutoupdateToggleProps`."
-		},
-		{
-			"id": "547ce76b3c",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "plugins/scheduled-updates/components/schedule-form.tsx",
-			"line": 48,
-			"message": "`ScheduledUpdatesForm` takes `Props`.",
-			"suggestion": "Rename the type to `ScheduledUpdatesFormProps`."
 		},
 		{
 			"id": "602c925d11",
@@ -2037,24 +1497,6 @@
 			"suggestion": "Rename the type to `InsightScreenshotWithOverlayProps`."
 		},
 		{
-			"id": "63107370a8",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "sites/performance/screenshot-timeline.tsx",
-			"line": 25,
-			"message": "`ScreenshotTimeline` takes `Props`.",
-			"suggestion": "Rename the type to `ScreenshotTimelineProps`."
-		},
-		{
-			"id": "e6ccab938f",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "sites/settings-repositories/disconnect-repository-modal-content.tsx",
-			"line": 31,
-			"message": "`DisconnectRepositoryModalContent` takes `DisconnectRepositoryModalProps`.",
-			"suggestion": "Rename the type to `DisconnectRepositoryModalContentProps`."
-		},
-		{
 			"id": "d3a5f8f1bf",
 			"convention": "props-type-name",
 			"source": "scan",
@@ -2073,22 +1515,12 @@
 			"suggestion": "Rename the type to `SiteLeaveModalProps`."
 		},
 		{
-			"id": "79022d087f",
-			"convention": "props-type-name",
+			"id": "ab58db8ad5",
+			"convention": "test-file-suffix",
 			"source": "scan",
-			"file": "sites/site-preview-links/index.tsx",
-			"line": 27,
-			"message": "`SitePreviewLinks` takes `SitePreviewLinkProps`.",
-			"suggestion": "Rename the type to `SitePreviewLinksProps`."
-		},
-		{
-			"id": "04397989a9",
-			"convention": "props-type-name",
-			"source": "scan",
-			"file": "sites/site-restore-modal/content-info.tsx",
-			"line": 21,
-			"message": "`SiteRestoreContentInfo` takes `ContentInfoProps`.",
-			"suggestion": "Rename the type to `SiteRestoreContentInfoProps`."
+			"file": "me/billing-purchases/cancel-purchase/test/get-all-survey-steps.ts",
+			"message": "`get-all-survey-steps.ts` contains tests but has no `.test` suffix.",
+			"suggestion": "Rename to `get-all-survey-steps.test.ts`."
 		},
 		{
 			"id": "80a84b6181",
@@ -2369,14 +1801,6 @@
 			"file": "sites/overview-domain-transfer-upsell-card/upsell-illustration-transfer-domain.svg",
 			"message": "Upsell image has a `-transfer-domain` suffix.",
 			"suggestion": "Rename to `upsell-illustration.svg` and update its import."
-		},
-		{
-			"id": "00bb432923",
-			"convention": "utils-no-folder-prefix",
-			"source": "scan",
-			"file": "sites/storage/storage-utils.ts",
-			"message": "`storage-utils.ts` repeats its folder name.",
-			"suggestion": "Rename to `utils.ts` and update its imports."
 		},
 		{
 			"id": "9cd3dd0e85",
