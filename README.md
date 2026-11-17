@@ -6,12 +6,12 @@ The scan runs locally against a checkout (`CCQ_REPO_PATH`, see Setup). Spacefast
 
 ## How it works
 
-- **Conventions** live in `conventions/*.mjs`, one per rule. Each has an `id`, `title`, `category` (`naming` / `structure`), `status` (`proposed` until you decide it's a rule, then `accepted`) and a `check( ctx )` that returns `{ checked, findings }`. `checked` is how many things the rule looked at, so the dashboard can show adherence.
+- **Conventions** live in `conventions/*.mjs`, one per rule. Each has an `id`, `title`, `category` (`naming` / `structure` / `react`), `status` (`proposed` until you decide it's a rule, then `accepted`) and a `check( ctx )` that returns `{ checked, findings }`. `checked` is how many things the rule looked at, so the dashboard can show adherence.
 - **Claude discovery**: `/discover [area] [focus]` in Claude Code compares sibling folders and records proposed conventions and findings in `data/discovered.json`. Mechanical proposals should graduate into a scripted check.
 - **Tracking**: `data/tracking.json` holds statuses and PR links, keyed by finding ids that stay stable across scans.
 - **Graduating**: once a convention is accepted and its backlog is small, move it into wp-calypso as an ESLint rule (or similar) so it stays fixed.
 
-`ctx` exposes `files` and `dirs` (git-tracked, relative to `client/dashboard`), `read( file )`, `ast( file )` (TypeScript AST), `lineOf( file, node )`, `has( file )` and `isSource` / `isTest` / `isStory`. `lib/ast.mjs` has export and JSX helpers.
+`ctx` exposes `files` and `dirs` (git-tracked, relative to `client/dashboard`), `read( file )`, `ast( file )` (TypeScript AST), `lineOf( file, node )`, `has( file )` and `isSource` / `isTest` / `isStory`. `lib/ast.mjs` has export and JSX helpers. A convention can also wrap an existing ESLint plugin through ESLint's synchronous `Linter`, as `you-might-not-need-an-effect` does, so it needs nothing from wp-calypso's `node_modules`. Findings may set a `key` to keep their id stable when the message changes, and messages can include `` `code` `` and `[links](https://…)`.
 
 ## Usage
 

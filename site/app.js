@@ -239,8 +239,10 @@ async function copyId( e ) {
 	}
 }
 
-// Messages are our own text with `backtick` code spans; escape everything else.
+// Messages are our own text with `backtick` code spans and [links](https://…); escape everything else.
 function inlineCode( text ) {
 	const escaped = text.replace( /[&<>"]/g, ( ch ) => ( { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } )[ ch ] );
-	return escaped.replace( /`([^`]+)`/g, '<code>$1</code>' );
+	return escaped
+		.replace( /`([^`]+)`/g, '<code>$1</code>' )
+		.replace( /\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>' );
 }
