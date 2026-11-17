@@ -1,9 +1,9 @@
 {
-	"generatedAt": "2026-10-28T00:59:56.619Z",
-	"commit": "623dbdfdb178a2fc587965502b9740ec51683607",
+	"generatedAt": "2026-11-17T02:04:19.079Z",
+	"commit": "b383b217ffdac6c12c8943224f5d5acf2a63fc26",
 	"githubRepo": "Automattic/wp-calypso",
 	"root": "client/dashboard",
-	"fileCount": 2323,
+	"fileCount": 2517,
 	"conventions": [
 		{
 			"id": "callout-file-name",
@@ -20,8 +20,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "`site-plan-card.tsx` default-exports `SitePlanCard` (or a qualified `SitesSitePlanCard`); `site-plan-card/index.tsx` does too. Matching names make components greppable from either side.",
-			"checked": 777,
-			"violations": 97
+			"checked": 808,
+			"violations": 107
 		},
 		{
 			"id": "hook-file-name",
@@ -29,8 +29,17 @@
 			"category": "naming",
 			"status": "proposed",
 			"description": "A module whose only runtime export is a hook is named after it in kebab-case (`useSitePlan` → `use-site-plan.ts`), and a `use-*.ts` file exports the hook its name promises.",
-			"checked": 141,
-			"violations": 41
+			"checked": 154,
+			"violations": 38
+		},
+		{
+			"id": "impressions-use-component-view-tracker",
+			"title": "Impressions are recorded with `<ComponentViewTracker>`",
+			"category": "react",
+			"status": "proposed",
+			"description": "An impression records that something came on screen, so it’s rendered with what it tracks: `<ComponentViewTracker eventName=\"…\" />`, not recorded from an effect or another helper. Render the tracker conditionally instead of checking a condition in an effect, and give it a `key` when it should record again as the content changes. Flags impression-named events (`_impression`, `_view`, `_shown`, `_open`, …) recorded in `useEffect` / `useLayoutEffect`, and calls to other view helpers. Checked counts those plus every `<ComponentViewTracker>`.",
+			"checked": 63,
+			"violations": 31
 		},
 		{
 			"id": "kebab-case-paths",
@@ -38,7 +47,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Every directory and file name (before its extensions) is lower-case kebab-case, e.g. `site-settings/use-site-plan.ts`.",
-			"checked": 2999,
+			"checked": 3236,
 			"violations": 0
 		},
 		{
@@ -47,7 +56,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "An exported component whose props use a named type calls that type `<ComponentName>Props`. Inline object types are left alone.",
-			"checked": 296,
+			"checked": 293,
 			"violations": 14
 		},
 		{
@@ -56,8 +65,8 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "A file in a `test/` folder that contains `describe`/`it`/`test` blocks is named `*.test.ts` or `*.test.tsx`. Unsuffixed files in `test/` are then reserved for fixtures and helpers.",
-			"checked": 417,
-			"violations": 1
+			"checked": 476,
+			"violations": 0
 		},
 		{
 			"id": "test-file-target",
@@ -65,8 +74,8 @@
 			"category": "structure",
 			"status": "accepted",
 			"description": "`foo/test/bar.test.tsx` tests `foo/bar.tsx` (or `foo/bar/`), and `foo/test/index.test.tsx` tests `foo/index.tsx`. A test whose name matches nothing next to its `test/` folder is hard to find from the code it covers.",
-			"checked": 414,
-			"violations": 34
+			"checked": 474,
+			"violations": 41
 		},
 		{
 			"id": "tsx-only-with-jsx",
@@ -74,7 +83,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Files without JSX use the `.ts` extension, so the extension tells you whether a module renders anything.",
-			"checked": 1368,
+			"checked": 1465,
 			"violations": 0
 		},
 		{
@@ -83,7 +92,7 @@
 			"category": "naming",
 			"status": "accepted",
 			"description": "Source and test files use `.ts` / `.tsx`, never `.js` / `.jsx`, so everything is type-checked. Tool config files such as `eslint.config.mjs` are exempt.",
-			"checked": 2015,
+			"checked": 2160,
 			"violations": 0
 		},
 		{
@@ -93,7 +102,7 @@
 			"status": "accepted",
 			"description": "A folder with one upsell image calls it plain `upsell-illustration.svg` (or `.tsx`); the folder already says what it’s for. Found by Claude in `sites/`.",
 			"checked": 7,
-			"violations": 1
+			"violations": 0
 		},
 		{
 			"id": "utils-no-folder-prefix",
@@ -112,6 +121,15 @@
 			"description": "Grab-bag modules are called `utils.ts` or `utils/` (17 files, 6 folders today) rather than `helpers`, `helper` or `util`.",
 			"checked": 31,
 			"violations": 0
+		},
+		{
+			"id": "you-might-not-need-an-effect",
+			"title": "`useEffect` only syncs with external systems",
+			"category": "react",
+			"status": "proposed",
+			"description": "Effects don’t derive state, chain state updates, stand in for event handlers, adjust or reset state when props change, pass state or data up to a parent, or subscribe to external stores; see [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect). Checked with [eslint-plugin-react-you-might-not-need-an-effect](https://github.com/nickjvandyke/eslint-plugin-react-you-might-not-need-an-effect); one finding per effect.",
+			"checked": 239,
+			"violations": 68
 		},
 		{
 			"status": "accepted",
@@ -153,6 +171,69 @@
 			"suggestion": "Rename to `logs-activity-callout.tsx` and update its imports."
 		},
 		{
+			"id": "bd08b32b0f",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/amplify/reports.tsx",
+			"line": 173,
+			"message": "Default export `AmplifyReportsList` doesn’t match `reports`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "cab0bdd8cd",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/amplify/story-graphics/audiences.tsx",
+			"line": 8,
+			"message": "Default export `AudiencesGraphic` doesn’t match `audiences`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "6681fa414c",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/amplify/story-graphics/category.tsx",
+			"line": 14,
+			"message": "Default export `CategoryGraphic` doesn’t match `category`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "f9c6c00ff3",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/amplify/story-graphics/prompt.tsx",
+			"line": 6,
+			"message": "Default export `PromptGraphic` doesn’t match `prompt`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "b88a0d3ea9",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/amplify/story-graphics/report-pages.tsx",
+			"line": 35,
+			"message": "Default export `ReportPagesGraphic` doesn’t match `report-pages`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "2dd9c42e6a",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/components/sidebar-promo/spacefast.tsx",
+			"line": 14,
+			"message": "Default export `SpacefastSidebarPromo` doesn’t match `spacefast`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "73d4efbd2b",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/crossover/index.tsx",
+			"line": 184,
+			"message": "Default export `CrossoverModalHost` doesn’t match `crossover`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
 			"id": "16c144f39e",
 			"convention": "default-export-matches-filename",
 			"source": "scan",
@@ -180,12 +261,39 @@
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
 		{
+			"id": "2d06df80da",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/woo-download/index.tsx",
+			"line": 77,
+			"message": "Default export `WooDownloadModalHost` doesn’t match `woo-download`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
 			"id": "4304ad740c",
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "agency/marketplace/referral-checkout/request-form.tsx",
 			"line": 24,
 			"message": "Default export `RequestClientPaymentForm` doesn’t match `request-form`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "b58e3489fb",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/overview/news/index.tsx",
+			"line": 166,
+			"message": "Default export `NewsCard` doesn’t match `news`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "0edeb7c236",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "agency/resources/dev-tools/spacefast-section.tsx",
+			"line": 31,
+			"message": "Default export `SpacefastDevToolsSection` doesn’t match `spacefast-section`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
 		{
@@ -292,26 +400,8 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "app/500/index.tsx",
-			"line": 180,
+			"line": 196,
 			"message": "Default export `UnknownError` doesn’t match `500`.",
-			"suggestion": "Rename the export or the file so the export name ends with the file name."
-		},
-		{
-			"id": "fce4c372f1",
-			"convention": "default-export-matches-filename",
-			"source": "scan",
-			"file": "app/omnibar/node-language-switcher-modal.tsx",
-			"line": 16,
-			"message": "Default export `LanguageSwitcherNodeModal` doesn’t match `node-language-switcher-modal`.",
-			"suggestion": "Rename the export or the file so the export name ends with the file name."
-		},
-		{
-			"id": "aa33ef696f",
-			"convention": "default-export-matches-filename",
-			"source": "scan",
-			"file": "app/omnibar/node-shopping-cart-panel.tsx",
-			"line": 9,
-			"message": "Default export `ShoppingCartNodePanel` doesn’t match `node-shopping-cart-panel`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
 		{
@@ -319,7 +409,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "app/omnibar/omnibar.tsx",
-			"line": 39,
+			"line": 40,
 			"message": "Default export `OmnibarContainer` doesn’t match `omnibar`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -337,7 +427,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "app/responsive-sidebar/agency.tsx",
-			"line": 30,
+			"line": 34,
 			"message": "Default export `AgencySidebar` doesn’t match `agency`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -427,7 +517,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "domains/domain-contact-details/index.tsx",
-			"line": 36,
+			"line": 37,
 			"message": "Default export `DomainContactInfo` doesn’t match `domain-contact-details`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -465,6 +555,33 @@
 			"file": "domains/domain-glue-records/edit.tsx",
 			"line": 14,
 			"message": "Default export `EditDomainGlueRecords` doesn’t match `edit`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "cffc0334d8",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-overview/emails-summary.tsx",
+			"line": 7,
+			"message": "Default export `DomainEmailsSettingsSummary` doesn’t match `emails-summary`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "642d76f56f",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-overview/renewal-summary.tsx",
+			"line": 66,
+			"message": "Default export `DomainRenewalSettingsSummary` doesn’t match `renewal-summary`.",
+			"suggestion": "Rename the export or the file so the export name ends with the file name."
+		},
+		{
+			"id": "c849fd8996",
+			"convention": "default-export-matches-filename",
+			"source": "scan",
+			"file": "domains/domain-overview/site-summary.tsx",
+			"line": 12,
+			"message": "Default export `DomainSiteSettingsSummary` doesn’t match `site-summary`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
 		{
@@ -589,7 +706,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "me/mcp/index.tsx",
-			"line": 258,
+			"line": 255,
 			"message": "Default export `McpComponent` doesn’t match `mcp`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -598,7 +715,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "me/mcp/setup/index.tsx",
-			"line": 378,
+			"line": 86,
 			"message": "Default export `McpSetupComponent` doesn’t match `setup`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -612,20 +729,11 @@
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
 		{
-			"id": "ec33273670",
-			"convention": "default-export-matches-filename",
-			"source": "scan",
-			"file": "me/profile-gravatar/index.tsx",
-			"line": 97,
-			"message": "Default export `GravatarProfileSection` doesn’t match `profile-gravatar`.",
-			"suggestion": "Rename the export or the file so the export name ends with the file name."
-		},
-		{
 			"id": "26f488c87b",
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "me/profile-personal-details/index.tsx",
-			"line": 29,
+			"line": 117,
 			"message": "Default export `PersonalDetailsSection` doesn’t match `profile-personal-details`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -634,7 +742,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "me/profile-personal-details/update-username/index.tsx",
-			"line": 38,
+			"line": 80,
 			"message": "Default export `UsernameUpdateForm` doesn’t match `update-username`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -652,7 +760,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "plugins/manage/index.tsx",
-			"line": 44,
+			"line": 46,
 			"message": "Default export `PluginsList` doesn’t match `manage`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -688,7 +796,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/hosting-feature-gated-with-callout/activation.tsx",
-			"line": 25,
+			"line": 27,
 			"message": "Default export `ActivationCallout` doesn’t match `activation`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -697,7 +805,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/hosting-feature-gated-with-callout/upsell.tsx",
-			"line": 29,
+			"line": 50,
 			"message": "Default export `UpsellCallout` doesn’t match `upsell`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -733,7 +841,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-difm-upsell-card/index.tsx",
-			"line": 13,
+			"line": 15,
 			"message": "Default export `DIFMUpsellCard` doesn’t match `overview-difm-upsell-card`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -742,7 +850,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-domain-transfer-upsell-card/index.tsx",
-			"line": 10,
+			"line": 12,
 			"message": "Default export `DomainTransferUpsellCard` doesn’t match `overview-domain-transfer-upsell-card`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -760,7 +868,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-domains-card/index.tsx",
-			"line": 103,
+			"line": 97,
 			"message": "Default export `DomainsCard` doesn’t match `overview-domains-card`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -805,7 +913,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-plan-card/index.tsx",
-			"line": 244,
+			"line": 268,
 			"message": "Default export `PlanCard` doesn’t match `overview-plan-card`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -832,7 +940,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-site-fields/index.tsx",
-			"line": 105,
+			"line": 103,
 			"message": "Default export `SiteOverviewFields` doesn’t match `overview-site-fields`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -850,7 +958,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/overview-visibility-card/index.tsx",
-			"line": 136,
+			"line": 171,
 			"message": "Default export `VisibilityCard` doesn’t match `overview-visibility-card`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -868,7 +976,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/settings-ai-tools/index.tsx",
-			"line": 261,
+			"line": 263,
 			"message": "Default export `AIToolsSettings` doesn’t match `settings-ai-tools`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -877,7 +985,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/settings-apm/index.tsx",
-			"line": 66,
+			"line": 63,
 			"message": "Default export `ApmSettings` doesn’t match `settings-apm`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -904,7 +1012,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/settings-database/index.tsx",
-			"line": 28,
+			"line": 30,
 			"message": "Default export `SiteDatabaseSettings` doesn’t match `settings-database`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -958,7 +1066,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/settings-repositories/index.tsx",
-			"line": 195,
+			"line": 199,
 			"message": "Default export `SiteRepositories` doesn’t match `settings-repositories`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -967,7 +1075,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/settings-sftp-ssh/index.tsx",
-			"line": 20,
+			"line": 22,
 			"message": "Default export `SftpSshSettings` doesn’t match `settings-sftp-ssh`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -1012,7 +1120,7 @@
 			"convention": "default-export-matches-filename",
 			"source": "scan",
 			"file": "sites/settings-wordpress/index.tsx",
-			"line": 111,
+			"line": 110,
 			"message": "Default export `WordPressSettings` doesn’t match `settings-wordpress`.",
 			"suggestion": "Rename the export or the file so the export name ends with the file name."
 		},
@@ -1032,6 +1140,24 @@
 			"file": "agency/earn/referrals/hooks/use-payout-data.ts",
 			"message": "`use-payout-data.ts` exports `useGetPayoutData`, not the hook its name implies.",
 			"suggestion": "Rename to `use-get-payout-data.ts`."
+		},
+		{
+			"id": "8ae5d37abd",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "agency/earn/referrals/referral/place-purchase.tsx",
+			"line": 61,
+			"message": "Only export is `usePlacePurchaseActions`, but the file is `place-purchase.tsx`.",
+			"suggestion": "Rename to `use-place-purchase-actions.tsx`."
+		},
+		{
+			"id": "7227c9ece3",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "agency/earn/referrals/referral/referral-actions.tsx",
+			"line": 23,
+			"message": "Only export is `useReferralActions`, but the file is `referral-actions.tsx`.",
+			"suggestion": "Rename to `use-referral-actions.tsx`."
 		},
 		{
 			"id": "dc48e9b095",
@@ -1068,67 +1194,13 @@
 			"message": "`use-visit-counter.ts` exports `usePersistentVisitCounter`, `useTrackVisitedAreas`, not the hook its name implies."
 		},
 		{
-			"id": "e7416817b4",
+			"id": "b37e7e7bb0",
 			"convention": "hook-file-name",
 			"source": "scan",
-			"file": "app/omnibar/node-ai-chat-can-show.ts",
+			"file": "app/omnibar/ai-chat-node/can-show.ts",
 			"line": 13,
-			"message": "Only export is `useCanShowAiChatNode`, but the file is `node-ai-chat-can-show.ts`.",
+			"message": "Only export is `useCanShowAiChatNode`, but the file is `can-show.ts`.",
 			"suggestion": "Rename to `use-can-show-ai-chat-node.ts`."
-		},
-		{
-			"id": "c3cf9535c8",
-			"convention": "hook-file-name",
-			"source": "scan",
-			"file": "app/omnibar/node-ai-chat.tsx",
-			"line": 16,
-			"message": "Only export is `useAiChatNode`, but the file is `node-ai-chat.tsx`.",
-			"suggestion": "Rename to `use-ai-chat-node.tsx`."
-		},
-		{
-			"id": "afb8cae901",
-			"convention": "hook-file-name",
-			"source": "scan",
-			"file": "app/omnibar/node-help-center.tsx",
-			"line": 38,
-			"message": "Only export is `useHelpCenterNodeBuilder`, but the file is `node-help-center.tsx`.",
-			"suggestion": "Rename to `use-help-center-node-builder.tsx`."
-		},
-		{
-			"id": "5e069a4975",
-			"convention": "hook-file-name",
-			"source": "scan",
-			"file": "app/omnibar/node-language-switcher.tsx",
-			"line": 18,
-			"message": "Only export is `useLanguageSwitcherNode`, but the file is `node-language-switcher.tsx`.",
-			"suggestion": "Rename to `use-language-switcher-node.tsx`."
-		},
-		{
-			"id": "e513559b67",
-			"convention": "hook-file-name",
-			"source": "scan",
-			"file": "app/omnibar/node-launch-site.tsx",
-			"line": 26,
-			"message": "Only export is `useLaunchSiteNodeBuilder`, but the file is `node-launch-site.tsx`.",
-			"suggestion": "Rename to `use-launch-site-node-builder.tsx`."
-		},
-		{
-			"id": "f74066022f",
-			"convention": "hook-file-name",
-			"source": "scan",
-			"file": "app/omnibar/node-notifications.tsx",
-			"line": 22,
-			"message": "Only export is `useNotificationsNodeBuilder`, but the file is `node-notifications.tsx`.",
-			"suggestion": "Rename to `use-notifications-node-builder.tsx`."
-		},
-		{
-			"id": "679cebeb71",
-			"convention": "hook-file-name",
-			"source": "scan",
-			"file": "app/omnibar/node-shopping-cart.tsx",
-			"line": 59,
-			"message": "Only export is `useShoppingCartNode`, but the file is `node-shopping-cart.tsx`.",
-			"suggestion": "Rename to `use-shopping-cart-node.tsx`."
 		},
 		{
 			"id": "7dbf8be10a",
@@ -1162,7 +1234,7 @@
 			"convention": "hook-file-name",
 			"source": "scan",
 			"file": "domains/dataviews/actions.tsx",
-			"line": 46,
+			"line": 26,
 			"message": "Only export is `useActions`, but the file is `actions.tsx`.",
 			"suggestion": "Rename to `use-actions.tsx`."
 		},
@@ -1176,11 +1248,18 @@
 			"suggestion": "Rename to `use-fields.tsx`."
 		},
 		{
+			"id": "203eafb55e",
+			"convention": "hook-file-name",
+			"source": "scan",
+			"file": "domains/dataviews/use-domain-activation.ts",
+			"message": "`use-domain-activation.ts` exports `useDomainSslDetails`, `useIsDomainActivating`, not the hook its name implies."
+		},
+		{
 			"id": "9c85834079",
 			"convention": "hook-file-name",
 			"source": "scan",
 			"file": "domains/domain-dns/actions.tsx",
-			"line": 13,
+			"line": 19,
 			"message": "Only export is `useDnsActions`, but the file is `actions.tsx`.",
 			"suggestion": "Rename to `use-dns-actions.tsx`."
 		},
@@ -1189,7 +1268,7 @@
 			"convention": "hook-file-name",
 			"source": "scan",
 			"file": "domains/domain-dns/fields.tsx",
-			"line": 10,
+			"line": 11,
 			"message": "Only export is `useDnsFields`, but the file is `fields.tsx`.",
 			"suggestion": "Rename to `use-dns-fields.tsx`."
 		},
@@ -1339,7 +1418,7 @@
 			"convention": "hook-file-name",
 			"source": "scan",
 			"file": "sites/logs-activity/dataviews/actions.tsx",
-			"line": 17,
+			"line": 16,
 			"message": "Only export is `useActivityActions`, but the file is `actions.tsx`.",
 			"suggestion": "Rename to `use-activity-actions.tsx`."
 		},
@@ -1387,6 +1466,316 @@
 			"line": 6,
 			"message": "Only export is `useIsSiteUnreachable`, but the file is `site-unreachable-status.ts`.",
 			"suggestion": "Rename to `use-is-site-unreachable.ts`."
+		},
+		{
+			"id": "2ea420309b",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/approval-gate/index.tsx",
+			"line": 101,
+			"key": "calypso_a4a_approval_gate_view",
+			"message": "Records `calypso_a4a_approval_gate_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_approval_gate_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "9527fb676d",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/certification/use-track-certification-view.ts",
+			"line": 21,
+			"key": "calypso_a4a_certification_view",
+			"message": "Records `calypso_a4a_certification_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_certification_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "f1f9ecc0da",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/components/payment-risk-notice/index.tsx",
+			"line": 53,
+			"key": "calypso_a4a_payment_risk_notice_banner_view",
+			"message": "Records `calypso_a4a_payment_risk_notice_banner_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_payment_risk_notice_banner_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "59718dc483",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/components/sidebar-promo/sidebar-promo-card.tsx",
+			"line": 57,
+			"key": "useRecordViewOnce( `sidebar-promo:${ id }` )",
+			"message": "Records a view with `useRecordViewOnce`.",
+			"suggestion": "Render `<ComponentViewTracker>` instead. `useRecordViewOnce` records once per page load because the agencies sidebar remounts between sections, so the component needs that option first."
+		},
+		{
+			"id": "e14a42bc7c",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/crossover/index.tsx",
+			"line": 65,
+			"key": "calypso_a4a_crossover_modal_view",
+			"message": "Records `calypso_a4a_crossover_modal_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_crossover_modal_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "20099d2cc5",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/dashboard-opt-in/welcome-notice.tsx",
+			"line": 93,
+			"key": "calypso_a4a_dashboard_welcome_notice_view",
+			"message": "Records `calypso_a4a_dashboard_welcome_notice_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_dashboard_welcome_notice_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "6752afc360",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/revoke-license-modal.tsx",
+			"line": 68,
+			"key": "calypso_a4a_license_list_revoke_dialog_open",
+			"message": "Records `calypso_a4a_license_list_revoke_dialog_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_license_list_revoke_dialog_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "632aa5c580",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/onboarding-tour/onboarding-tour-modal.tsx",
+			"line": 61,
+			"key": "calypso_onboarding_tour_modal_section_view",
+			"message": "Records `calypso_onboarding_tour_modal_section_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_onboarding_tour_modal_section_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "e7d8bde9e3",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/onboarding-tour/welcome-band.tsx",
+			"line": 99,
+			"key": "calypso_a4a_overview_welcome_band_view",
+			"message": "Records `calypso_a4a_overview_welcome_band_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_overview_welcome_band_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "a3723530ad",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/partner-directory/lead-matching/index.tsx",
+			"line": 14,
+			"key": "calypso_a4a_partner_directory_lead_matching_view",
+			"message": "Records `calypso_a4a_partner_directory_lead_matching_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_partner_directory_lead_matching_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "15b5ec666a",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/partner-directory/tier-upsell.tsx",
+			"line": 20,
+			"key": "calypso_agency_tier_permission_error_view",
+			"message": "Records `calypso_agency_tier_permission_error_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_agency_tier_permission_error_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "153c094604",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/resources/dev-tools/spacefast-section.tsx",
+			"line": 43,
+			"key": "useRecordViewOnce( 'spacefast-dev-tools' )",
+			"message": "Records a view with `useRecordViewOnce`.",
+			"suggestion": "Render `<ComponentViewTracker>` instead. `useRecordViewOnce` records once per page load because the agencies sidebar remounts between sections, so the component needs that option first."
+		},
+		{
+			"id": "cd3793bc0f",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "agency/sites/remove-site-modal.tsx",
+			"line": 51,
+			"key": "calypso_a4a_sites_remove_site_dialog_open",
+			"message": "Records `calypso_a4a_sites_remove_site_dialog_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_a4a_sites_remove_site_dialog_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "bfd5431683",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "app/omnibar/help-center-node/index.tsx",
+			"line": 20,
+			"key": "calypso_inlinehelp_impression",
+			"message": "Records `calypso_inlinehelp_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_inlinehelp_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "69b18bd46d",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "app/omnibar/shopping-cart-node/index.tsx",
+			"line": 72,
+			"key": "calypso_masterbar_cart_shown",
+			"message": "Records `calypso_masterbar_cart_shown` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_masterbar_cart_shown\" />` with the UI it tracks."
+		},
+		{
+			"id": "7198c9fe33",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "app/resurrected-welcome-modal/index.tsx",
+			"line": 119,
+			"key": "calypso_resurrected_welcome_modal_impression",
+			"message": "Records `calypso_resurrected_welcome_modal_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_resurrected_welcome_modal_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "5cbe9e4246",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "components/plan-expiry-notice/index.tsx",
+			"line": 230,
+			"key": "calypso_purchases_plan_expiry_notice_impression",
+			"message": "Records `calypso_purchases_plan_expiry_notice_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_purchases_plan_expiry_notice_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "5f6f6146cb",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "components/site-expiry-notice/site-reverted-notice.tsx",
+			"line": 58,
+			"key": "calypso_purchases_plan_expiry_notice_impression",
+			"message": "Records `calypso_purchases_plan_expiry_notice_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_purchases_plan_expiry_notice_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "cb88583b83",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/solutions-cards-upsell-step.tsx",
+			"line": 299,
+			"key": "calypso_cancellation_solution_cards_view",
+			"message": "Records `calypso_cancellation_solution_cards_view` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_cancellation_solution_cards_view\" />` with the UI it tracks."
+		},
+		{
+			"id": "ed21a6225e",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/critical-error/index.tsx",
+			"line": 86,
+			"key": "calypso_dashboard_critical_error_impression",
+			"message": "Records `calypso_dashboard_critical_error_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_critical_error_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "6c3c599ed4",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/hosting-feature-gated-with-callout/activation.tsx",
+			"line": 55,
+			"key": "calypso_dashboard_hosting_feature_activation_impression",
+			"message": "Records `calypso_dashboard_hosting_feature_activation_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_hosting_feature_activation_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "4fa66353ed",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/overview-static-site-import/index.tsx",
+			"line": 207,
+			"key": "calypso_dashboard_static_site_import_ready_notice_impression",
+			"message": "Records `calypso_dashboard_static_site_import_ready_notice_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_static_site_import_ready_notice_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "ea461a02ac",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/overview/email-block-notice.tsx",
+			"line": 28,
+			"key": "calypso_dashboard_email_block_notice_impression",
+			"message": "Records `calypso_dashboard_email_block_notice_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_email_block_notice_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "500a45c38d",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/performance/backend/start-capturing-button.tsx",
+			"line": 22,
+			"key": "calypso_dashboard_site_apm_enable_impression",
+			"message": "Records `calypso_dashboard_site_apm_enable_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_site_apm_enable_impression\" />` with the UI it tracks."
+		},
+		{
+			"id": "e7001cca82",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/scan/components/bulk-fix-threats-modal.tsx",
+			"line": 34,
+			"key": "calypso_dashboard_scan_bulk_fix_threats_modal_open",
+			"message": "Records `calypso_dashboard_scan_bulk_fix_threats_modal_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_scan_bulk_fix_threats_modal_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "35de9db148",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/scan/components/fix-threat-modal.tsx",
+			"line": 34,
+			"key": "calypso_dashboard_scan_fix_threat_confirmation_modal_open",
+			"message": "Records `calypso_dashboard_scan_fix_threat_confirmation_modal_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_scan_fix_threat_confirmation_modal_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "3a9b7e17ca",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/scan/components/fix-threat-modal.tsx",
+			"line": 36,
+			"key": "calypso_dashboard_scan_fix_threat_modal_open",
+			"message": "Records `calypso_dashboard_scan_fix_threat_modal_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_scan_fix_threat_modal_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "3e47b6659f",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/scan/components/ignore-threat-modal.tsx",
+			"line": 35,
+			"key": "calypso_dashboard_scan_ignore_threat_modal_open",
+			"message": "Records `calypso_dashboard_scan_ignore_threat_modal_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_scan_ignore_threat_modal_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "8ce0fd0946",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/scan/components/unignore-threat-modal.tsx",
+			"line": 34,
+			"key": "calypso_dashboard_scan_unignore_threat_modal_open",
+			"message": "Records `calypso_dashboard_scan_unignore_threat_modal_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_scan_unignore_threat_modal_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "c90049b21f",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/scan/components/view-details-modal.tsx",
+			"line": 17,
+			"key": "calypso_dashboard_scan_view_details_modal_open",
+			"message": "Records `calypso_dashboard_scan_view_details_modal_open` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_scan_view_details_modal_open\" />` with the UI it tracks."
+		},
+		{
+			"id": "99625f56b4",
+			"convention": "impressions-use-component-view-tracker",
+			"source": "scan",
+			"file": "sites/staging-site-sync-notice/index.tsx",
+			"line": 113,
+			"key": "calypso_dashboard_staging_site_sync_notice_impression",
+			"message": "Records `calypso_dashboard_staging_site_sync_notice_impression` from an effect.",
+			"suggestion": "Render `<ComponentViewTracker eventName=\"calypso_dashboard_staging_site_sync_notice_impression\" />` with the UI it tracks."
 		},
 		{
 			"id": "1e56c635b9",
@@ -1501,7 +1890,7 @@
 			"convention": "props-type-name",
 			"source": "scan",
 			"file": "sites/site-fields/index.tsx",
-			"line": 169,
+			"line": 175,
 			"message": "`SiteIconLink` takes `ComponentProps`.",
 			"suggestion": "Rename the type to `SiteIconLinkProps`."
 		},
@@ -1515,12 +1904,12 @@
 			"suggestion": "Rename the type to `SiteLeaveModalProps`."
 		},
 		{
-			"id": "ab58db8ad5",
-			"convention": "test-file-suffix",
+			"id": "9bbf60946d",
+			"convention": "test-file-target",
 			"source": "scan",
-			"file": "me/billing-purchases/cancel-purchase/test/get-all-survey-steps.ts",
-			"message": "`get-all-survey-steps.ts` contains tests but has no `.test` suffix.",
-			"suggestion": "Rename to `get-all-survey-steps.test.ts`."
+			"file": "agency/overview/test/contact-options-announcement.test.tsx",
+			"message": "No `contact-options-announcement.ts(x)` or `contact-options-announcement/` beside `agency/overview/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
 			"id": "80a84b6181",
@@ -1528,6 +1917,14 @@
 			"source": "scan",
 			"file": "app/router/test/agency-capabilities.test.ts",
 			"message": "No `agency-capabilities.ts(x)` or `agency-capabilities/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "8a06ff0ce3",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/agency-overview-route.test.ts",
+			"message": "No `agency-overview-route.ts(x)` or `agency-overview-route/` beside `app/router/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
@@ -1563,19 +1960,19 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
-			"id": "b8e6e8d33b",
-			"convention": "test-file-target",
-			"source": "scan",
-			"file": "app/router/test/marketplace-purchases-route.test.ts",
-			"message": "No `marketplace-purchases-route.ts(x)` or `marketplace-purchases-route/` beside `app/router/test/`.",
-			"suggestion": "Rename the test after the module it covers, or move it next to that module."
-		},
-		{
 			"id": "d05b527bc1",
 			"convention": "test-file-target",
 			"source": "scan",
 			"file": "app/router/test/payout-settings-route.test.ts",
 			"message": "No `payout-settings-route.ts(x)` or `payout-settings-route/` beside `app/router/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "4a2117ff4b",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "app/router/test/site-performance-backend-route.test.ts",
+			"message": "No `site-performance-backend-route.ts(x)` or `site-performance-backend-route/` beside `app/router/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
@@ -1659,19 +2056,35 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
-			"id": "4019b3efbe",
-			"convention": "test-file-target",
-			"source": "scan",
-			"file": "domains/domain-connection-setup/test/dns-propagation-progress-bar.test.tsx",
-			"message": "No `dns-propagation-progress-bar.ts(x)` or `dns-propagation-progress-bar/` beside `domains/domain-connection-setup/test/`.",
-			"suggestion": "Rename the test after the module it covers, or move it next to that module."
-		},
-		{
 			"id": "385823a3fc",
 			"convention": "test-file-target",
 			"source": "scan",
 			"file": "domains/domain-connection-setup/test/domain-propagation-status.test.tsx",
 			"message": "No `domain-propagation-status.ts(x)` or `domain-propagation-status/` beside `domains/domain-connection-setup/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "aaf50d53a0",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "domains/domain-overview/test/overview-header.test.tsx",
+			"message": "No `overview-header.ts(x)` or `overview-header/` beside `domains/domain-overview/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "e0a9ea45cc",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "domains/domain-overview/test/overview-item-tracks.test.tsx",
+			"message": "No `overview-item-tracks.ts(x)` or `overview-item-tracks/` beside `domains/domain-overview/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "a9a6e5722f",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "domains/test/saved-layout-fallback.test.tsx",
+			"message": "No `saved-layout-fallback.ts(x)` or `saved-layout-fallback/` beside `domains/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
@@ -1683,11 +2096,27 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
+			"id": "f32050ac92",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/auto-renew-help-text.test.tsx",
+			"message": "No `auto-renew-help-text.ts(x)` or `auto-renew-help-text/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
 			"id": "9ba78cb763",
 			"convention": "test-file-target",
 			"source": "scan",
 			"file": "me/billing-purchases/purchase-settings/test/auto-renew-payment-method-cta.test.tsx",
 			"message": "No `auto-renew-payment-method-cta.ts(x)` or `auto-renew-payment-method-cta/` beside `me/billing-purchases/purchase-settings/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "69e4cd94c0",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/test/auto-renew-toggle.test.tsx",
+			"message": "No `auto-renew-toggle.ts(x)` or `auto-renew-toggle/` beside `me/billing-purchases/purchase-settings/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
@@ -1736,6 +2165,14 @@
 			"source": "scan",
 			"file": "me/mcp/test/read-page.test.tsx",
 			"message": "No `read-page.ts(x)` or `read-page/` beside `me/mcp/test/`.",
+			"suggestion": "Rename the test after the module it covers, or move it next to that module."
+		},
+		{
+			"id": "3b28bfb40d",
+			"convention": "test-file-target",
+			"source": "scan",
+			"file": "me/mcp/test/write-page.test.tsx",
+			"message": "No `write-page.ts(x)` or `write-page/` beside `me/mcp/test/`.",
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
@@ -1795,12 +2232,684 @@
 			"suggestion": "Rename the test after the module it covers, or move it next to that module."
 		},
 		{
-			"id": "8c5609ab10",
-			"convention": "upsell-illustration-name",
+			"id": "b417615600",
+			"convention": "you-might-not-need-an-effect",
 			"source": "scan",
-			"file": "sites/overview-domain-transfer-upsell-card/upsell-illustration-transfer-domain.svg",
-			"message": "Upsell image has a `-transfer-domain` suffix.",
-			"suggestion": "Rename to `upsell-illustration.svg` and update its import."
+			"file": "agency/amplify/header-actions.tsx",
+			"line": 33,
+			"key": "AmplifyHeaderActions: useEffect( no deps )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state) and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Compute `isNewReportOpen` directly during render. Move the code that uses `page` to the parent component. Call the code that uses `isNewReportOpen` directly when the event occurs."
+		},
+		{
+			"id": "07f95497c1",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/amplify/reports.tsx",
+			"line": 191,
+			"key": "AmplifyReportsList: useEffect( [ focusAfterArchive, reportToArchive ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations) and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "When possible, update `focusAfterArchive` along with other relevant state simultaneously. Call the code that uses `focusAfterArchive` directly when the event occurs. Call the code that uses `reportToArchive` directly when the event occurs."
+		},
+		{
+			"id": "97c698cbe7",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/certification/use-track-certification-view.ts",
+			"line": 16,
+			"key": "useTrackCertificationView: useEffect( [ isEligible, source, recordTracksEvent ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `isEligible` to the parent component."
+		},
+		{
+			"id": "dac7153379",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/components/agency-notices/index.tsx",
+			"line": 46,
+			"key": "AgencyNotices: useEffect( [ newlyLoaded ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers) and [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Move the code that uses `newlyLoaded` to the parent component. Adjust `loadedIds` directly during render when `candidates` and `sharedCandidates` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "8d9bdd6502",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/components/payment-risk-notice/index.tsx",
+			"line": 51,
+			"key": "PaymentRiskNotice: useEffect( [ recordTracksEvent, source, state, severity ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `state` to the parent component. Move the code that uses `severity` to the parent component."
+		},
+		{
+			"id": "e719f95433",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/components/showcase/row-arrows.tsx",
+			"line": 12,
+			"key": "useRowScroll: useEffect( [] )",
+			"message": "Effect [subscribes to an external store](https://react.dev/learn/you-might-not-need-an-effect#subscribing-to-an-external-store).",
+			"suggestion": "Use `useSyncExternalStore` to manage `canScroll`."
+		},
+		{
+			"id": "3afe8046bf",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/dashboard-opt-in/welcome-notice.tsx",
+			"line": 72,
+			"key": "useCaptionsUrl: useEffect( [ captions ] )",
+			"message": "Effect [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Adjust `url` directly during render when `captions` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "efb727fda5",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/earn/woopayments/add-woopayments-to-site/index.tsx",
+			"line": 44,
+			"key": "AddWooPaymentsToSite: useEffect( [ autoOpen, onAutoOpen, handleOpenModal ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `autoOpen` to the parent component."
+		},
+		{
+			"id": "04adf09e8d",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/pressable-section.tsx",
+			"line": 196,
+			"key": "PressableSection: useEffect( [ catalog, tabOptions, selectedTab, getPersistedSlug, persistSlug, isReferralMode, existingPlan, existingPlanInfo ] )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state), [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), and [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Compute `selectedSlug` directly during render. Move the code that uses `isReferralMode` to the parent component. Move the code that uses `existingPlan` to the parent component. Adjust `selectedSlug` directly during render when `isReferralMode` and `existingPlan` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "c9f7080010",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/marketplace/hosting/pressable-section.tsx",
+			"line": 226,
+			"key": "PressableSection: useEffect( [ selectedSlug, tabOptions, minimumIndex ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations) and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "When possible, update `selectedSlug` along with other relevant state simultaneously. Call the code that uses `selectedSlug` directly when the event occurs."
+		},
+		{
+			"id": "759f9d728d",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/assign-license-modal.tsx",
+			"line": 101,
+			"key": "AssignLicenseModal: useEffect( [ assignError ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Call the code that uses `assignError` directly when the event occurs."
+		},
+		{
+			"id": "b332087517",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/marketplace/purchases/site-configuration-modal.tsx",
+			"line": 240,
+			"key": "SiteConfigurationForm: useEffect( [ isCreating, onCreatingChange ] )",
+			"message": "Effect [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Fetch `useMutation` in the parent and pass it down to `SiteConfigurationForm` as a prop."
+		},
+		{
+			"id": "00e3d7e7be",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/partner-directory/not-approved-popover.tsx",
+			"line": 57,
+			"key": "NotApprovedPopover: useEffect( [ showOnLoad, preferenceDismissed ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers) and [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Move the code that uses `showOnLoad` to the parent component. Adjust `showPopover` directly during render when `showOnLoad` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "3ca30d925c",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/team/accept-invite/index.tsx",
+			"line": 74,
+			"key": "AcceptTeamInvite: useEffect( [ isAlreadyInThisAgency, navigate ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `isAlreadyInThisAgency` to the parent component."
+		},
+		{
+			"id": "7c7a90c140",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "agency/team/accept-invite/index.tsx",
+			"line": 80,
+			"key": "AcceptTeamInvite: useEffect( [ activateMember, agencyId, hasCheckedAgency, inviteId, isAlreadyInThisAgency, navigate, secret ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `agencyId` to the parent component. Move the code that uses `inviteId` to the parent component. Move the code that uses `secret` to the parent component. Move the code that uses `isAlreadyInThisAgency` to the parent component."
+		},
+		{
+			"id": "9560003d01",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "app/hooks/use-date-range.ts",
+			"line": 89,
+			"key": "useDateRange: useEffect( [ initializeUrl, search, dateRange, timezoneString, gmtOffset, syncUrl ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `initializeUrl` to the parent component."
+		},
+		{
+			"id": "1705cf9317",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "app/hooks/use-persistent-view.ts",
+			"line": 142,
+			"key": "useBasePersistentView: useEffect( [ JSON.stringify( transientQueryParamFilterFields ), lockQueryParamFilters ] )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state).",
+			"suggestion": "Compute `transientFilters` directly during render."
+		},
+		{
+			"id": "d67a5c9976",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "app/hooks/use-persistent-view.ts",
+			"line": 156,
+			"key": "useBasePersistentView: useEffect( [ matches, transientProperties, transientFilters, queryParams ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `matches` to the parent component."
+		},
+		{
+			"id": "c3de385a51",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "app/hooks/use-visit-counter.ts",
+			"line": 43,
+			"key": "usePersistentVisitCounter: useEffect( [ area, isSuccess, counter, mutate ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `area` to the parent component."
+		},
+		{
+			"id": "2397943f14",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "app/resurrected-welcome-modal/index.tsx",
+			"line": 101,
+			"key": "ResurrectedWelcomeModalGate: useEffect( [ eligibility.isLoading, onEligibilityResolved, willDisplay ] )",
+			"message": "Effect [passes live state to a parent](https://react.dev/learn/you-might-not-need-an-effect#notifying-parent-components-about-state-changes) and [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Lift `hasDismissedForSession` to the parent and pass it down to `ResurrectedWelcomeModalGate` as a prop. Fetch `useResurrectedFreeUserEligibility` in the parent and pass it down to `ResurrectedWelcomeModalGate` as a prop."
+		},
+		{
+			"id": "822edc7c8b",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "app/resurrected-welcome-modal/index.tsx",
+			"line": 107,
+			"key": "ResurrectedWelcomeModalGate: useEffect( [ shouldDisplay, onVisibilityChange ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), [passes live state to a parent](https://react.dev/learn/you-might-not-need-an-effect#notifying-parent-components-about-state-changes), and [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Call the code that uses `shouldDisplay` directly when the event occurs. Move the code that uses `shouldDisplay` to the parent component. Lift `hasDismissedForSession` to the parent and pass it down to `ResurrectedWelcomeModalGate` as a prop. Fetch `useResurrectedFreeUserEligibility` in the parent and pass it down to `ResurrectedWelcomeModalGate` as a prop."
+		},
+		{
+			"id": "700941573b",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "app/resurrected-welcome-modal/index.tsx",
+			"line": 114,
+			"key": "ResurrectedWelcomeModalGate: useEffect( [ shouldDisplay, variationName, hasTrackedImpression, recordTracksEvent ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations), [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), and [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "When possible, update `hasTrackedImpression` along with other relevant state simultaneously. Call the code that uses `shouldDisplay` directly when the event occurs. Move the code that uses `shouldDisplay` to the parent component. Call the code that uses `hasTrackedImpression` directly when the event occurs. Adjust `hasTrackedImpression` directly during render when `isSuppressed` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "c8b440f075",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/clipboard-input-control/index.tsx",
+			"line": 27,
+			"key": "ClipboardInputControl: useEffect( [ isCopied ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Call the code that uses `isCopied` directly when the event occurs."
+		},
+		{
+			"id": "e24f62310a",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/dataviews/dataviews.tsx",
+			"line": 20,
+			"key": "DataViews: useEffect( [ view.page, isLoading ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `isLoading` to the parent component. Move the code that uses `view` to the parent component."
+		},
+		{
+			"id": "cb70a711ff",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/difm-offer-modal/request-step.tsx",
+			"line": 82,
+			"key": "RequestStep: useEffect( [ isBusy, onBusyChange ] )",
+			"message": "Effect [passes live state to a parent](https://react.dev/learn/you-might-not-need-an-effect#notifying-parent-components-about-state-changes) and [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Lift `isAddingToCart` to the parent and pass it down to `RequestStep` as a prop. Fetch `useMutation` in the parent and pass it down to `RequestStep` as a prop."
+		},
+		{
+			"id": "4d9d739f5f",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/domain-contact-details-form/contact-form-fields.tsx",
+			"line": 80,
+			"key": "PhoneNumberField: useEffect( [ phoneValue ] )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state).",
+			"suggestion": "Compute `validationMessage` directly during render."
+		},
+		{
+			"id": "31cbd7ff3b",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/guided-tour/step/index.tsx",
+			"line": 25,
+			"key": "useAsyncElement: useEffect( [ selector, timeoutDuration ] )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state) and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Compute `asyncElement` directly during render. Move the code that uses `selector` to the parent component."
+		},
+		{
+			"id": "3e049c52b6",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/guided-tour/step/index.tsx",
+			"line": 104,
+			"key": "GuidedTourStepContents: useEffect( [ anchor, currentStep, isActive, startTour ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Call the code that uses `anchor` directly when the event occurs. Move the code that uses `anchor` to the parent component. Move the code that uses `currentStep` to the parent component. Move the code that uses `isActive` to the parent component."
+		},
+		{
+			"id": "3ceb9a2d65",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/pending-primary-domain-notice/index.tsx",
+			"line": 43,
+			"key": "usePendingPrimaryDomain: useEffect( [ isPending, createSuccessNotice, domainName ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `domainName` to the parent component. Move the code that uses `isPending` to the parent component."
+		},
+		{
+			"id": "130af74759",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/plan-expiry-notice/index.tsx",
+			"line": 226,
+			"key": "PlanExpiryNotice: useEffect( [ eventProperties, variant, recordTracksEvent ] )",
+			"message": "Effect [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Fetch `useMemo` in the parent and pass it down to `PlanExpiryNotice` as a prop."
+		},
+		{
+			"id": "32684e88c6",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/sidebar/sidebar-expandable-menu-item.tsx",
+			"line": 39,
+			"key": "SidebarExpandableMenuItem: useEffect( [ isActive ] )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state) and [resets all state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes).",
+			"suggestion": "Compute `isOpen` directly during render. If `to` is a key, pass it as `key` so React will reset the component's state."
+		},
+		{
+			"id": "33b3f725a6",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "components/site-expiry-notice/site-reverted-notice.tsx",
+			"line": 57,
+			"key": "SiteRevertedNotice: useEffect( [ recordTracksEvent, eventProperties ] )",
+			"message": "Effect [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Fetch `useMemo` in the parent and pass it down to `SiteRevertedNotice` as a prop."
+		},
+		{
+			"id": "82b484a0c7",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "domains/dataviews/bulk-actions-progress-notice.tsx",
+			"line": 67,
+			"key": "useBulkActionsProgressNotice: useEffect( [ shouldRefetchAllDomainsQuery, queryClient ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Call the code that uses `shouldRefetchAllDomainsQuery` directly when the event occurs."
+		},
+		{
+			"id": "12c394dd30",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "domains/domain-dns/dns-import-dialog.tsx",
+			"line": 43,
+			"key": "DnsImportDialog: useEffect( [ records ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers) and [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Move the code that uses `records` to the parent component. Adjust `selectedRecords` directly during render when `records` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "dd1447cd4b",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "domains/domain-security/dnssec-record-textarea.tsx",
+			"line": 34,
+			"key": "DnsSecRecordTextarea: useEffect( [ value ] )",
+			"message": "Effect [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Adjust `textareaRows` directly during render when `value` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "5777f75c89",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "emails/add-forwarder/index.tsx",
+			"line": 116,
+			"key": "AddEmailForwarder: useEffect( [ formData.domain ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations).",
+			"suggestion": "When possible, update `mxWarningAcknowledged` along with other relevant state simultaneously."
+		},
+		{
+			"id": "56077894c2",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "emails/components/dkim-records-modal.tsx",
+			"line": 13,
+			"key": "CopyableText: useEffect( [ isCopied ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Call the code that uses `isCopied` directly when the event occurs."
+		},
+		{
+			"id": "c47f056987",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "emails/hooks/use-dkim-record-checks.ts",
+			"line": 71,
+			"key": "useDkimRecordChecks: useEffect( [ checkedAtBefore, isGivingUp, data, createSuccessNotice ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations) and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "When possible, update `checkedAtBefore` along with other relevant state simultaneously. When possible, update `isGivingUp` along with other relevant state simultaneously. When possible, update `showTryLater` along with other relevant state simultaneously. Call the code that uses `checkedAtBefore` directly when the event occurs. Call the code that uses `isGivingUp` directly when the event occurs."
+		},
+		{
+			"id": "99adfdc2b0",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/backup-retention-management/retention-option-on-cancel-purchase/index.tsx",
+			"line": 102,
+			"key": "BackupRetentionOptionOnCancelPurchase: useEffect( [ siteSlug, updateRetentionRequestStatus ] )",
+			"message": "Effect [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Adjust `confirmationDialogVisible` directly during render when `purchase` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "a2f5059f64",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/cancel-purchase-form/step-components/solutions-cards-upsell-step.tsx",
+			"line": 297,
+			"key": "SolutionsCardsUpsellStep: useEffect( [] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers) and [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Move the code that uses `filteredSolutions` to the parent component. Fetch `getSolutionsForReason` in the parent and pass it down to `SolutionsCardsUpsellStep` as a prop."
+		},
+		{
+			"id": "6c94a83ab5",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/billing-purchases/cancel-purchase/index.tsx",
+			"line": 1361,
+			"key": "CancelPurchaseInner: useEffect( [ isDataLoading, isDataValid, state.surveyShown, redirectBack, state.isLoading, createErrorNotice ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations) and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "When possible, update `state` along with other relevant state simultaneously. Call the code that uses `state` directly when the event occurs."
+		},
+		{
+			"id": "50367a5f83",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/billing-purchases/payment-methods/use-memo-compare.ts",
+			"line": 21,
+			"key": "useMemoCompare: useEffect( no deps )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `isEqual` to the parent component."
+		},
+		{
+			"id": "15f966b273",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/billing-purchases/purchase-settings/upcoming-renewals-dialog.tsx",
+			"line": 109,
+			"key": "UpcomingRenewalsDialog: useEffect( [ purchases ] )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state) and [resets all state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes).",
+			"suggestion": "Compute `selection` directly during render. If `purchases` is a key, pass it as `key` so React will reset the component's state."
+		},
+		{
+			"id": "299d0f02cd",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/mcp/connect-card.tsx",
+			"line": 208,
+			"key": "McpConnectCard: useEffect( [ mcpEnabled, isTurningOn ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `mcpEnabled` to the parent component. Move the code that uses `isTurningOn` to the parent component."
+		},
+		{
+			"id": "29e4e4b1f6",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/mcp/use-anchor-scroll.ts",
+			"line": 18,
+			"key": "useAnchorScroll: useEffect( no deps )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `page` to the parent component. Move the code that uses `toolbar` to the parent component."
+		},
+		{
+			"id": "6be6077ecb",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/notifications-emails/pause-all-emails/index.tsx",
+			"line": 35,
+			"key": "PauseAllEmails: useEffect( [ enabled, isSettingsUpdated, setIsConfirmDialogOpen, recordTracksEvent ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations).",
+			"suggestion": "When possible, update `isConfirmDialogOpen` along with other relevant state simultaneously."
+		},
+		{
+			"id": "f709d99ca4",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/notifications-sites/browser-notification-card/index.tsx",
+			"line": 64,
+			"key": "BrowserNotificationCard: useEffect( [ deviceId, isRemoving, registerDevice, removeDevice, shouldCreateDevice, shouldRemoveDevice ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Call the code that uses `shouldRemoveDevice` directly when the event occurs. Call the code that uses `shouldCreateDevice` directly when the event occurs."
+		},
+		{
+			"id": "a54e284fa4",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/profile-personal-details/email-section.tsx",
+			"line": 57,
+			"key": "EmailEdit: useEffect( [ isInvalid, hasSaveError ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `isInvalid` to the parent component."
+		},
+		{
+			"id": "12dd5638cb",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/profile-personal-details/email-section.tsx",
+			"line": 151,
+			"key": "EmailSection: useEffect( [ isEmailValid, onValidationChange ] )",
+			"message": "Effect [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Fetch `email` and `currentEmail` and `getEmailAddressError` in the parent and pass it down to `EmailSection` as a prop."
+		},
+		{
+			"id": "8860914a04",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/security-social-logins/oauth2-login.tsx",
+			"line": 91,
+			"key": "OAuth2Login: useEffect( [ code, state, requestService, service, isConnected, exchangeCodeForToken ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers) and [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Move the code that uses `service` to the parent component. Move the code that uses `isConnected` to the parent component. Adjust `showLoading` directly during render when `service` and `isConnected` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "3ccdb62043",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "me/security-social-logins/oauth2-login.tsx",
+			"line": 98,
+			"key": "OAuth2Login: useEffect( [ error, requestService, service, handleError ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `service` to the parent component."
+		},
+		{
+			"id": "9b5dadd744",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "plugins/plugin/index.tsx",
+			"line": 47,
+			"key": "PluginTabs: useEffect( [ sitesWithThisPlugin ] )",
+			"message": "Effect [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Adjust `optimisticDelete` directly during render when `sitesWithThisPlugin` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "aa65c6f3b2",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/backup-download/download-page.tsx",
+			"line": 23,
+			"key": "BackupDownloadPage: useEffect( [ downloadId, onConsumeDownloadId ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `downloadId` to the parent component."
+		},
+		{
+			"id": "5581f59e0c",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/backup-download/progress.tsx",
+			"line": 48,
+			"key": "SiteBackupDownloadProgress: useEffect( [ downloadProgress?.url, downloadProgress?.bytes_formatted, downloadProgress?.error, onDownloadComplete, onDownloadError, downloadQueryError ] )",
+			"message": "Effect [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Fetch `useQuery` in the parent and pass it down to `SiteBackupDownloadProgress` as a prop."
+		},
+		{
+			"id": "c56ff60837",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/backups/backup-notices.tsx",
+			"line": 46,
+			"key": "BackupNotices: useEffect( [ status ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes), and [resets all state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes).",
+			"suggestion": "Move the code that uses `status` to the parent component. Adjust `isDismissed` directly during render when `backupState` changes, or refactor your state to avoid this need entirely. If `backupState` is a key, pass it as `key` so React will reset the component's state."
+		},
+		{
+			"id": "a142d8dda0",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/logs/index.tsx",
+			"line": 111,
+			"key": "SiteLogsContent: useEffect( [ autoRefresh, dateRange, timezoneString, gmtOffset ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations), [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes), and [resets all state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes).",
+			"suggestion": "When possible, update `autoRefreshDisabledReason` along with other relevant state simultaneously. When possible, update `autoRefresh` along with other relevant state simultaneously. Call the code that uses `autoRefresh` directly when the event occurs. Adjust `autoRefreshDisabledReason` directly during render when `timezoneString` and `gmtOffset` changes, or refactor your state to avoid this need entirely. Adjust `autoRefresh` directly during render when `timezoneString` and `gmtOffset` changes, or refactor your state to avoid this need entirely. If `timezoneString` is a key, pass it as `key` so React will reset the component's state."
+		},
+		{
+			"id": "5ece593dee",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/overview-static-site-import/index.tsx",
+			"line": 164,
+			"key": "useOpenPreviewWhenReady: useEffect( [ status, previewUrl ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `status` to the parent component. Move the code that uses `previewUrl` to the parent component."
+		},
+		{
+			"id": "8524312876",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/overview-static-site-import/index.tsx",
+			"line": 202,
+			"key": "StaticSiteImportNotice: useEffect( [ isReady, recordTracksEvent, site.ID, platform ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `isReady` to the parent component."
+		},
+		{
+			"id": "b8c029ff7b",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/overview-static-site-import/moving-card.tsx",
+			"line": 217,
+			"key": "useNow: useEffect( [ isRunning ] )",
+			"message": "Effect [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "Adjust `now` directly during render when `isRunning` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "a1c38d6ac8",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/overview-static-site-import/use-static-site-import.ts",
+			"line": 73,
+			"key": "useStaticSiteImport: useEffect( [ approve, refetch, session, sessionId, site.ID ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `sessionId` to the parent component."
+		},
+		{
+			"id": "66ae42322a",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/scan/hooks/use-fix-threats.ts",
+			"line": 64,
+			"key": "useFixThreats: useEffect( [ status, fixState, queryClient, siteId ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations), [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), and [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).",
+			"suggestion": "When possible, update `fixState` along with other relevant state simultaneously. Call the code that uses `fixState` directly when the event occurs. Adjust `fixState` directly during render when `siteId` changes, or refactor your state to avoid this need entirely."
+		},
+		{
+			"id": "00a9ad57f5",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/scan/scan-notices.tsx",
+			"line": 21,
+			"key": "ScanNotices: useEffect( [ status ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes), and [resets all state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#resetting-all-state-when-a-prop-changes).",
+			"suggestion": "Move the code that uses `status` to the parent component. Adjust `isDismissed` directly during render when `status` changes, or refactor your state to avoid this need entirely. If `status` is a key, pass it as `key` so React will reset the component's state."
+		},
+		{
+			"id": "46e9d619ec",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/scan/use-scan-state.ts",
+			"line": 23,
+			"key": "useScanState: useEffect( [ isEnqueued, isRunning ] )",
+			"message": "Effect [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations) and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "When possible, update `hasSucceeded` along with other relevant state simultaneously. When possible, update `isEnqueued` along with other relevant state simultaneously. Call the code that uses `isEnqueued` directly when the event occurs."
+		},
+		{
+			"id": "a9cee911f0",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/settings-ai-tools/mcp-group-card.tsx",
+			"line": 54,
+			"key": "McpGroupCard: useEffect( [ hash, id, toolAnchors ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers), [adjusts state when a prop changes](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes), and [passes data to a parent](https://react.dev/learn/you-might-not-need-an-effect#passing-data-to-the-parent).",
+			"suggestion": "Move the code that uses `matches` to the parent component. Adjust `isOpen` directly during render when `id` and `toolAnchors` changes, or refactor your state to avoid this need entirely. Fetch `useLocation` in the parent and pass it down to `McpGroupCard` as a prop."
+		},
+		{
+			"id": "034044dc38",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/settings-repositories/connect-repository-form.tsx",
+			"line": 113,
+			"key": "RepositorySelector: useEffect( [ shouldRestoreFocus ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `shouldRestoreFocus` to the parent component."
+		},
+		{
+			"id": "34b562a10c",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/settings-repositories/connect-repository-form.tsx",
+			"line": 380,
+			"key": "ConnectRepositoryForm: useEffect( [ repositoryChecks?.suggested_directory, formData.targetDir ] )",
+			"message": "Effect [stores derived state](https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state), [chains state updates](https://react.dev/learn/you-might-not-need-an-effect#chains-of-computations), and [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Compute `formData` directly during render. When possible, update `formData` along with other relevant state simultaneously. Call the code that uses `formData` directly when the event occurs."
+		},
+		{
+			"id": "612d97d497",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/settings-wordpress/use-version-switch.ts",
+			"line": 88,
+			"key": "useVersionSwitch: useEffect( [ hadPendingVersion, hasPendingVersion, site.ID, site.slug ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `hasPendingVersion` to the parent component."
+		},
+		{
+			"id": "de5616b7d6",
+			"convention": "you-might-not-need-an-effect",
+			"source": "scan",
+			"file": "sites/site-launch-modal/celebration-modal.tsx",
+			"line": 35,
+			"key": "SiteLaunchCelebrationModal: useEffect( [ site.launch_status, onOpen ] )",
+			"message": "Effect [acts as an event handler](https://react.dev/learn/you-might-not-need-an-effect#sharing-logic-between-event-handlers).",
+			"suggestion": "Move the code that uses `isSiteLaunched` to the parent component."
 		},
 		{
 			"id": "9cd3dd0e85",
